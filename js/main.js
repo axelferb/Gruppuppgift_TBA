@@ -1,8 +1,15 @@
 fetch('https://folksa.ga/api/albums?key=flat_eric')
     .then((response) => response.json())
     .then((albums) => {
-        view.display(albums);
+        view.displayAlbums(albums);
         console.log(albums);
+    });
+
+fetch('https://folksa.ga/api/playlists?key=flat_eric')
+    .then((response) => response.json())
+    .then((playlists) => {
+        view.displayPlaylists(playlists);
+        console.log(playlists);
     });
 
 function fetchSingleArtist(artistId) {
@@ -19,30 +26,43 @@ function fetchSingleArtist(artistId) {
 
 const view = {
 
-    display: function (albums) {
+    displayAlbums: function (albums) {
 
         var albumListElement = document.getElementById("listMain")
         var albumList = ''
         var artistName = ""
-        
+
 
         for (i = 0; i < albums.length; i++) {
             artistName = fetchSingleArtist(albums[i].artists[0])
-            
-            console.log(artistName)
 
-            albumList +=
+            console.log(artistName)
+            latestAlbumWrapper.innerHTML +=
 
                 `
+                <div class="latestAlbum">
                 <p> 
-                ${albums[i].title} 
+                ${albums[i].title}
+                <br>
                 ${artistName}
                 </p>
+                </div>
         `
         }
+    },
 
-        albumListElement.innerHTML = albumList;
+    displayPlaylists: function (playlists) {
+        for (i = 0; i < playlists.length; i++) {
+            playlistWrapper.innerHTML +=
 
+                `
+                <div class="playlist">
+                <p> 
+                ${playlists[i].title}
+                </p>
+                </div>
+        `
+        }
     }
 }
 

@@ -1,11 +1,21 @@
 @font-face {
-    font-family: Geomanist-Black;
-    src: url(../fonts/Geomanist-Black.otf);
+    font-family: Circular-black;
+    src: url(../fonts/circular-black.otf);
+}
+
+@font-face {
+    font-family: Apercu;
+    src: url(../fonts/apercu-regular.otf);
+}
+
+@font-face {
+    font-family: Apercu-light;
+    src: url(../fonts/apercu-light.otf);
 }
 
 body {
     margin: 0;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Apercu', monospace;
     font-weight: 300;
 }
 
@@ -35,23 +45,21 @@ nav {
 
 h2 {
     margin: 0;
-    font-family: 'Geomanist-Black', sans-serif;
+    font-family: 'Circular-black', sans-serif;
     font-size: 5rem;
     color: #fff;
 }
 
 h3 {
     margin: 0;
-    font-family: 'Geomanist-Black', sans-serif;
-    font-weight: bold;
-    font-size: 2.5rem;
-    font-weight: bold;
+    font-family: 'Circular-black', sans-serif;
+    font-size: 3rem;
 }
 
 .hero {
     padding-top: 100px;
     height: 500px;
-    background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
+    background-image: linear-gradient(to bottom, #a18cd1 0%, #fbc2eb 100%);
     text-align: center;
     display: flex;
     justify-content: center;
@@ -59,6 +67,8 @@ h3 {
     flex-direction: column;
     p {
         margin: 0;
+        font-family: 'Apercu-light';
+        font-size: 1.2rem;
         font-weight: 100;
         color: #fff;
     }

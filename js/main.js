@@ -54,6 +54,7 @@ const View = {
 
 window.onscroll = function() {
     navbarOpacity();
+    heroTextParallax();
 }
 
 function navbarOpacity() {
@@ -65,6 +66,15 @@ function navbarOpacity() {
         document.getElementById('navbar').style.backgroundColor = "#000000";
         document.getElementById('searchBar').style.display = "block";
         document.getElementById('navbarLogo').style.filter = "invert(0%)";
+    }
+}
+
+function heroTextParallax() {
+    const heroText = document.getElementById('heroText');
+    const val = scrollY;
+    heroText.style.transform = "translateY(" + val / 2 + "px)";
+    if(val > 200) {
+        heroText.style.transform = "translateY(100px)";
     }
 }
 

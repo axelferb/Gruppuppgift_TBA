@@ -1,25 +1,11 @@
-@font-face {
-    font-family: Circular-black;
-    src: url(../fonts/circular-black.otf);
-}
-
-@font-face {
-    font-family: Apercu;
-    src: url(../fonts/apercu-regular.otf);
-}
-
-@font-face {
-    font-family: Apercu-light;
-    src: url(../fonts/apercu-light.otf);
-}
-
 body {
     margin: 0;
-    font-family: 'Apercu', monospace;
+    font-family: 'Apercu-mono', monospace;
+    color: #232323;
     font-weight: 300;
 }
 
-nav {
+#navbar {
     padding: 30px 40px;
     background-color: #000;
     position: fixed;
@@ -29,14 +15,15 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: 400ms;
     img {
         width: 120px;
     }
-    #searchField {
+    #searchBar {
         padding-left: 15px;
         width: 250px;
         height: 35px;
-        font-family: 'Roboto Mono', monospace;
+        font-family: 'Apercu-mono', monospace;
         font-size: .8rem;
         letter-spacing: .02rem;
         border: 0;
@@ -46,14 +33,14 @@ nav {
 
 h3 {
     margin: 0;
-    font-family: 'Circular-black', sans-serif;
+    font-family: 'Friz Quadrata-bold', sans-serif;
     font-size: 3rem;
 }
 
 .hero {
-    padding-top: 100px;
+    padding: 100px 40px 0px 40px;
     height: 500px;
-    background-image: linear-gradient(to bottom, #a18cd1 0%, #fbc2eb 100%);
+    background-image: linear-gradient(to bottom, #d4b6c2 0%, #c094a4 100%);
     text-align: center;
     display: flex;
     justify-content: center;
@@ -61,13 +48,13 @@ h3 {
     flex-direction: column;
     h2 {
         margin: 0;
-        font-family: 'Circular-black', sans-serif;
+        font-family: 'Friz Quadrata-bold', sans-serif;
         font-size: 5rem;
         color: #fff;
     }
     p {
         margin: 0;
-        font-family: 'Apercu-light';
+        font-family: 'Apercu-light', sans-serif;
         font-size: 1.2rem;
         font-weight: 100;
         color: #fff;
@@ -92,22 +79,22 @@ h3 {
 
 .rating {
     margin: 10px 0 0 0;
-    unicode-bidi: bidi-override;
-    direction: rtl;
     color: #fff;
+    direction: rtl;
+    unicode-bidi: bidi-override;
     cursor: pointer;
     span {
         padding-right: 10px;
-        display: inline-block;
-        position: relative;
         width: 1.1em;
         color: rgba(255, 255, 255, 0.5);
+        position: relative;
+        display: inline-block;
     }
     span:hover:before,
     span:hover ~ span:before {
         content: "\2B24";
-        position: absolute;
         color:#fff;
+        position: absolute;
     }
 }
 
@@ -140,15 +127,8 @@ h3 {
                 margin: 0;
             }
         }
-        #remove {
-            
-            img {
-                height: 35px;
-            }
-        }
     }
 }
-
 
 #latestAlbumHeader {
     margin-top: 60px;

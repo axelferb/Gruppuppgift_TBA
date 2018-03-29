@@ -59,13 +59,9 @@ window.onscroll = function() {
 
 function navbarOpacity() {
     if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-        document.getElementById('navbar').style.backgroundColor = "transparent";
-        document.getElementById('searchBar').style.display = "none";
-        document.getElementById('navbarLogo').style.filter = "invert(100%)";
+        document.getElementById('navbar').style.backgroundColor = "#4e2791";
     } else {
-        document.getElementById('navbar').style.backgroundColor = "#000000";
-        document.getElementById('searchBar').style.display = "block";
-        document.getElementById('navbarLogo').style.filter = "invert(0%)";
+        document.getElementById('navbar').style.backgroundColor = "transparent";
     }
 }
 

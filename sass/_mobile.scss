@@ -6,8 +6,8 @@ body {
 }
 
 #navbar {
-    padding: 30px 40px;
-    background-color: #000;
+    padding: 25px 40px;
+    background-color: transparent;
     position: fixed;
     z-index: 1;
     right: 0;
@@ -40,7 +40,8 @@ h3 {
 .hero {
     padding: 100px 40px 0px 40px;
     height: 500px;
-    background-image: linear-gradient(to bottom, #d4b6c2 0%, #c094a4 100%);
+    background-color: #c59cf7;
+    background-image: linear-gradient(to bottom, #c59cf7 0%, #4e2791 100%);
     text-align: center;
     display: flex;
     justify-content: center;

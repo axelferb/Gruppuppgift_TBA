@@ -55,11 +55,13 @@ const View = {
 window.onscroll = function() {
     navbarOpacity();
     heroTextParallax();
+    mainWrapperEffect();
+    heroOpacity();
 }
 
 function navbarOpacity() {
-    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-        document.getElementById('navbar').style.backgroundColor = "#4e2791";
+    if (document.body.scrollTop > 520 || document.documentElement.scrollTop > 520) {
+        document.getElementById('navbar').style.backgroundColor = "#000";
     } else {
         document.getElementById('navbar').style.backgroundColor = "transparent";
     }
@@ -69,8 +71,26 @@ function heroTextParallax() {
     const heroText = document.getElementById('heroText');
     const val = scrollY;
     heroText.style.transform = "translateY(" + val / 2 + "px)";
-    if(val > 200) {
-        heroText.style.transform = "translateY(100px)";
+    if(val > 250) {
+        heroText.style.transform = "translateY(125px)";
+    }
+}
+
+function heroOpacity() {
+    if (document.body.scrollTop > 340 || document.documentElement.scrollTop > 340) {
+        document.getElementById('hero').style.backgroundColor = "#000";
+        document.getElementById('heroText').style.opacity = "0";
+    } else {
+        document.getElementById('hero').style.backgroundColor= "#4e2791";
+        document.getElementById('heroText').style.opacity = "1";
+    }
+}
+
+function mainWrapperEffect() {
+    if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
+        document.getElementById('mainWrapper').style.padding = "40px 20px";
+    } else {
+        document.getElementById('mainWrapper').style.padding = "240px 20px";
     }
 }
 

@@ -53,13 +53,13 @@ const View = {
 }
 
 window.onscroll = function() {
-    navbarOpacity();
+    navbarShift();
     heroTextParallax();
-    mainWrapperEffect();
+    mainWrapperParallax();
     heroOpacity();
 }
 
-function navbarOpacity() {
+function navbarShift() {
     if (document.body.scrollTop > 520 || document.documentElement.scrollTop > 520) {
         document.getElementById('navbar').style.backgroundColor = "#000";
     } else {
@@ -86,7 +86,7 @@ function heroOpacity() {
     }
 }
 
-function mainWrapperEffect() {
+function mainWrapperParallax() {
     if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
         document.getElementById('mainWrapper').style.padding = "40px 20px";
     } else {

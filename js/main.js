@@ -94,9 +94,18 @@ function mainWrapperEffect() {
     }
 }
 
-// aids = "5aae2d13b9791d0344d8f717"
+function heroTextParallax() {
+    const heroText = document.getElementById('heroText');
+    const val = scrollY;
+    heroText.style.transform = "translateY(" + val / 2 + "px)";
+    if(val > 200) {
+        heroText.style.transform = "translateY(100px)";
+    }
+}
+
+/*aids = "5aae2d13b9791d0344d8f717"
 
 // fetchSingleArtist(aids).then(artistName => {
 //     console.log(artistName)
 //     return artistName
-// });
+// });*/

@@ -1,9 +1,14 @@
-// Fetches Albums.
+// Fetches all albums.
 fetch('https://folksa.ga/api/albums?key=flat_eric')
     .then((response) => response.json())
     .then((albums) => {
         View.displayAlbums(albums);
-        console.log(albums);
+    });
+// Only fetches 8 Albums to display on the main page.
+fetch('https://folksa.ga/api/albums?limit=8&key=flat_eric')
+    .then((response) => response.json())
+    .then((albumsLimited) => {
+        View.displayAlbumsLimited(albumsLimited);
     });
 // Fetches playlist.
 fetch('https://folksa.ga/api/playlists?key=flat_eric')
@@ -12,7 +17,7 @@ fetch('https://folksa.ga/api/playlists?key=flat_eric')
         View.displayPlaylists(playlists);
         console.log(playlists);
     });
-// Creates an Array to fill with artistnames.
+// Creates an Array to fill with artist names.
 var array = []
 // Fetches artistnames and puts them in the array created earlier.
 function fetchSingleArtist(artistId) {
@@ -31,19 +36,19 @@ function renderArtists(artistsId) {
 }
 
 const View = {
-    // Diplays the albums on the main page.
-    displayAlbums: function (albums) {
+    // Diplays the 8 latest albums on the main page.
+    displayAlbumsLimited: function (albumsLimited) {
         var albumListElement = document.getElementById("listMain")
         var albumList = '';
         var artistName = "";
 
-        for (i = 0; i < albums.length; i++) {
-            artistName = fetchSingleArtist(albums[i].artists[0])
+        for (i = 0; i < albumsLimited.length; i++) {
+            artistName = fetchSingleArtist(albumsLimited[i].artists[0])
 
             console.log(artistName)
             latestAlbumWrapper.innerHTML += `
                 <div class="latestAlbum">
-                    <p> ${albums[i].title} </p>
+                    <p> ${albumsLimited[i].title} </p>
                     <p> ${artistName} </p>
                 </div>
             `

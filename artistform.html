@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>•))) music</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,300,400,700" rel="stylesheet">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <nav>
+            <div id="navbar">
+                <a href="#">
+                    <img id="navbarLogo" src="images/logo.png" alt="Music navbar logo" />
+                </a>
+                <input id="searchBar" type="text" placeholder="Search...">
+            </div>
+        </nav>
+        <div id="hero" class="hero">
+            <div id="heroText">
+                <h2>Musik für alles</h2>
+                <p>Worlds best music service. Just kidding. It isn't.</p>
+            </div>
+        </div>
+    </header>
+    <main>
+        <form>
+            <label for="Name">Name:</label>
+            <input id="artistName" name="Name" type="text">
+            <br>
+            <label for="Genre">Genre:</label>
+            <input id="Genre" name="Genre" type="text">
+            <br>
+            <label for="Country">Country:</label>
+            <input id="artistCountry" name="Country" type="text">
+            <br>
+            <label for="spotifyURL">Spotify URL:</label>
+            <input id="artistSpotifyUrl" name="spotifyURL" type="text">
+            <br>
+            <label for="imgLink">Image Link:</label>
+            <input id="artistImgLink" name="imgLink" type="text">
+            <br>
+            <label for="Gender">Gender: </label>
+            <select id="artistGender" name="Gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            <br>
+            <button id="artistSubmit" type="submit">Submit</button>
+        </form>
+    </main>
+    <footer>
+        <img src="images/logo.png" alt="Music footer logo" />
+    </footer>
+    <script src="js/main.js"></script>
+    <script src="js/form.js"></script>
+</body>
+
+</html>

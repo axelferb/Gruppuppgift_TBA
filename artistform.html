@@ -27,13 +27,31 @@
         </div>
     </header>
     <main>
-        <div id="mainWrapper" class="mainWrapper">
-            <h3>Top playlists</h3>
-            <p>Our top rated playlists</p>
-            <div id="playlistWrapper" class="playlistWrapper"> </div>
-            <h3 id="latestAlbumHeader">Latest albums</h3>
-            <div id="latestAlbumWrapper" class="latestAlbumWrapper"> </div>
-        </div>
+        <form>
+            <label for="Name">Name:</label>
+            <input id="artistName" name="Name" type="text">
+            <br>
+            <label for="Genre">Genre:</label>
+            <input id="Genre" name="Genre" type="text">
+            <br>
+            <label for="Country">Country:</label>
+            <input id="artistCountry" name="Country" type="text">
+            <br>
+            <label for="spotifyURL">Spotify URL:</label>
+            <input id="artistSpotifyUrl" name="spotifyURL" type="text">
+            <br>
+            <label for="imgLink">Image Link:</label>
+            <input id="artistImgLink" name="imgLink" type="text">
+            <br>
+            <label for="Gender">Gender: </label>
+            <select id="artistGender" name="Gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            <br>
+            <button id="artistSubmit" type="submit">Submit</button>
+        </form>
     </main>
     <footer>
         <img src="images/logo.png" alt="Music footer logo" />

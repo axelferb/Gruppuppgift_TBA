@@ -27,16 +27,6 @@ function fetchSingleArtist(artistId) {
             array.push(artists.name)
         });
 }
-// Get time and make it in to ISO format
-function getTime() {
-    var date = new Date();
-    var ISODate = date.toISOString();
-    console.log(ISODate);
-}
-// What happens when you press "submit" on new artist form.
-function submitArtistForm() {
-    getTime();
-}
 console.log(array.length);
 console.log(array)
 function renderArtists(artistsId) {
@@ -75,8 +65,6 @@ const View = {
         }
     }
 }
-// New artist form.
-document.getElementById("artistSubmit").addEventListener("click", submitArtistForm);
 // Parallax and styling.
 window.onscroll = function () {
     navbarShift();

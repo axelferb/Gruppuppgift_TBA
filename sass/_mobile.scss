@@ -1,27 +1,13 @@
-@font-face {
-    font-family: Circular-black;
-    src: url(../fonts/circular-black.otf);
-}
-
-@font-face {
-    font-family: Apercu;
-    src: url(../fonts/apercu-regular.otf);
-}
-
-@font-face {
-    font-family: Apercu-light;
-    src: url(../fonts/apercu-light.otf);
-}
-
 body {
     margin: 0;
-    font-family: 'Apercu', monospace;
+    font-family: 'Apercu-mono', monospace;
+    color: #232323;
     font-weight: 300;
 }
 
-nav {
-    padding: 30px 40px;
-    background-color: #000;
+#navbar {
+    padding: 25px 40px;
+    background-color: transparent;
     position: fixed;
     z-index: 1;
     right: 0;
@@ -29,14 +15,15 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: background-color 800ms;
     img {
         width: 120px;
     }
-    #searchField {
+    #searchBar {
         padding-left: 15px;
         width: 250px;
         height: 35px;
-        font-family: 'Roboto Mono', monospace;
+        font-family: 'Apercu-mono', monospace;
         font-size: .8rem;
         letter-spacing: .02rem;
         border: 0;
@@ -46,31 +33,37 @@ nav {
 
 h3 {
     margin: 0;
-    font-family: 'Circular-black', sans-serif;
+    font-family: 'Friz Quadrata-bold', sans-serif;
     font-size: 3rem;
 }
 
 .hero {
-    padding-top: 100px;
+    padding: 100px 40px 0px 40px;
     height: 500px;
-    background-image: linear-gradient(to bottom, #a18cd1 0%, #fbc2eb 100%);
+    background-color: #4e2791;
+    background-image: url("data:image/svg+xml,%3Csvg width='272' height='166' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c59cf7' fill-opacity='0.4'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    h2 {
-        margin: 0;
-        font-family: 'Circular-black', sans-serif;
-        font-size: 5rem;
-        color: #fff;
-    }
-    p {
-        margin: 0;
-        font-family: 'Apercu-light';
-        font-size: 1.2rem;
-        font-weight: 100;
-        color: #fff;
+    transition: background-color 800ms;
+    #heroText {
+        transition: opacity 800ms;
+        h2 {
+            margin: -40px 0 10px 0;
+            font-family: 'Friz Quadrata-bold', sans-serif;
+            font-size: 5rem;
+            line-height: 4rem;
+            color: #fff;
+        }
+        p {
+            margin: 0;
+            font-family: 'Apercu-light', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 100;
+            color: #fff;
+        }
     }
 }
 
@@ -92,28 +85,29 @@ h3 {
 
 .rating {
     margin: 10px 0 0 0;
-    unicode-bidi: bidi-override;
-    direction: rtl;
     color: #fff;
+    direction: rtl;
+    unicode-bidi: bidi-override;
     cursor: pointer;
     span {
         padding-right: 10px;
-        display: inline-block;
-        position: relative;
         width: 1.1em;
         color: rgba(255, 255, 255, 0.5);
+        position: relative;
+        display: inline-block;
     }
     span:hover:before,
     span:hover ~ span:before {
         content: "\2B24";
-        position: absolute;
         color:#fff;
+        position: absolute;
     }
 }
 
 .mainWrapper {
-    padding: 40px 100px;
+    padding: 240px 20px;
     text-align: center;
+    transition: padding 3s;
 }
 
 .playlistList {
@@ -140,15 +134,8 @@ h3 {
                 margin: 0;
             }
         }
-        #remove {
-            
-            img {
-                height: 35px;
-            }
-        }
     }
 }
-
 
 #latestAlbumHeader {
     margin-top: 60px;
@@ -165,17 +152,20 @@ h3 {
 .playlist,
 .latestAlbum {
     margin: 20px;
+    padding: 20px;
     width: 300px;
     height: 300px;
     background-color: #f2f2f2;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 footer {
     height: 300px;
     background-color: #000;
+    background-image: url("data:image/svg+xml,%3Csvg width='272' height='166' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c59cf7' fill-opacity='0.4'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     display: flex;
     justify-content: center;
     align-items: center;

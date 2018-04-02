@@ -12,16 +12,24 @@ fetch('https://folksa.ga/api/playlists?key=flat_eric')
         console.log(playlists);
     });
 
+var array = [{ Name: "Kuken", }]
+
 function fetchSingleArtist(artistId) {
 
     fetch(`https://folksa.ga/api/artists/${artistId}?key=flat_eric`)
 
         .then((response) => response.json())
         .then((artists) => {
-
-            var artistName = artists.name
-            return artistName;
+            array.push(artists.name)
         });
+
+}
+console.log(array.length);
+console.log(array)
+function renderArtists(artistsId) {
+    var artistName = artistsId
+    console.log(artistName.name)
+    return artistName
 }
 
 const view = {
@@ -35,8 +43,6 @@ const view = {
 
         for (i = 0; i < albums.length; i++) {
             artistName = fetchSingleArtist(albums[i].artists[0])
-
-            console.log(artistName)
             latestAlbumWrapper.innerHTML +=
 
                 `
@@ -44,7 +50,7 @@ const view = {
                 <p> 
                 ${albums[i].title}
                 <br>
-                ${artistName}
+                ${array[i].Name}
                 </p>
                 </div>
         `

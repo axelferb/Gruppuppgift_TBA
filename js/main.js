@@ -1,19 +1,18 @@
+// Fetch for albums.
 fetch('https://folksa.ga/api/albums?key=flat_eric')
     .then((response) => response.json())
     .then((albums) => {
         View.displayAlbums(albums);
         console.log(albums);
     });
-
+// Fetch for playlists.
 fetch('https://folksa.ga/api/playlists?key=flat_eric')
     .then((response) => response.json())
     .then((playlists) => {
         View.displayPlaylists(playlists);
         console.log(playlists);
     });
-
-var array = [{ Name: "Kuken", }]
-
+// Fetch for artists.
 function fetchSingleArtist(artistId) {
     fetch(`https://folksa.ga/api/artists/${artistId}?key=flat_eric`)
         .then((response) => response.json())
@@ -29,7 +28,7 @@ function renderArtists(artistsId) {
     console.log(artistName.name)
     return artistName
 }
-
+// Displays albums and artistname on the mainpage.
 const View = {
     displayAlbums: function (albums) {
         var albumListElement = document.getElementById("listMain")
@@ -48,7 +47,7 @@ const View = {
             `
         }
     },
-
+    // Displays playlists on the main page.
     displayPlaylists: function (playlists) {
         for (i = 0; i < playlists.length; i++) {
             playlistWrapper.innerHTML += `
@@ -60,6 +59,7 @@ const View = {
     }
 }
 
+// Parallax and styling
 window.onscroll = function () {
     navbarShift();
     heroTextParallax();
@@ -110,10 +110,4 @@ function heroTextParallax() {
         heroText.style.transform = "translateY(100px)";
     }
 }
-
-/*aids = "5aae2d13b9791d0344d8f717"
-
-// fetchSingleArtist(aids).then(artistName => {
-//     console.log(artistName)
-//     return artistName
-// });*/
+//

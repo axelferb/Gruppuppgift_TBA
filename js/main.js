@@ -39,7 +39,7 @@ const View = {
     // Diplays the 8 latest albums on the main page.
     displayAlbumsLimited: function (albumsLimited) {
         var albumListElement = document.getElementById("listMain")
-        var albumList = '';
+        var albumList = "";
         var artistName = "";
 
         for (i = 0; i < albumsLimited.length; i++) {

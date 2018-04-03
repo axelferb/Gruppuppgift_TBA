@@ -11,12 +11,14 @@
 </head>
 <body>
     <header>
-        <nav>
+        <nav id="nav">
             <div id="navbar">
-                <a href="#">
-                    <img id="navbarLogo" src="images/logo.png" alt="Music navbar logo" />
-                </a>
-                <input id="searchBar" type="text" placeholder="Search...">
+                <div class="navContainer">
+                    <a href="#">
+                        <img id="navbarLogo" src="images/logo.png" alt="Music navbar logo" />
+                    </a>
+                    <input id="searchBar" type="text" placeholder="Search...">
+                </div>
             </div>
         </nav>
         <div id="hero" class="hero">
@@ -27,34 +29,38 @@
         </div>
     </header>
     <main>
-        <form>
-            <label for="Name">Name:</label>
-            <input id="artistName" name="Name" type="text">
-            <br>
-            <label for="Genre">Genre:</label>
-            <input id="genre" name="Genre" type="text">
-            <br>
-            <label for="Country">Country:</label>
-            <input id="artistCountry" name="Country" type="text">
-            <br>
-            <label for="Birthdate">Date born:</label>
-            <input id="artistDateBorn" type="date">
-            <br>
-            <label for="spotifyURL">Spotify URL:</label>
-            <input id="artistSpotifyUrl" name="spotifyURL" type="text">
-            <br>
-            <label for="imgLink">Image Link:</label>
-            <input id="artistImgLink" name="imgLink" type="text">
-            <br>
-            <label for="Gender">Gender: </label>
-            <select id="artistGender" name="Gender">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select>
-            <br>
-            <button id="artistSubmit" type="submit">Submit</button>
-        </form>
+        <div class="mainWrapper">
+            <h3>Add new artist</h3>
+            <p>Add a new artist to the API</p>
+            <form id="addArtistForm">
+                <label for="Name">Name:</label>
+                <input id="artistName" name="Name" type="text" />
+
+                <label for="Genre">Genre:</label>
+                <input id="genre" name="Genre" type="text" />
+
+                <label for="Country">Country:</label>
+                <input id="artistCountry" name="Country" type="text" />
+
+                <label for="Birthdate">Born:</label>
+                <input id="artistDateBorn" type="date" />
+
+                <label for="spotifyURL">Spotify URL:</label>
+                <input id="artistSpotifyUrl" name="spotifyURL" type="text" placeholder="http://" />
+
+                <label for="imgLink">Image URL:</label>
+                <input id="artistImgLink" name="imgLink" type="text" />
+
+                <label for="Gender">Gender:</label>
+                <select id="artistGender" name="Gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                <button id="artistSubmit" type="submit">Submit</button>
+            </form>
+        </div>
+        <!-- mainWrapper.collapse -->
     </main>
     <footer>
         <img src="images/logo.png" alt="Music footer logo" />

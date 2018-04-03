@@ -82,10 +82,9 @@ function navbarShift() {
 
 function heroTextParallax() {
     const heroText = document.getElementById('heroText');
-    const val = scrollY;
-    heroText.style.transform = "translateY(" + val / 2 + "px)";
-    if (val > 250) {
-        heroText.style.transform = "translateY(125px)";
+    heroText.style.transform = "translateY(" + scrollY / 2 + "px)";
+    if (scrollY > 200) {
+        heroText.style.transform = "translateY(100px)";
     }
 }
 
@@ -96,14 +95,5 @@ function heroOpacity() {
     } else {
         document.getElementById('hero').style.backgroundColor = "#4e2791";
         document.getElementById('heroText').style.opacity = "1";
-    }
-}
-
-function heroTextParallax() {
-    const heroText = document.getElementById('heroText');
-    const val = scrollY;
-    heroText.style.transform = "translateY(" + val / 2 + "px)";
-    if (val > 200) {
-        heroText.style.transform = "translateY(100px)";
     }
 }

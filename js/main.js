@@ -69,7 +69,6 @@ const View = {
 window.onscroll = function () {
     navbarShift();
     heroTextParallax();
-    mainWrapperParallax();
     heroOpacity();
 }
 
@@ -97,14 +96,6 @@ function heroOpacity() {
     } else {
         document.getElementById('hero').style.backgroundColor = "#4e2791";
         document.getElementById('heroText').style.opacity = "1";
-    }
-}
-
-function mainWrapperParallax() {
-    if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
-        document.getElementById('mainWrapper').style.padding = "40px 20px";
-    } else {
-        document.getElementById('mainWrapper').style.padding = "240px 20px";
     }
 }
 

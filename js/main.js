@@ -4,8 +4,8 @@ fetch('https://folksa.ga/api/albums?key=flat_eric')
     .then((albums) => {
         View.displayAlbums(albums);
     });
-// Only fetches 8 Albums to display on the main page.
-fetch('https://folksa.ga/api/albums?limit=8&key=flat_eric')
+// Only fetches 6 Albums to display on the main page.
+fetch('https://folksa.ga/api/albums?limit=6&key=flat_eric')
     .then((response) => response.json())
     .then((albumsLimited) => {
         View.displayAlbumsLimited(albumsLimited);

@@ -29,6 +29,9 @@ body {
         border: 0;
         border-radius: 15px;
     }
+    #searchBar:focus {
+        outline: 0;
+    }
 }
 
 h3 {

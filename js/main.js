@@ -4,8 +4,8 @@ fetch('https://folksa.ga/api/albums?key=flat_eric')
     .then((albums) => {
         View.displayAlbums(albums);
     });
-// Only fetches 8 Albums to display on the main page.
-fetch('https://folksa.ga/api/albums?limit=8&key=flat_eric')
+// Only fetches 6 Albums to display on the main page.
+fetch('https://folksa.ga/api/albums?limit=6&key=flat_eric')
     .then((response) => response.json())
     .then((albumsLimited) => {
         View.displayAlbumsLimited(albumsLimited);
@@ -39,7 +39,7 @@ const View = {
     // Diplays the 8 latest albums on the main page.
     displayAlbumsLimited: function (albumsLimited) {
         var albumListElement = document.getElementById("listMain")
-        var albumList = '';
+        var albumList = "";
         var artistName = "";
 
         for (i = 0; i < albumsLimited.length; i++) {

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>•))) music</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,300,400,700" rel="stylesheet">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <nav>
+            <div id="navbar">
+                <a href="#">
+                    <img id="navbarLogo" src="images/logo.png" alt="Music navbar logo" />
+                </a>
+                <input id="searchBar" type="text" placeholder="Search...">
+            </div>
+        </nav>
+        <div id="hero" class="hero">
+            <div id="heroText">
+                <h2>Musik für alles</h2>
+                <p>Worlds best music service. Just kidding. It isn't.</p>
+            </div>
+        </div>
+    </header>
+    <main>
+        <form>
+            <label for="Title">Title:</label>
+            <input id="songTitle" name="Title" type="text">
+            <br>
+            <label for="Artist">Artist(s)</label>
+            <select id="songArtist" name="Artist">
+            </select>
+            <br>
+            <label for="Album">Album</label>
+            <select id="songAlbum" name="Album">
+            </select>
+            <br>
+            <label for="Genre">Genre:</label>
+            <input id="songGenre" name="Genre" type="text">
+            <button id="songSubmit" type="submit">Submit</button>
+        </form>
+    </main>
+    <footer>
+        <img src="images/logo.png" alt="Music footer logo" />
+    </footer>
+    <script src="js/main.js"></script>
+    <script src="js/songform.js"></script>
+</body>
+
+</html>

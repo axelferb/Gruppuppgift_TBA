@@ -10,8 +10,8 @@ fetch('https://folksa.ga/api/albums?limit=6&key=flat_eric')
     .then((albumsLimited) => {
         View.displayAlbumsLimited(albumsLimited);
     });
-// Fetches playlist.
-fetch('https://folksa.ga/api/playlists?key=flat_eric')
+// Fetches playlist. Limited to 3.
+fetch('https://folksa.ga/api/playlists?limit=3&key=flat_eric')
     .then((response) => response.json())
     .then((playlists) => {
         View.displayPlaylists(playlists);
@@ -66,12 +66,6 @@ const View = {
     }
 }
 // Parallax and styling.
-window.onscroll = function () {
-    navbarShift();
-    heroTextParallax();
-    heroOpacity();
-}
-
 function navbarShift() {
     if (document.body.scrollTop > 520 || document.documentElement.scrollTop > 520) {
         document.getElementById('navbar').style.backgroundColor = "#000";
@@ -96,4 +90,10 @@ function heroOpacity() {
         document.getElementById('hero').style.backgroundColor = "#4e2791";
         document.getElementById('heroText').style.opacity = "1";
     }
+}
+
+window.onscroll = function () {
+    navbarShift();
+    heroTextParallax();
+    heroOpacity();
 }

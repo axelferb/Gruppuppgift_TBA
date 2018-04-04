@@ -30,8 +30,11 @@ const View = {
 
             latestAlbumWrapper.innerHTML += `
                 <div class="latestAlbum">
-                    <p> ${albumsLimited[i].title} </p>
-                    <p> ${albumsLimited[i].artists[0].name} </p>
+                    <img src="${albumsLimited[i].coverImage}" />
+                    <div class="albumInfo">
+                        <h4> ${albumsLimited[i].title} </h4>
+                        <p> ${albumsLimited[i].artists[0].name} </p>
+                    </div>
                 </div>
             `
         }

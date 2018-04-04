@@ -23,28 +23,50 @@ function calculateAverage(sum, arrayLength) {
 function displayAverage(average) {
     var display = average.toFixed(1)
     document.getElementById('currentRating').innerHTML = "Rating: " + display;
-    
+
     console.log(display)
 }
 
 
 fetchPlayList('5ac37c251c908334d07e95f9')
-   .then((array) => {
-    displayAverage( calculateAverage( calculateSum(array.ratings), array.ratings.length))  
-});
-
-function votePlaylist(id, ratingNumber) {
-    fetch(`https://folksa.ga/api/playlists/5aae312ee3534b03981f6521/vote`, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ rating: 9 });
-    })
-    .then((response) => response.json())
-    .then((playlist) => {
-        console.log(playlist);
+    .then((array) => {
+        displayAverage(calculateAverage(calculateSum(array.ratings), array.ratings.length))
     });
+
+function votePlaylist(ratingNumber) {
+    fetch(`https://folksa.ga/api/playlists/5ac37c251c908334d07e95f9/vote?key=flat_eric`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                rating: ratingNumber
+            })
+        })
+        .then((response) => response.json())
+        .then((playlist) => {
+            console.log(playlist);
+        });
 }
 
+
+
+createVoting();
+
+function createVoting() {
+    votingValue = 10
+
+    for (i = 10; i > 0; i--) {
+
+        var mumma = document.getElementById('rating')
+        var ratings = document.createElement("SPAN")
+        var ratingSymbol = document.createTextNode('⬤')
+        ratings.appendChild(ratingSymbol)
+        ratings.addEventListener('click', votePlaylist.bind(this, votingValue));
+        mumma.appendChild(ratings)
+
+        votingValue -= 1
+
+    }
+}

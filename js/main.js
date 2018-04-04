@@ -7,7 +7,7 @@
 */    
 // Only fetches 6 Albums to display on the main page.
 
-fetch('https://folksa.ga/api/albums?limit=6&key=flat_eric&populateArtists=true')
+fetch('https://folksa.ga/api/albums?limit=6&sort=desc&key=flat_eric&populateArtists=true')
     .then((response) => response.json())
     .then((albumsLimited) => {
         View.displayAlbumsLimited(albumsLimited);
@@ -32,7 +32,10 @@ const View = {
                 <div class="latestAlbum">
                     <img src="${albumsLimited[i].coverImage}" />
                     <div class="albumInfo">
-                        <h4> ${albumsLimited[i].title} </h4>
+                        <h4> 
+                            ${albumsLimited[i].title}
+                            <br /> (${albumsLimited[i].releaseDate})
+                        </h4>
                         <p> ${albumsLimited[i].artists[0].name} </p>
                     </div>
                 </div>

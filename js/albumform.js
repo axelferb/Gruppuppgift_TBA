@@ -52,7 +52,7 @@ function submitNewAlbum() {
         });
 }
 // Submits new Album.
-AlbumSubmit.addEventListener("click", function (e) {
+albumSubmit.addEventListener("click", function (e) {
     e.preventDefault();
     submitAlbumForm();
 });

@@ -85,3 +85,13 @@ window.onscroll = function () {
     heroTextParallax();
     heroOpacity();
 }
+
+const openSideNav = document.getElementById('openSideNav');
+openSideNav.addEventListener('click', function () {
+    document.getElementById("navigation").style.width = "100%";
+})
+
+const closeSideNav = document.getElementById('closeSideNav');
+closeSideNav.addEventListener('click', function () {
+    document.getElementById("navigation").style.width = "0";
+})

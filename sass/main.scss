@@ -1,8 +1,12 @@
-@import "_fonts.scss";
-@import "_keyframes.scss";
-@import "_mixins.scss";
-@import "_mobile.scss";
+@import "_fonts";
+@import "_keyframes";
+@import "_mixins";
+@import "_mobile";
 
 @media screen and (min-width: 650px) {
-    @import "_tablet.scss";
+    @import "_tablet";
+}
+
+@media screen and (min-width: 1024px) {
+    @import "_desktop";
 }

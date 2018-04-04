@@ -161,19 +161,23 @@ h3 {
     justify-content: space-around;
 }
 
-.playlist,
+.playlist {
+    @extend .latestAlbum;
+    padding: 20px;
+    width: 300px;
+    height: 300px;
+}
 .latestAlbum {
     margin: 20px;
-    width: 340px;
-    height: 340px;
     background-color: #f2f2f2;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     .albumInfo { 
-        width: 340px;
-        height: 340px;
+        width: 300px;
+        height: 300px;
+        padding: 20px;
         color: #fff;
         text-align: center;
         background-color: hsla(262, 58%, 36%, 0.8);
@@ -193,8 +197,8 @@ h3 {
         }
     }
     img {
-        width: 100%;
-        height: 100%;
+        width: 340px;
+        height: 340px;
     }
     p {
         margin: 0;
@@ -209,7 +213,8 @@ h3 {
     }
 }
 
-#addArtistForm {
+#addArtistForm,
+#addAlbumForm {
     margin-top: 40px;
     display: flex;
     flex-direction: column;
@@ -249,7 +254,7 @@ h3 {
     input:focus,
     select:focus {
         outline: 0;
-        background-color: #ddd;
+        background-color: #ebebeb;
     }
 }
 

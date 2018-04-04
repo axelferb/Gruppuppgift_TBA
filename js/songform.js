@@ -12,7 +12,7 @@ function loopArtists(artists) {
     console.log(artists);
     for (i = 0; i < artists.length; i++) {
         songArtist.innerHTML += `
-        <option value="${artists[i].id}" id="${artists[i]._id}">
+        <option value="${artists[i]._id}" id="${artists[i]._id}">
             ${artists[i].name}
         </option>
         `
@@ -30,7 +30,7 @@ function loopAlbums(albums) {
     console.log(albums);
     for (i = 0; i < albums.length; i++) {
         songAlbum.innerHTML += `
-        <option value="${albums[i].id}" id="${albums[i]._id}">
+        <option value="${albums[i]._id}" id="${albums[i]._id}">
             ${albums[i].title}
         </option>
         `

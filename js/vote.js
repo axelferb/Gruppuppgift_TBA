@@ -1,7 +1,7 @@
 ratingArray = [3, 4, 7, 10, 9, 3, 4, 5, 8]
 
-function fetchPlayList() {
-    return fetch('https://folksa.ga/api/playlists/5ac37c251c908334d07e95f9?key=flat_eric')
+function fetchPlayList(playlistId) {
+    return fetch('https://folksa.ga/api/playlists/' + playlistId + '?key=flat_eric')
         .then((response) => response.json())
 
 }
@@ -33,7 +33,7 @@ displayAverage(
     ) 
 )
 
-fetchPlayList()
+fetchPlayList('5ac37c251c908334d07e95f9')
    .then((array) => {
     displayAverage( calculateAverage( calculateSum(array.ratings), array.ratings.length))  
 });

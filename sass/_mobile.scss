@@ -31,7 +31,7 @@ body {
             left: 0;
             background-color: rgba(0, 0, 0, 0.9);
             overflow-x: hidden;
-            transition: 400ms;
+            //transition: 400ms;
             display: flex;
             justify-content: flex-start;
             align-items: center;
@@ -58,7 +58,7 @@ body {
             a:hover:after {
                 transform: scaleX(1);
             }
-            #openSideNav {
+            #closeSideNav {
                 height: 50px;
             }
             #searchBar {
@@ -77,8 +77,8 @@ body {
         }
         .sidenav .close {
             position: absolute;
-            top: 25px;
-            right: 30px;
+            top: 24px;
+            right: 29px;
             cursor: pointer;
         }
     }

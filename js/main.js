@@ -57,8 +57,12 @@ const View = {
 function navbarShift() {
     if (document.body.scrollTop > 520 || document.documentElement.scrollTop > 520) {
         document.getElementById('navbar').style.backgroundColor = "#000";
+        document.getElementById('addDropDownContent').style.backgroundColor = "#000";
+        document.getElementById('browseDropDownContent').style.backgroundColor = "#000";
     } else {
         document.getElementById('navbar').style.backgroundColor = "transparent";
+        document.getElementById('addDropDownContent').style.backgroundColor = "transparent";
+        document.getElementById('browseDropDownContent').style.backgroundColor = "transparent";
     }
 }
 

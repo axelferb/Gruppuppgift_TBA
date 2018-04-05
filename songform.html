@@ -11,14 +11,40 @@
 </head>
 <body>
     <header>
-        <nav>
+        <nav id="nav">
             <div id="navbar">
-                <a href="#">
-                    <img id="navbarLogo" src="images/logo.png" alt="Music navbar logo" />
-                </a>
-                <input id="searchBar" type="text" placeholder="Search...">
+                <div class="navContainer">
+                    <a href="index.html">
+                        <img id="navbarLogo" src="images/logo.png" alt="Music navbar logo" />
+                    </a>
+                    <div id="navigation" class="sidenav">
+                        <img id="closeSideNav" class="close" src="images/close.svg" alt="Close navbar" />
+                        <div class="browseDropDown">
+                            <button class="browseDropButton">Browse</button>
+                            <div id="browseDropDownContent">
+                                 <ul>
+                                    <li><a href="#">Artist</a></li>
+                                    <li><a href="#">Album</a></li>
+                                    <li><a href="#">Playlist</a></li>
+                                </ul>    
+                            </div>
+                        </div>
+                        <div class="addDropDown">
+                            <button class="addDropButton">Add</button>
+                            <div id="addDropDownContent">
+                                <ul>
+                                    <li><a href="artistform.html">Artist</a></li>
+                                    <li><a href="albumform.html">Album</a></li>
+                                    <li><a href="#">Playlist</a></li>
+                                </ul>    
+                            </div>
+                        </div>
+                        <a href="deleteform.html">Delete</a>
+                        <input id="searchBar" type="text" placeholder="Search...">
+                    </div>
+                    <img id="openSideNav" src="images/menu.svg" alt="Open navbar" />
+                </div>
             </div>
-        </nav>
         <div id="hero" class="hero">
             <div id="heroText">
                 <h2>Musik für alles</h2>

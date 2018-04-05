@@ -13,7 +13,7 @@ function deleteFunction(param, id) {
 }
 
 // Deletes artist by ID
-const deleteArtistButton= document.getElementById("deleteArtistButton");
+const deleteArtistButton = document.getElementById("deleteArtistButton");
 
 deleteArtistButton.addEventListener("click", function (e) {
     const artistID = document.getElementById("artistID");
@@ -21,6 +21,7 @@ deleteArtistButton.addEventListener("click", function (e) {
     e.preventDefault();
     deleteFunction('artists', artistID.value);
     document.getElementById('artistID').value = '';
+    console.log("Artist with ID:" + " " + artistID.value + " " + "was successfully deleted!");
 });
 
 // Deletes album by ID
@@ -32,4 +33,5 @@ deleteAlbumButton.addEventListener("click", function (e) {
     e.preventDefault();
     deleteFunction('albums', albumID.value);
     document.getElementById('albumID').value = '';
+    console.log("Album with ID:" + " " + albumID.value + " " + "was successfully deleted!");
 });

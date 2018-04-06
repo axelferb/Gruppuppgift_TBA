@@ -6,6 +6,7 @@ const artistImgLink = document.getElementById("artistImgLink");
 const artistGender = document.getElementById("artistGender");
 const artistDateBorn = document.getElementById("artistDateBorn");
 const mainWrapper = document.getElementById("mainWrapper");
+// What to replace the innerHTML on index with!
 const view = {
     replaceArtistForm: function () {
         mainWrapper.innerHTML = `
@@ -35,6 +36,7 @@ const view = {
         `
     }
 }
+// Replaces the innerHTML with the form to create a Artist.
 view.replaceArtistForm();
 const artistSubmit = document.getElementById("artistSubmit");
 const model = {
@@ -49,13 +51,13 @@ const model = {
             coverImage: artistImgLink.value,
         }
         fetch('https://folksa.ga/api/artists?key=flat_eric', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newArtist),
-            })
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newArtist),
+        })
             .then((response) => response.json())
             .then((newArtist) => {
                 console.log(newArtist);

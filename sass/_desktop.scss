@@ -1,26 +1,28 @@
 #navbar {
     .navContainer {
-        .sidenav {
-            padding-top: 0;
-            position: relative;
-            background-color: transparent;
-            width: 600px !important;
-            overflow-x: visible;
-            justify-content: space-between;
-            flex-direction: row;
-            transition: 0s;
-            #searchBar {
-                margin-top: 0;
-            }
-            #closeSideNav {
-                display: none;
-            }
-        }
-        #openSideNav {
-            display: none;
-        }
+        padding: 4px 25px;
     }
 }
+
+.sidenav {
+    padding-top: 0;
+    position: relative;
+    background-color: transparent;
+    width: 600px !important;
+    overflow-x: visible;
+    justify-content: space-between;
+    flex-direction: row;
+    #searchBar {
+        margin-top: 0;
+    }
+    #closeSideNav {
+        display: none;
+    }
+}
+#openSideNav {
+    display: none;
+}
+
 .browseDropDown,
 .addDropDown {
     position: relative;
@@ -31,7 +33,7 @@
         background-color: transparent;
         font-size: 1rem;
         color: #fff;
-        padding: 0 10px;
+        padding: 0 0px;
         border: none;
         cursor: pointer;
     }
@@ -39,11 +41,11 @@
     #addDropDownContent {
         margin-top: 30px;
         text-align: center;
-        padding: 20px 20px 10px 20px;
+        padding: 20px 20px 5px 20px;
         display: none;
         position: absolute;
         background-color: transparent;
-        // box-shadow: 0px 3px 9px 6px rgba(78,39,145,.8);
+        transition: background-color 800ms;
         z-index: 1;
         a {
         margin-bottom: 10px;

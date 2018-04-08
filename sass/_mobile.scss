@@ -15,7 +15,7 @@ body {
     display: flex;
     justify-content: center;
     .navContainer { 
-        padding: 0 30px;
+        padding: 0 25px;
         width: 100%;
         max-width: 1200px;
         display: flex;
@@ -28,7 +28,6 @@ body {
 }
 
 .sidenav {
-    padding-top: 100px;
     width: 0;
     height: 100%;
     position: fixed;
@@ -37,30 +36,15 @@ body {
     left: 0;
     background-color: #000;
     overflow-x: hidden;
-    display: flex !important;
-    justify-content: flex-start;
+    display: flex;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
-    transition: 400ms;
     #closeSideNav {
         height: 50px;
     }
-    a {
-        color: #fff;
-        text-decoration: none;
-    }
-    a:after {
-        display: block;
-        content: '';
-        border-bottom: solid 2px #fff;  
-        transform: scaleX(0);  
-        transition: transform 250ms ease-in-out;
-    }
-    a:hover:after {
-        transform: scaleX(1);
-    }
     #searchBar {
-        margin-top: 20px;
+        margin-top: 40px;
         padding-left: 15px;
         width: 250px;
         height: 35px;
@@ -73,7 +57,24 @@ body {
     #searchBar:focus {
         outline: 0;
     }
+    a {
+        margin-bottom: 10px;
+        color: #fff;
+        text-decoration: none;
+        display: inline-block;
+    }
+    a:after {
+        display: block;
+        content: '';
+        border-bottom: solid 2px #fff;  
+        transform: scaleX(0);  
+        transition: transform 250ms ease-in-out;
+    }
+    a:hover:after {
+        transform: scaleX(1);
+    }
 }
+
 .sidenav .close {
     position: absolute;
     top: 24px;
@@ -86,6 +87,7 @@ body {
     text-align: center;
     .browseDropButton,
     .addDropButton {
+        padding: 0;
         margin: 10px 0;
         background-color: transparent;
         font-size: 1rem;
@@ -104,8 +106,25 @@ body {
             padding: 0;
             list-style: none;
             li {
+                width: 100%;
                 margin: 5px 0;
             }
+        }
+        a {
+            margin-bottom: 10px;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+        }
+        a:after {
+            display: block;
+            content: '';
+            border-bottom: solid 2px #fff;  
+            transform: scaleX(0);  
+            transition: transform 250ms ease-in-out;
+        }
+        a:hover:after {
+            transform: scaleX(1);
         }
     }
 }

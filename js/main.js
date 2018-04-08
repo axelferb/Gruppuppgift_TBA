@@ -5,19 +5,29 @@
         View.displayAlbums(albums);
     });     
 */    
-// Only fetches 6 Albums to display on the main page.
 
+// Only fetches 6 Albums to display on the main page.
 fetch('https://folksa.ga/api/albums?limit=6&sort=desc&key=flat_eric&populateArtists=true')
     .then((response) => response.json())
     .then((albumsLimited) => {
         View.displayAlbumsLimited(albumsLimited);
     });
+
 // Fetches playlist. Limited to 3.
 fetch('https://folksa.ga/api/playlists?limit=3&key=flat_eric')
     .then((response) => response.json())
     .then((playlists) => {
         View.displayPlaylists(playlists);
         console.log(playlists);
+    });
+
+// Fetches artists, limited to 6
+fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric&populateArtists=true')
+    .then((response) => response.json())
+    .then((artists) => {
+        artist = artists;
+        console.log(artist);
+        View.displayArtists(artist);
     });
 
 const View = {
@@ -27,7 +37,6 @@ const View = {
         var albumList = "";
 
         for (i = 0; i < albumsLimited.length; i++) {
-
             latestAlbumWrapper.innerHTML += `
                 <div class="latestAlbum">
                     <img src="${albumsLimited[i].coverImage}" />
@@ -48,6 +57,23 @@ const View = {
             playlistWrapper.innerHTML += `
                 <div class="playlist">
                     <p> ${playlists[i].title} </p>
+                </div>
+            `
+        }
+    },
+    // Display artists
+    displayArtists: function (artist) {
+        for (i = 0; i < artist.length; i++) {
+            artistWrapper.innerHTML += `
+                <div class="artist">
+                    <img src="${artist[i].coverImage}" />
+                    <div class="artistInfo">
+                        <h4> 
+                            ${artist[i].name}
+                            <br /> (${artist[i].genres})
+                        </h4>
+                        <p> <a href="${artist[i].spotifyURL}" target="_blank">Listen on Spotify</a> </p>
+                    </div>
                 </div>
             `
         }

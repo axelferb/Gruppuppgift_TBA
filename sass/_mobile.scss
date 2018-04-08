@@ -22,6 +22,10 @@ body {
         justify-content: space-between;
         align-items: center;
     }
+    #openSideNav {
+        height: 50px;
+        cursor: pointer;
+    }
     #navbarLogo {
         width: 120px;
     }
@@ -41,7 +45,7 @@ body {
     align-items: center;
     flex-direction: column;
     #closeSideNav {
-        height: 50px;
+        @extend #openSideNav;
     }
     #searchBar {
         margin-top: 40px;
@@ -78,7 +82,6 @@ body {
     position: absolute;
     top: 24px;
     right: 29px;
-    cursor: pointer;
 }
 
 .browseDropDown,
@@ -247,7 +250,7 @@ body {
 .playlistWrapper,
 .latestAlbumWrapper,
 .artistWrapper {
-    margin-top: 40px;
+    margin-top: 20px;
     width: 100%;
     max-width: 1150px;
     display: flex;

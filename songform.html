@@ -23,8 +23,9 @@
                             <button class="browseDropButton">Browse</button>
                             <div id="browseDropDownContent">
                                  <ul>
-                                    <li><a href="#">Artist</a></li>
-                                    <li><a href="#">Album</a></li>
+                                    <li><a href="artistform.html">Artist</a></li>
+                                    <li><a href="albumform.html">Album</a></li>
+                                    <li><a href="songform.html">Song</a></li>
                                     <li><a href="#">Playlist</a></li>
                                 </ul>    
                             </div>
@@ -53,28 +54,47 @@
         </div>
     </header>
     <main>
-        <form>
-            <label for="Title">Title:</label>
-            <input id="songTitle" name="Title" type="text">
-            <br>
-            <label for="Artist">Artist(s)</label>
-            <select id="songArtist" name="Artist">
-            </select>
-            <br>
-            <label for="Album">Album</label>
-            <select id="songAlbum" name="Album">
-            </select>
-            <br>
-            <label for="Genre">Genre:</label>
-            <input id="songGenre" name="Genre" type="text">
-            <button id="songSubmit" type="submit">Submit</button>
-        </form>
+        <div class="mainWrapper">
+            <h3>Add song</h3>
+            <p>Add a new song to the API</p>
+            <form id="addSongForm">
+                <label for="Title">Title:</label>
+                <input id="songTitle" name="Title" type="text" />
+
+                <label for="Artist">Artist(s)</label>
+                <select id="songArtist" name="Artist"> </select>
+
+                <label for="Album">Album</label>
+                <select id="songAlbum" name="Album"> </select>
+
+                <label for="Genre">Genre:</label>
+                <input id="songGenre" name="Genre" type="text" />
+                <button id="songSubmit" type="submit">Submit</button>
+            </form>
+        </div>
     </main>
     <footer>
-        <img src="images/logo.png" alt="Music footer logo" />
+        <div class="footerContainer">
+            <img src="images/logo.png" alt="Music footer logo" />
+            <ul>
+                <li>
+                    <h4>Browse</h4>
+                </li>
+                <li><a href="">Playlists</a></li>
+                <li><a href="">Albums</a></li>
+                <li><a href="">Artists</a></li>
+            </ul>
+            <ul>
+                <li>
+                    <h4>Add</h4>
+                </li>
+                <li><a href="">Playlist</a></li>
+                <li><a href="">Album</a></li>
+                <li><a href="">Artist</a></li>
+            </ul>
+        </div>
     </footer>
     <script src="js/main.js"></script>
     <script src="js/songform.js"></script>
 </body>
-
 </html>

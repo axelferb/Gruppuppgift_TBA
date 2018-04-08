@@ -32,15 +32,16 @@ body {
     width: 0;
     height: 100%;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: #000;
     overflow-x: hidden;
-    display: flex;
+    display: flex !important;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    transition: 400ms;
     #closeSideNav {
         height: 50px;
     }
@@ -179,6 +180,7 @@ body {
 .mainWrapper {
     padding: 40px 20px;
     transition: padding 3s;
+    background-color: #fff;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -289,7 +291,9 @@ body {
 #addArtistForm,
 #deleteArtistForm,
 #addAlbumForm,
-#deleteAlbumForm {
+#deleteAlbumForm,
+#addSongForm,
+#deleteSongForm {
     margin-top: 40px;
     display: flex;
     flex-direction: column;

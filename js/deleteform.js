@@ -36,3 +36,15 @@ deleteAlbumButton.addEventListener("click", function (e) {
     deleteFunction('albums', albumID.value);
     document.getElementById('albumID').value = '';
 });
+
+// Deletes song by ID
+const deleteSongButton= document.getElementById("deleteSongButton");
+
+deleteSongButton.addEventListener("click", function (e) {
+    const songID = document.getElementById("songID");
+    
+    e.preventDefault();
+    console.log(songID.value);
+    deleteFunction('tracks', songID.value);
+    document.getElementById('songID').value = '';
+});

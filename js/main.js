@@ -21,8 +21,8 @@ fetch('https://folksa.ga/api/playlists?limit=3&key=flat_eric')
         console.log(playlists);
     });
 
-// Fetches artists, limited to 6
-fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric&populateArtists=true')
+// Fetches artists, limited to 9
+fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
     .then((response) => response.json())
     .then((artists) => {
         artist = artists;

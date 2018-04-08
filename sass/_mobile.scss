@@ -58,7 +58,6 @@ body {
         outline: 0;
     }
     a {
-        margin-bottom: 10px;
         color: #fff;
         text-decoration: none;
         display: inline-block;
@@ -107,11 +106,10 @@ body {
             list-style: none;
             li {
                 width: 100%;
-                margin: 5px 0;
+                margin: 5px 0 10px 0;
             }
         }
         a {
-            margin-bottom: 10px;
             color: #fff;
             text-decoration: none;
             display: inline-block;

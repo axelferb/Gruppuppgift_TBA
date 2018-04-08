@@ -35,6 +35,7 @@
                                 <ul>
                                     <li><a href="artistform.html">Artist</a></li>
                                     <li><a href="albumform.html">Album</a></li>
+                                    <li><a href="songform.html">Song</a></li>
                                     <li><a href="#">Playlist</a></li>
                                 </ul>    
                             </div>
@@ -64,6 +65,12 @@
 
                 <button id="deleteArtistButton" type="submit">Delete artist</button>
             </form>
+            <form id="deleteSongForm">
+                    <label for="deleteSong">Delete song by ID:</label>
+                    <input id="songID" name="deleteSong" type="text" />
+        
+                    <button id="deleteSongButton" type="submit">Delete song</button>
+                </form>
             <form id="deleteAlbumForm">
                 <label for="deleteAlbum">Delete album by ID:</label>
                 <input id="albumID" name="deleteAlbum" type="text" />

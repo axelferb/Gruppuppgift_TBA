@@ -19,17 +19,33 @@
                     </a>
                     <div id="navigation" class="sidenav">
                         <img id="closeSideNav" class="close" src="images/close.svg" alt="Close navbar" />
-                        <ul>
-                            <li><a href="#">Browse</a></li>
-                            <li><a href="#">Add</a></li>
-                            <li><a href="deleteform.html">Delete</a></li>
-                        </ul>
+                        <div class="browseDropDown">
+                            <button class="browseDropButton">Browse</button>
+                            <div id="browseDropDownContent">
+                                 <ul>
+                                    <li><a href="#">Artist</a></li>
+                                    <li><a href="#">Album</a></li>
+                                    <li><a href="#">Playlist</a></li>
+                                </ul>    
+                            </div>
+                        </div>
+                        <div class="addDropDown">
+                            <button class="addDropButton">Add</button>
+                            <div id="addDropDownContent">
+                                <ul>
+                                    <li><a href="artistform.html">Artist</a></li>
+                                    <li><a href="albumform.html">Album</a></li>
+                                    <li><a href="songform.html">Song</a></li>
+                                    <li><a href="#">Playlist</a></li>
+                                </ul>    
+                            </div>
+                        </div>
+                        <a href="deleteform.html">Delete</a>
                         <input id="searchBar" type="text" placeholder="Search...">
                     </div>
                     <img id="openSideNav" src="images/menu.svg" alt="Open navbar" />
                 </div>
             </div>
-        </nav>
         <div id="hero" class="hero">
             <div id="heroText">
                 <h2>Musik für alles</h2>
@@ -49,6 +65,12 @@
 
                 <button id="deleteArtistButton" type="submit">Delete artist</button>
             </form>
+            <form id="deleteSongForm">
+                    <label for="deleteSong">Delete song by ID:</label>
+                    <input id="songID" name="deleteSong" type="text" />
+        
+                    <button id="deleteSongButton" type="submit">Delete song</button>
+                </form>
             <form id="deleteAlbumForm">
                 <label for="deleteAlbum">Delete album by ID:</label>
                 <input id="albumID" name="deleteAlbum" type="text" />

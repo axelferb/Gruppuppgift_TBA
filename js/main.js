@@ -3,7 +3,7 @@
     .then((response) => response.json())
     .then((albums) => {
         View.displayAlbums(albums);
-    });
+    });     
 */    
 // Only fetches 6 Albums to display on the main page.
 
@@ -55,23 +55,27 @@ const View = {
 }
 // Parallax and styling.
 function navbarShift() {
-    if (document.body.scrollTop > 520 || document.documentElement.scrollTop > 520) {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
         document.getElementById('navbar').style.backgroundColor = "#000";
+        document.getElementById('addDropDownContent').style.backgroundColor = "#000";
+        document.getElementById('browseDropDownContent').style.backgroundColor = "#000";
     } else {
         document.getElementById('navbar').style.backgroundColor = "transparent";
+        document.getElementById('addDropDownContent').style.backgroundColor = "transparent";
+        document.getElementById('browseDropDownContent').style.backgroundColor = "transparent";
     }
 }
 
 function heroTextParallax() {
     const heroText = document.getElementById('heroText');
     heroText.style.transform = "translateY(" + scrollY / 2 + "px)";
-    if (scrollY > 200) {
-        heroText.style.transform = "translateY(100px)";
+    if (scrollY > 450) {
+        heroText.style.transform = "translateY(225px)";
     }
 }
 
 function heroOpacity() {
-    if (document.body.scrollTop > 340 || document.documentElement.scrollTop > 340) {
+    if (document.body.scrollTop > 425 || document.documentElement.scrollTop > 425) {
         document.getElementById('hero').style.backgroundColor = "#000";
         document.getElementById('heroText').style.opacity = "0";
     } else {

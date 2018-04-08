@@ -21,69 +21,92 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        .sidenav {
-            padding-top: 100px;
-            width: 0;
-            height: 100%;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: rgba(0, 0, 0, 0.9);
-            overflow-x: hidden;
-            //transition: 400ms;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            flex-direction: column;
-            ul {
-                text-align: center;
-                padding: 0;
-                list-style: none;
-                li {
-                    margin: 10px 0;
-                }
-            }
-            a {
-                color: #fff;
-                text-decoration: none;
-            }
-            a:after {
-                display:block;
-                content: '';
-                border-bottom: solid 2px #fff;  
-                transform: scaleX(0);  
-                transition: transform 250ms ease-in-out;
-            }
-            a:hover:after {
-                transform: scaleX(1);
-            }
-            #closeSideNav {
-                height: 50px;
-            }
-            #searchBar {
-                padding-left: 15px;
-                width: 250px;
-                height: 35px;
-                font-family: $mainFont;
-                font-size: .8rem;
-                letter-spacing: .02rem;
-                border: 0;
-                border-radius: 15px;
-            }
-            #searchBar:focus {
-                outline: 0;
-            }
-        }
-        .sidenav .close {
-            position: absolute;
-            top: 24px;
-            right: 29px;
-            cursor: pointer;
-        }
     }
     #navbarLogo {
         width: 120px;
+    }
+}
+
+.sidenav {
+    padding-top: 100px;
+    width: 0;
+    height: 100%;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    overflow-x: hidden;
+    display: flex !important;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    transition: 400ms;
+    #closeSideNav {
+        height: 50px;
+    }
+    a {
+        color: #fff;
+        text-decoration: none;
+    }
+    a:after {
+        display: block;
+        content: '';
+        border-bottom: solid 2px #fff;  
+        transform: scaleX(0);  
+        transition: transform 250ms ease-in-out;
+    }
+    a:hover:after {
+        transform: scaleX(1);
+    }
+    #searchBar {
+        margin-top: 20px;
+        padding-left: 15px;
+        width: 250px;
+        height: 35px;
+        font-family: $mainFont;
+        font-size: .8rem;
+        letter-spacing: .02rem;
+        border: 0;
+        border-radius: 15px;
+    }
+    #searchBar:focus {
+        outline: 0;
+    }
+}
+.sidenav .close {
+    position: absolute;
+    top: 24px;
+    right: 29px;
+    cursor: pointer;
+}
+
+.browseDropDown,
+.addDropDown {
+    text-align: center;
+    .browseDropButton,
+    .addDropButton {
+        margin: 10px 0;
+        background-color: transparent;
+        font-size: 1rem;
+        color: #fff;
+        border: 0;
+        border-bottom: 2px solid #fff;;
+    }
+    #browseDropDownContent,
+    #addDropDownContent {
+        margin-bottom: 20px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            li {
+                margin: 5px 0;
+            }
+        }
     }
 }
 
@@ -99,7 +122,7 @@ body {
     flex-direction: column;
     transition: background-color 800ms;
     #heroText {
-        transition: opacity 800ms;
+        transition: opacity 400ms;
         h2 {
             margin: -40px 0 10px 0;
             font-family: $headerFont;
@@ -157,16 +180,17 @@ body {
 .mainWrapper {
     padding: 40px 20px;
     transition: padding 3s;
+    background-color: #fff;
     display: flex;
     align-items: center;
     flex-direction: column;
-    text-align: center;
     h3 {
         margin: 0;
         font-family: $headerFont;
         font-size: 3rem;
     }
     p {
+        text-align: center;
         line-height: 1.5rem;
     }
 }
@@ -267,7 +291,9 @@ body {
 #addArtistForm,
 #deleteArtistForm,
 #addAlbumForm,
-#deleteAlbumForm {
+#deleteAlbumForm,
+#addSongForm,
+#deleteSongForm {
     margin-top: 40px;
     display: flex;
     flex-direction: column;

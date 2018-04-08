@@ -31,7 +31,7 @@ fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
     });
 
 const View = {
-    // Diplays the 8 latest albums on the main page.
+    // Diplays the 6 latest albums on the main page.
     displayAlbumsLimited: function (albumsLimited) {
         var albumListElement = document.getElementById("listMain")
         var albumList = "";
@@ -41,11 +41,12 @@ const View = {
                 <div class="latestAlbum">
                     <img src="${albumsLimited[i].coverImage}" />
                     <div class="albumInfo">
-                        <h4> 
-                            ${albumsLimited[i].title}
-                            <br /> (${albumsLimited[i].releaseDate})
-                        </h4>
+                        <h4> ${albumsLimited[i].title} </h4>
+                        <h4> (${albumsLimited[i].releaseDate}) </h4>
                         <p> ${albumsLimited[i].artists[0].name} </p>
+                        <p id="spotifyLink">
+                            <a href="${albumsLimited[i].spotifyURL}" target="_blank">Listen on Spotify</a>
+                        </p>
                     </div>
                 </div>
             `

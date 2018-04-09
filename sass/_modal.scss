@@ -17,16 +17,50 @@
     /* Fallback color */
     background-color: rgba(0, 0, 0, 0.8);
     /* Black w/ opacity */
-    color: #fff;
+    color: #000;
 }
     
 #modalContent {
-    margin: 10% auto;
+    margin: 5% auto;
     /* 15% from the top and centered */
     width: 80%;
 }
     
 #modalPadding {
-    padding: 20px 60px;
+    padding: 40px 20px;
+    background-color: #fff;
+}
+
+.modalAlbumWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    h1 {
+        margin: 0;
+        //font-family: $headerFont;
+    }
+    h2 {
+        margin: 0;
+    }
+    h3 {
+        margin: 5px 0;
+    }
+    img {
+        width: 200px;
+    }
+    .modalAlbumInfo {
+        margin-left: 40px;
+        font-size: .8rem;
+    }
+    ul {
+        margin: 20px 0 0 0;
+        padding: 0;
+        list-style: none;
+        li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f2f2f2;
+        }
+    }
 }
     

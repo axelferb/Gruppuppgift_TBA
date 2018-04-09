@@ -21,16 +21,33 @@ fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
         console.log(artist);
         View.displayArtists(artist);
     });
-function addEventListener(){
+
+function addEventListener(type){
     for (i = 0; i < 6; i++) {
+
+        
+            var itemID = document.getElementById(`latestAlbum${[i]}`).getAttribute("value")
+
+            var moreInfo = document.getElementById(`latestAlbum${[i]}`);
+            
+            
+            moreInfo.addEventListener('click', fetchSingleItem.bind(this, type, itemID));
+            
+    }
+}
+
+function fetchSingleItem(listType, Id) {
+    return fetch('https://folksa.ga/api/' + listType + '/' + Id + '?key=flat_eric')
+        .then((response) => response.json())
+        .then((data) => {
+        console.log(data);
+    });
+
         var moreInfo = document.getElementById(`latestAlbum${[i]}`);
         moreInfo.addEventListener('click', myFunction.bind(this));
     }
 }
 
-function fetchSingleAlbum(){
-    console.log("Mumma");
-}
 
 const View = {
     // Diplays the 6 latest albums on the main page.
@@ -39,8 +56,9 @@ const View = {
 
         for (i = 0; i < albumsLimited.length; i++) {
             if(albumsLimited[i].coverImage === "") {
+                
                 htmlBlock += `
-                    <div class="latestAlbum" id="latestAlbum${[i]}">
+                    <div class="latestAlbum" id="latestAlbum${[i]}" value="${albumsLimited[i]._id}>
                         <img src="images/noimage.jpg" />
                         <div class="albumInfo">
                             <h4> ${albumsLimited[i].title} </h4>
@@ -53,8 +71,9 @@ const View = {
                     </div>
                 `
             } else {
+
                 htmlBlock += `
-                    <div class="latestAlbum" id="latestAlbum${[i]}">
+                    <div class="latestAlbum" id="latestAlbum${[i]}" value="${albumsLimited[i]._id}">
                         <img src="${albumsLimited[i].coverImage}" />
                         <div class="albumInfo">
                             <h4> ${albumsLimited[i].title} </h4>
@@ -68,8 +87,9 @@ const View = {
                 `
             }
         }
-        latestAlbumWrapper.innerHTML = htmlBlock;
-        addEventListener()
+    latestAlbumWrapper.innerHTML = htmlBlock;
+    addEventListener("albums")
+
     },
     // Diplays the playlists on the main page.
     displayPlaylists: function (playlists) {

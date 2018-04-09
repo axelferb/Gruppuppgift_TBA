@@ -1,11 +1,3 @@
-// Fetches all albums.
-/*fetch('https://folksa.ga/api/albums?key=flat_eric')
-    .then((response) => response.json())
-    .then((albums) => {
-        View.displayAlbums(albums);
-    });     
-*/    
-
 // Only fetches 6 Albums to display on the main page.
 fetch('https://folksa.ga/api/albums?limit=6&sort=desc&key=flat_eric&populateArtists=true')
     .then((response) => response.json())
@@ -31,26 +23,23 @@ fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
     });
 function addEventListener(){
     for (i = 0; i < 6; i++) {
-            
-            var moreInfo = document.getElementById(`latestAlbum${[i]}`);
-            moreInfo.addEventListener('click', myFunction.bind(this));
+        var moreInfo = document.getElementById(`latestAlbum${[i]}`);
+        moreInfo.addEventListener('click', myFunction.bind(this));
     }
 }
 
 function fetchSingleAlbum(){
-    console.log("MUmma")
+    console.log("Mumma");
 }
 
 const View = {
     // Diplays the 6 latest albums on the main page.
     displayAlbumsLimited: function (albumsLimited) {
-        var albumListElement = document.getElementById("listMain")
-        var albumList = "";
+        let htmlBlock = '';
 
         for (i = 0; i < albumsLimited.length; i++) {
-            
             if(albumsLimited[i].coverImage === "") {
-                latestAlbumWrapper.innerHTML += `
+                htmlBlock += `
                     <div class="latestAlbum" id="latestAlbum${[i]}">
                         <img src="images/noimage.jpg" />
                         <div class="albumInfo">
@@ -64,7 +53,7 @@ const View = {
                     </div>
                 `
             } else {
-                latestAlbumWrapper.innerHTML += `
+                htmlBlock += `
                     <div class="latestAlbum" id="latestAlbum${[i]}">
                         <img src="${albumsLimited[i].coverImage}" />
                         <div class="albumInfo">
@@ -78,27 +67,29 @@ const View = {
                     </div>
                 `
             }
-            
         }
-    
-    addEventListener()
-        
-
+        latestAlbumWrapper.innerHTML = htmlBlock;
+        addEventListener()
     },
     // Diplays the playlists on the main page.
     displayPlaylists: function (playlists) {
+        let htmlBlock = '';
+
         for (i = 0; i < playlists.length; i++) {
-            playlistWrapper.innerHTML += `
+            htmlBlock += `
                 <div class="playlist">
                     <p> ${playlists[i].title} </p>
                 </div>
             `
         }
+        playlistWrapper.innerHTML = htmlBlock;
     },
     // Display artists
     displayArtists: function (artist) {
+        let htmlBlock = '';
+
         for (i = 0; i < artist.length; i++) {
-            artistWrapper.innerHTML += `
+            htmlBlock += `
                 <div class="artist">
                     <img src="${artist[i].coverImage}" />
                     <div class="artistInfo">
@@ -108,7 +99,8 @@ const View = {
                     </div>
                 </div>
             `
-        }   
+        }
+        artistWrapper.innerHTML = htmlBlock;
     }
 }
 // Parallax and styling.

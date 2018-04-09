@@ -37,20 +37,38 @@ const View = {
         var albumList = "";
 
         for (i = 0; i < albumsLimited.length; i++) {
-            latestAlbumWrapper.innerHTML += `
-                <div class="latestAlbum">
-                    <img src="${albumsLimited[i].coverImage}" />
-                    <div class="albumInfo">
-                        <h4> ${albumsLimited[i].title} </h4>
-                        <h4> (${albumsLimited[i].releaseDate}) </h4>
-                        <p> ${albumsLimited[i].artists[0].name} </p>
-                        <p id="spotifyLink">
-                            <a href="${albumsLimited[i].spotifyURL}" target="_blank">Listen on Spotify</a>
-                        </p>
+            if(albumsLimited[i].coverImage === "") {
+                latestAlbumWrapper.innerHTML += `
+                    <div class="latestAlbum">
+                        <img src="images/noimage.jpg" />
+                        <div class="albumInfo">
+                            <h4> ${albumsLimited[i].title} </h4>
+                            <h4> (${albumsLimited[i].releaseDate}) </h4>
+                            <p> ${albumsLimited[i].artists[0].name} </p>
+                            <p id="spotifyLink">
+                                <a href="${albumsLimited[i].spotifyURL}" target="_blank">Listen on Spotify</a>
+                            </p>
+                        </div>
                     </div>
-                </div>
-            `
+                `
+            } else {
+                latestAlbumWrapper.innerHTML += `
+                    <div class="latestAlbum">
+                        <img src="${albumsLimited[i].coverImage}" />
+                        <div class="albumInfo">
+                            <h4> ${albumsLimited[i].title} </h4>
+                            <h4> (${albumsLimited[i].releaseDate}) </h4>
+                            <p> ${albumsLimited[i].artists[0].name} </p>
+                            <p id="spotifyLink">
+                                <a href="${albumsLimited[i].spotifyURL}" target="_blank">Listen on Spotify</a>
+                            </p>
+                        </div>
+                    </div>
+                `
+            }
+            
         }
+        latestAlbumWrapper
     },
     // Diplays the playlists on the main page.
     displayPlaylists: function (playlists) {
@@ -75,7 +93,7 @@ const View = {
                     </div>
                 </div>
             `
-        }
+        }   
     }
 }
 // Parallax and styling.

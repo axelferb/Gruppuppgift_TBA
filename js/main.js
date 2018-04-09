@@ -1,11 +1,3 @@
-// Fetches all albums.
-/*fetch('https://folksa.ga/api/albums?key=flat_eric')
-    .then((response) => response.json())
-    .then((albums) => {
-        View.displayAlbums(albums);
-    });     
-*/    
-
 // Only fetches 6 Albums to display on the main page.
 fetch('https://folksa.ga/api/albums?limit=6&sort=desc&key=flat_eric&populateArtists=true')
     .then((response) => response.json())
@@ -29,6 +21,16 @@ fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
         console.log(artist);
         View.displayArtists(artist);
     });
+function addEventListener(){
+    for (i = 0; i < 6; i++) {
+        var moreInfo = document.getElementById(`latestAlbum${[i]}`);
+        moreInfo.addEventListener('click', myFunction.bind(this));
+    }
+}
+
+function fetchSingleAlbum(){
+    console.log("Mumma");
+}
 
 const View = {
     // Diplays the 6 latest albums on the main page.
@@ -38,7 +40,7 @@ const View = {
         for (i = 0; i < albumsLimited.length; i++) {
             if(albumsLimited[i].coverImage === "") {
                 htmlBlock += `
-                    <div class="latestAlbum">
+                    <div class="latestAlbum" id="latestAlbum${[i]}">
                         <img src="images/noimage.jpg" />
                         <div class="albumInfo">
                             <h4> ${albumsLimited[i].title} </h4>
@@ -52,7 +54,7 @@ const View = {
                 `
             } else {
                 htmlBlock += `
-                    <div class="latestAlbum">
+                    <div class="latestAlbum" id="latestAlbum${[i]}">
                         <img src="${albumsLimited[i].coverImage}" />
                         <div class="albumInfo">
                             <h4> ${albumsLimited[i].title} </h4>
@@ -65,9 +67,9 @@ const View = {
                     </div>
                 `
             }
-            
         }
         latestAlbumWrapper.innerHTML = htmlBlock;
+        addEventListener()
     },
     // Diplays the playlists on the main page.
     displayPlaylists: function (playlists) {
@@ -147,3 +149,38 @@ const closeSideNav = document.getElementById('closeSideNav');
 closeSideNav.addEventListener('click', function () {
     document.getElementById("navigation").style.width = "0";
 })
+
+
+
+
+//MODAL FUNCTIONS
+
+var modal = document.getElementById('myModal');
+
+//print out Single information
+function myFunction() {
+
+/*    var word = document.getElementById("modal-padding");
+
+    var jobInfo = ''
+    console.log("ad")
+
+    jobInfo +=
+        `
+        <h4 class = "arbetsplatsnamn"> 
+        HEJHEJ </h4>
+       `
+
+    word.innerHTML = jobInfo;
+    */
+    
+    modal.style.display = "block";
+    
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}

@@ -1,4 +1,8 @@
 //ratingArray = [3, 4, 7, 10, 9, 3, 4, 5, 8]
+fetchPlayList('5ac37c251c908334d07e95f9')
+    .then((array) => {
+        displayAverage(calculateAverage(calculateSum(array.ratings), array.ratings.length))
+    });
 
 function fetchPlayList(playlistId) {
     return fetch('https://folksa.ga/api/playlists/' + playlistId + '?key=flat_eric')
@@ -28,11 +32,6 @@ function displayAverage(average) {
 }
 
 
-fetchPlayList('5ac37c251c908334d07e95f9')
-    .then((array) => {
-        displayAverage(calculateAverage(calculateSum(array.ratings), array.ratings.length))
-    });
-
 function votePlaylist(ratingNumber) {
     fetch(`https://folksa.ga/api/playlists/5ac37c251c908334d07e95f9/vote?key=flat_eric`, {
             method: 'POST',
@@ -46,7 +45,11 @@ function votePlaylist(ratingNumber) {
         })
         .then((response) => response.json())
         .then((playlist) => {
-            console.log(playlist);
+            fetchPlayList('5ac37c251c908334d07e95f9')
+                .then((array) => {
+                    displayAverage(calculateAverage(calculateSum(array.ratings), array.ratings.length))
+                });
+
         });
 }
 
@@ -62,8 +65,10 @@ function createVoting() {
         var mumma = document.getElementById('rating')
         var ratings = document.createElement("SPAN")
         var ratingSymbol = document.createTextNode('⬤')
+
         ratings.appendChild(ratingSymbol)
         ratings.addEventListener('click', votePlaylist.bind(this, votingValue));
+
         mumma.appendChild(ratings)
 
         votingValue -= 1

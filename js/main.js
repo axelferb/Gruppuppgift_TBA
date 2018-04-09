@@ -29,16 +29,26 @@ fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
         console.log(artist);
         View.displayArtists(artist);
     });
-function addEventListener(){
+
+function addEventListener(type){
     for (i = 0; i < 6; i++) {
-            
+        
+            var itemID = document.getElementById(`latestAlbum${[i]}`).getAttribute("value")
+
             var moreInfo = document.getElementById(`latestAlbum${[i]}`);
-            moreInfo.addEventListener('click', myFunction.bind(this));
+            
+            
+            moreInfo.addEventListener('click', fetchSingleItem.bind(this, type, itemID));
+            
     }
 }
 
-function fetchSingleAlbum(){
-    console.log("MUmma")
+function fetchSingleItem(listType, Id) {
+    return fetch('https://folksa.ga/api/' + listType + '/' + Id + '?key=flat_eric')
+        .then((response) => response.json())
+        .then((playlists) => {
+        console.log(playlists);
+    });
 }
 
 const View = {
@@ -51,7 +61,7 @@ const View = {
             
             if(albumsLimited[i].coverImage === "") {
                 latestAlbumWrapper.innerHTML += `
-                    <div class="latestAlbum" id="latestAlbum${[i]}">
+                    <div class="latestAlbum" id="latestAlbum${[i]}" value="${albumsLimited[i]._id}">
                         <img src="images/noimage.jpg" />
                         <div class="albumInfo">
                             <h4> ${albumsLimited[i].title} </h4>
@@ -65,7 +75,7 @@ const View = {
                 `
             } else {
                 latestAlbumWrapper.innerHTML += `
-                    <div class="latestAlbum" id="latestAlbum${[i]}">
+                    <div class="latestAlbum" id="latestAlbum${[i]}" value="${albumsLimited[i]._id}">
                         <img src="${albumsLimited[i].coverImage}" />
                         <div class="albumInfo">
                             <h4> ${albumsLimited[i].title} </h4>
@@ -81,7 +91,7 @@ const View = {
             
         }
     
-    addEventListener()
+    addEventListener("albums")
         
 
     },

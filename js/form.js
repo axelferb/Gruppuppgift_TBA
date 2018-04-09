@@ -62,10 +62,14 @@ const model = {
             .then((newArtist) => {
                 console.log(newArtist);
             });
-    }
+    },
 }
+// Sends new artist to API when button is 
 artistSubmit.addEventListener("click", function (e) {
-    model.submitNewArtist();
+    model.submitNewArtist();,
     e.preventDefault();
     console.log(newArtist);
+    function() {
+        const innerVar = '2';
+    }
 })

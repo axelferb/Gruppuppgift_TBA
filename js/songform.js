@@ -5,7 +5,7 @@ const songGenre = document.getElementById("songGenre");
 const songSubmit = document.getElementById("songSubmit");
 // Fetch all artists.
 function fetchArtists() {
-    return fetch('https://folksa.ga/api/artists?key=flat_eric')
+    return fetch('https://folksa.ga/api/artists?sort=desc&limit=1000&key=flat_eric')
         .then((response) => response.json())
 }
 function loopArtists(artists) {
@@ -13,7 +13,7 @@ function loopArtists(artists) {
     for (i = 0; i < artists.length; i++) {
         songArtist.innerHTML += `
         <option value="${artists[i]._id}" id="${artists[i]._id}">
-            ${artists[i].name}
+            ${artists[i].name.toUpperCase()}
         </option>
         `
     }
@@ -21,9 +21,9 @@ function loopArtists(artists) {
 fetchArtists()
     .then(loopArtists);
 
-// Fetch all artists.
+// Fetch all albums.
 function fetchAlbums() {
-    return fetch('https://folksa.ga/api/albums?key=flat_eric')
+    return fetch('https://folksa.ga/api/albums?sort=desc&limit=1000&key=flat_eric')
         .then((response) => response.json())
 }
 function loopAlbums(albums) {
@@ -31,8 +31,8 @@ function loopAlbums(albums) {
     for (i = 0; i < albums.length; i++) {
         songAlbum.innerHTML += `
         <option value="${albums[i]._id}" id="${albums[i]._id}">
-            ${albums[i].title}
-        </option>
+            ${albums[i].title.toUpperCase()}
+        </option >
         `
     }
 }
@@ -51,7 +51,7 @@ function submitNewSong() {
         genres: songGenre.value,
     }
 
-    fetch('https://folksa.ga/api/tracks?key=flat_eric', {
+    fetch('https://folksa.ga/api/tracks?sort=desc&limit=1000&key=flat_eric', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',

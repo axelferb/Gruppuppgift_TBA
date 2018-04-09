@@ -216,6 +216,16 @@ body {
     }
 }
 
+.loadingWrapper {
+    text-align: center;
+    #loadingImage {
+        margin-top: 20px;
+        width: 115px;
+        -webkit-animation: spin 1s linear infinite;
+                animation: spin 1s linear infinite;
+    }
+}
+
 .playlistList {
     width: 100%;
     .songWrapper {

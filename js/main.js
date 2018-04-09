@@ -33,12 +33,11 @@ fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
 const View = {
     // Diplays the 6 latest albums on the main page.
     displayAlbumsLimited: function (albumsLimited) {
-        var albumListElement = document.getElementById("listMain")
-        var albumList = "";
+        let htmlBlock = '';
 
         for (i = 0; i < albumsLimited.length; i++) {
             if(albumsLimited[i].coverImage === "") {
-                latestAlbumWrapper.innerHTML += `
+                htmlBlock += `
                     <div class="latestAlbum">
                         <img src="images/noimage.jpg" />
                         <div class="albumInfo">
@@ -52,7 +51,7 @@ const View = {
                     </div>
                 `
             } else {
-                latestAlbumWrapper.innerHTML += `
+                htmlBlock += `
                     <div class="latestAlbum">
                         <img src="${albumsLimited[i].coverImage}" />
                         <div class="albumInfo">
@@ -68,22 +67,27 @@ const View = {
             }
             
         }
-        latestAlbumWrapper
+        latestAlbumWrapper.innerHTML = htmlBlock;
     },
     // Diplays the playlists on the main page.
     displayPlaylists: function (playlists) {
+        let htmlBlock = '';
+
         for (i = 0; i < playlists.length; i++) {
-            playlistWrapper.innerHTML += `
+            htmlBlock += `
                 <div class="playlist">
                     <p> ${playlists[i].title} </p>
                 </div>
             `
         }
+        playlistWrapper.innerHTML = htmlBlock;
     },
     // Display artists
     displayArtists: function (artist) {
+        let htmlBlock = '';
+
         for (i = 0; i < artist.length; i++) {
-            artistWrapper.innerHTML += `
+            htmlBlock += `
                 <div class="artist">
                     <img src="${artist[i].coverImage}" />
                     <div class="artistInfo">
@@ -93,7 +97,8 @@ const View = {
                     </div>
                 </div>
             `
-        }   
+        }
+        artistWrapper.innerHTML = htmlBlock;
     }
 }
 // Parallax and styling.

@@ -2,14 +2,18 @@
 fetch('https://folksa.ga/api/albums?limit=6&sort=desc&key=flat_eric&populateArtists=true')
     .then((response) => response.json())
     .then((albumsLimited) => {
-        View.displayAlbumsLimited(albumsLimited);
+        setTimeout(function () {
+            View.displayAlbumsLimited(albumsLimited);
+        }, 1000);
     });
 
 // Fetches playlist. Limited to 3.
 fetch('https://folksa.ga/api/playlists?limit=3&key=flat_eric')
     .then((response) => response.json())
     .then((playlists) => {
-        View.displayPlaylists(playlists);
+        setTimeout(function () {
+            View.displayPlaylists(playlists);
+        }, 1000);
         console.log(playlists);
     });
 
@@ -18,8 +22,10 @@ fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
     .then((response) => response.json())
     .then((artists) => {
         artist = artists;
+        setTimeout(function () {
+            View.displayArtists(artist);
+        }, 1000);
         console.log(artist);
-        View.displayArtists(artist);
     });
 
 
@@ -45,6 +51,9 @@ function fetchSingleItem(listType, ItemId) {
         });
 }
 
+function fetchSingleAlbum(){
+    console.log("Mumma");
+}
 
 
 const View = {
@@ -69,9 +78,8 @@ const View = {
                     </div>
                 `
             } else {
-
                 htmlBlock += `
-                    <div class="latestAlbum" id="latestAlbum${[i]}" value="${albumsLimited[i]._id}">
+                    <div class="latestAlbum" id="latestAlbum${[i]}">
                         <img src="${albumsLimited[i].coverImage}" />
                         <div class="albumInfo">
                             <h4> ${albumsLimited[i].title} </h4>
@@ -186,3 +194,14 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
+
+const closeModal = document.getElementById('closeModal');
+closeModal.addEventListener('click', function () {
+    modal.style.display = "none";
+})
+
+document.onkeydown = function (e) {
+    if (e.keyCode == 27) {
+        modal.style.display = "none";
+    }
+};

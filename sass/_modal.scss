@@ -1,56 +1,100 @@
-    .modal {
-        display: none;
-        /* Hidden by default */
-        position: fixed;
-        /* Stay in place */
-        z-index: 2;
-        /* Sit on top */
-        left: 0;
-        top: 0;
-        width: 100%;
-        /* Full width */
-        height: 100%;
-        /* Full height */
-        overflow: auto;
-        /* Enable scroll if needed */
-        background-color: rgb(0, 0, 0);
-        /* Fallback color */
-        background-color: rgba(0, 0, 0, 0.4);
-        /* Black w/ opacity */
-    }
-    /* Modal Content/Box */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 3;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Black w/ opacity */
+    color: #000;
+}
     
-    #modal-content {
-        background-color: #363231;
-        margin: 10% auto;
-        /* 15% from the top and centered */
-        width: 80%;
-        border-radius: 4px;
-        /* Could be more or less, depending on screen size */
-        box-shadow: 0px 0px 6px #252221;
-    }
+#modalContent {
+    margin: 5% auto;
+    /* 15% from the top and centered */
+    width: 80%;
+    -webkit-animation: scale-in-center 0.5s ease-in-out ;
+            animation: scale-in-center 0.5s ease-in-out ;
+}
     
-    #modal-padding {
-        padding: 20px 60px;
-    }
-    
-    #modal-padding>.arbetsplatsnamn {
-        font-size: 1.5em;
+#modalPadding {
+    padding: 40px 20px;
+    background-color: #fff;
+}
+
+#closeModal {
+    margin: -20px 0 0 0;
+    width: 50px;
+    position: absolute;
+    cursor: pointer;
+}
+
+.modalAlbumWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    h1 {
         margin: 0;
     }
-    
-    #modal-padding>.annonsrubrik {
-        margin: 5px 0 60px 0;
-        font-weight: 400;
-        color: #fff;
+    h2 {
+        margin: 0;
     }
-    
-    #modal-padding>.annonstext {
-        font-family: 'Roboto Slab', serif;
+    h3 {
+        margin: 5px 0;
+    }
+    img {
+        width: 200px;
+    }
+    .albumCover {
+        letter-spacing: .05rem;
+        text-align: center;
+        #year {
+            font-size: .8rem;
+            color: #c0c0c0;
+        }
+        p {
+            margin: 5px 0;
+        }
+    }
+    .modalAlbumInfo {
+        margin-left: 40px;
         font-size: .8rem;
-        font-weight: 100;
-        color: #fff;
-        line-height: 1rem;
-        margin-bottom: 60px;
     }
+    ul {
+        margin: 20px 0 0 0;
+        padding: 0;
+        list-style: none;
+        li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f2f2f2;
+        }
+    }
+    a {
+        color: #000;
+        display: inline-block;
+        text-decoration: none;
+    }
+    a:after {
+        display: block;
+        content: '';
+        border-bottom: 2px #000 solid;  
+        transform: scaleX(0);  
+        transition: transform 250ms ease-in-out;
+    }
+    a:hover:after {
+        transform: scaleX(1);
+    }
+}
     

@@ -26,9 +26,7 @@ function calculateAverage(sum, arrayLength) {
 
 function displayAverage(average) {
     var display = average.toFixed(1)
-    document.getElementById('currentRating').innerHTML = "Rating: " + display;
-
-    console.log(display)
+    return display
 }
 
 

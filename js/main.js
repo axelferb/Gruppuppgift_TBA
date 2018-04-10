@@ -1,5 +1,5 @@
 // Only fetches 6 Albums to display on the main page.
-fetch('https://folksa.ga/api/albums?limit=6&sort=desc&key=flat_eric&populateArtists=true')
+fetch('https://folksa.ga/api/albums?limit=25&sort=desc&key=flat_eric&populateArtists=true')
     .then((response) => response.json())
     .then((albumsLimited) => {
         setTimeout(function () {
@@ -34,10 +34,12 @@ function addEventListener(listType, divType, looplength) {
     
     for (i = 0; i < looplength; i++) {
 
-        var itemID = document.getElementById(divType+[i]).getAttribute("value")
+        var itemId = document.getElementById(divType+[i]).getAttribute("value")
+     
         
         var moreInfo = document.getElementById(divType+[i]);
-        moreInfo.addEventListener('click', fetchSingleItem.bind(this, listType, itemID));
+        
+        moreInfo.addEventListener('click', fetchSingleItem.bind(this, listType, itemId));
 
     }
 }
@@ -47,7 +49,7 @@ function fetchSingleItem(listType, ItemId) {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
-            myFunction()
+            myFunction(data)
         });
 }
 
@@ -79,7 +81,7 @@ const View = {
                 `
             } else {
                 htmlBlock += `
-                    <div class="latestAlbum" id="latestAlbum${[i]}">
+                    <div class="latestAlbum" id="latestAlbum${[i]}" value="${albumsLimited[i]._id}">
                         <img src="${albumsLimited[i].coverImage}" />
                         <div class="albumInfo">
                             <h4> ${albumsLimited[i].title} </h4>
@@ -95,7 +97,7 @@ const View = {
         }
         
         latestAlbumWrapper.innerHTML = htmlBlock;
-        addEventListener("albums", "latestAlbum", 6);
+        addEventListener("albums", "latestAlbum", 25);
         
     },
     // Diplays the playlists on the main page.
@@ -127,7 +129,7 @@ const View = {
                 </div>
             `
         }
-        artistWrapper.innerHTML = htmlBlock;
+        //artistWrapper.innerHTML = htmlBlock;
     }
 }
 // Parallax and styling.
@@ -182,10 +184,51 @@ closeSideNav.addEventListener('click', function () {
 var modal = document.getElementById('myModal');
 
 //print out Single information
-function myFunction() {
+function myFunction(data) {
 
     /* Modal content */
     modal.style.display = "block";
+    var placeHolder = document.getElementById('modalContent') 
+    var htmlBlock = 
+    
+    `            <div id="modalPadding">
+                    <img id="closeModal" src="images/close-black.svg" alt="Close" />
+                    <div class="modalAlbumWrapper">
+                        <div class="albumCover">
+                            <img src="${data.coverImage}" alt="Album cover" />
+                            <p><a href="${data.spotifyURL}">Listen on Spotify</a></p>
+                            <p id="year">(${data.releaseDate})</p>
+                        </div>
+                        <div class="modalAlbumInfo">
+                            <h1>${data.title}</h1>
+                            <h2>${data.artists[0].name}</h2>
+                            <h3>Rating:${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
+                            <h3 id ="rating"></h3>
+                            <ul id= "songList">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+     `
+    
+    placeHolder.innerHTML = htmlBlock
+    createVoting()
+    var songList = document.getElementById('songList')
+    var listElement = ""
+    var songNumber = 1; 
+        for (i = 0; i < data.tracks.length; i++) {
+        
+        listElement += 
+            `
+            <li> ${songNumber}. ${data.tracks[i].title}</li>
+    `
+            
+    songNumber+=1    
+    songList.innerHTML = listElement
+        
+        }
+    
+    
 }
 
 // When the user clicks anywhere outside of the modal, close it

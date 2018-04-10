@@ -2,14 +2,18 @@
 fetch('https://folksa.ga/api/albums?limit=6&sort=desc&key=flat_eric&populateArtists=true')
     .then((response) => response.json())
     .then((albumsLimited) => {
-        View.displayAlbumsLimited(albumsLimited);
+        setTimeout(function () {
+            View.displayAlbumsLimited(albumsLimited);
+        }, 1000);
     });
 
 // Fetches playlist. Limited to 3.
 fetch('https://folksa.ga/api/playlists?limit=3&key=flat_eric')
     .then((response) => response.json())
     .then((playlists) => {
-        View.displayPlaylists(playlists);
+        setTimeout(function () {
+            View.displayPlaylists(playlists);
+        }, 1000);
         console.log(playlists);
     });
 
@@ -18,36 +22,21 @@ fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
     .then((response) => response.json())
     .then((artists) => {
         artist = artists;
+        setTimeout(function () {
+            View.displayArtists(artist);
+        }, 1000);
         console.log(artist);
-        View.displayArtists(artist);
     });
-
-function addEventListener(type){
+function addEventListener(){
     for (i = 0; i < 6; i++) {
-
-        
-            var itemID = document.getElementById(`latestAlbum${[i]}`).getAttribute("value")
-
-            var moreInfo = document.getElementById(`latestAlbum${[i]}`);
-            
-            
-            moreInfo.addEventListener('click', fetchSingleItem.bind(this, type, itemID));
-            
-    }
-}
-
-function fetchSingleItem(listType, Id) {
-    return fetch('https://folksa.ga/api/' + listType + '/' + Id + '?key=flat_eric')
-        .then((response) => response.json())
-        .then((data) => {
-        console.log(data);
-    });
-
         var moreInfo = document.getElementById(`latestAlbum${[i]}`);
         moreInfo.addEventListener('click', myFunction.bind(this));
     }
 }
 
+function fetchSingleAlbum(){
+    console.log("Mumma");
+}
 
 const View = {
     // Diplays the 6 latest albums on the main page.
@@ -56,9 +45,8 @@ const View = {
 
         for (i = 0; i < albumsLimited.length; i++) {
             if(albumsLimited[i].coverImage === "") {
-                
                 htmlBlock += `
-                    <div class="latestAlbum" id="latestAlbum${[i]}" value="${albumsLimited[i]._id}>
+                    <div class="latestAlbum" id="latestAlbum${[i]}">
                         <img src="images/noimage.jpg" />
                         <div class="albumInfo">
                             <h4> ${albumsLimited[i].title} </h4>
@@ -71,9 +59,8 @@ const View = {
                     </div>
                 `
             } else {
-
                 htmlBlock += `
-                    <div class="latestAlbum" id="latestAlbum${[i]}" value="${albumsLimited[i]._id}">
+                    <div class="latestAlbum" id="latestAlbum${[i]}">
                         <img src="${albumsLimited[i].coverImage}" />
                         <div class="albumInfo">
                             <h4> ${albumsLimited[i].title} </h4>
@@ -87,9 +74,8 @@ const View = {
                 `
             }
         }
-    latestAlbumWrapper.innerHTML = htmlBlock;
-    addEventListener("albums")
-
+        latestAlbumWrapper.innerHTML = htmlBlock;
+        addEventListener()
     },
     // Diplays the playlists on the main page.
     displayPlaylists: function (playlists) {
@@ -197,6 +183,14 @@ function myFunction() {
     modal.style.display = "block";
     
 }
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {

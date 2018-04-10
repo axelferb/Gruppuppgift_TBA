@@ -27,16 +27,34 @@ fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
         }, 1000);
         console.log(artist);
     });
-function addEventListener(){
-    for (i = 0; i < 6; i++) {
-        var moreInfo = document.getElementById(`latestAlbum${[i]}`);
-        moreInfo.addEventListener('click', myFunction.bind(this));
+
+
+function addEventListener(listType, divType, looplength) {
+        
+    
+    for (i = 0; i < looplength; i++) {
+
+        var itemID = document.getElementById(divType+[i]).getAttribute("value")
+        
+        var moreInfo = document.getElementById(divType+[i]);
+        moreInfo.addEventListener('click', fetchSingleItem.bind(this, listType, itemID));
+
     }
+}
+
+function fetchSingleItem(listType, ItemId) {
+    return fetch('https://folksa.ga/api/' + listType + '/' + ItemId + '?key=flat_eric')
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            myFunction()
+        });
 }
 
 function fetchSingleAlbum(){
     console.log("Mumma");
 }
+
 
 const View = {
     // Diplays the 6 latest albums on the main page.
@@ -44,9 +62,10 @@ const View = {
         let htmlBlock = '';
 
         for (i = 0; i < albumsLimited.length; i++) {
-            if(albumsLimited[i].coverImage === "") {
+            if (albumsLimited[i].coverImage === "") {
+
                 htmlBlock += `
-                    <div class="latestAlbum" id="latestAlbum${[i]}">
+                    <div class="latestAlbum" id="latestAlbum${[i]}" value="${albumsLimited[i]._id}">
                         <img src="images/noimage.jpg" />
                         <div class="albumInfo">
                             <h4> ${albumsLimited[i].title} </h4>
@@ -74,8 +93,10 @@ const View = {
                 `
             }
         }
+        
         latestAlbumWrapper.innerHTML = htmlBlock;
-        addEventListener()
+        addEventListener("albums", "latestAlbum", 6);
+        
     },
     // Diplays the playlists on the main page.
     displayPlaylists: function (playlists) {
@@ -156,9 +177,6 @@ closeSideNav.addEventListener('click', function () {
     document.getElementById("navigation").style.width = "0";
 })
 
-
-
-
 //MODAL FUNCTIONS
 
 var modal = document.getElementById('myModal');
@@ -166,20 +184,7 @@ var modal = document.getElementById('myModal');
 //print out Single information
 function myFunction() {
 
-/*    var word = document.getElementById("modal-padding");
-
-    var jobInfo = ''
-    console.log("ad")
-
-    jobInfo +=
-        `
-        <h4 class = "arbetsplatsnamn"> 
-        HEJHEJ </h4>
-       `
-
-    word.innerHTML = jobInfo;
-    */
-    
+    /* Modal content */
     modal.style.display = "block";
 }
 

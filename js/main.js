@@ -1,5 +1,5 @@
 // Only fetches 6 Albums to display on the main page.
-fetch('https://folksa.ga/api/albums?limit=9&sort=desc&key=flat_eric&populateArtists=true')
+fetch('https://folksa.ga/api/albums?limit=6&sort=desc&key=flat_eric&populateArtists=true')
     .then((response) => response.json())
     .then((albumsLimited) => {
         setTimeout(function () {
@@ -191,27 +191,25 @@ function myFunction(data) {
     /* Modal content */
     modal.style.display = "block";
     var placeHolder = document.getElementById('modalContent') 
-    var htmlBlock = 
-    
-    `            <div id="modalPadding">
-                    <img id="closeModal" src="images/close-black.svg" alt="Close" />
-                    <div class="modalAlbumWrapper">
-                        <div class="albumCover">
-                            <img src="${data.coverImage}" alt="Album cover" />
-                            <p><a href="${data.spotifyURL}">Listen on Spotify</a></p>
-                            <p id="year">(${data.releaseDate})</p>
-                        </div>
-                        <div class="modalAlbumInfo">
-                            <h1>${data.title}</h1>
-                            <h2>${data.artists[0].name}</h2>
-                            <h3>Rating:${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
-                            <div id= "rating"></div>
-                            <ul id= "songList">
-                            </ul>
-                        </div>
-                    </div>
+    var htmlBlock =`
+        <div id="modalPadding">
+            <img id="closeModal" src="images/close-black.svg" alt="Close" />
+            <div class="modalAlbumWrapper">
+                <div class="albumCover">
+                    <img src="${data.coverImage}" alt="Album cover" />
+                    <p><a href="${data.spotifyURL}">Listen on Spotify</a></p>
+                    <p id="year">(${data.releaseDate})</p>
                 </div>
-     `
+                <div class="modalAlbumInfo">
+                    <h1>${data.title}</h1>
+                    <h2>${data.artists[0].name}</h2>
+                    <h3>Rating: ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
+                    <div id= "rating"></div>
+                    <ul id= "songList"> </ul>
+                </div>
+            </div>
+        </div>
+    `
     
     placeHolder.innerHTML = htmlBlock
     createVoting(data._id)

@@ -24,15 +24,10 @@ fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
 
 function addEventListener(type){
     for (i = 0; i < 6; i++) {
+        var itemID = document.getElementById(`latestAlbum${[i]}`).getAttribute("value")
+        var moreInfo = document.getElementById(`latestAlbum${[i]}`);
 
-        
-            var itemID = document.getElementById(`latestAlbum${[i]}`).getAttribute("value")
-
-            var moreInfo = document.getElementById(`latestAlbum${[i]}`);
-            
-            
-            moreInfo.addEventListener('click', fetchSingleItem.bind(this, type, itemID));
-            
+        moreInfo.addEventListener('click', fetchSingleItem.bind(this, type, itemID));       
     }
 }
 
@@ -40,12 +35,8 @@ function fetchSingleItem(listType, Id) {
     return fetch('https://folksa.ga/api/' + listType + '/' + Id + '?key=flat_eric')
         .then((response) => response.json())
         .then((data) => {
-        console.log(data);
-    });
-
-        var moreInfo = document.getElementById(`latestAlbum${[i]}`);
-        moreInfo.addEventListener('click', myFunction.bind(this));
-    }
+            console.log(data);
+        });
 }
 
 
@@ -170,32 +161,14 @@ closeSideNav.addEventListener('click', function () {
     document.getElementById("navigation").style.width = "0";
 })
 
-
-
-
 //MODAL FUNCTIONS
 
 var modal = document.getElementById('myModal');
 
 //print out Single information
 function myFunction() {
-
-/*    var word = document.getElementById("modal-padding");
-
-    var jobInfo = ''
-    console.log("ad")
-
-    jobInfo +=
-        `
-        <h4 class = "arbetsplatsnamn"> 
-        HEJHEJ </h4>
-       `
-
-    word.innerHTML = jobInfo;
-    */
-    
+    /* Modal content */
     modal.style.display = "block";
-    
 }
 
 // When the user clicks anywhere outside of the modal, close it

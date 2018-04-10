@@ -62,6 +62,7 @@ function fetchSingleAlbum(){
 const View = {
     // Diplays the 6 latest albums on the main page.
     displayAlbumsLimited: function (albumsLimited) {
+        const latestAlbumWrapper = document.getElementById('latestAlbumWrapper');
         let htmlBlock = '';
 
         for (i = 0; i < albumsLimited.length; i++) {
@@ -102,8 +103,8 @@ const View = {
     },
     // Diplays the playlists on the main page.
     displayPlaylists: function (playlists) {
+        const playlistWrapper = document.getElementById('playlistWrapper');
         let htmlBlock = '';
-
         for (i = 0; i < playlists.length; i++) {
             htmlBlock += `
                 <div class="playlist">
@@ -115,6 +116,7 @@ const View = {
     },
     // Display artists
     displayArtists: function (artist) {
+        const artistWrapper = document.getElementById('artistWrapper');
         let htmlBlock = '';
 
         for (i = 0; i < artist.length; i++) {
@@ -129,7 +131,7 @@ const View = {
                 </div>
             `
         }
-        //artistWrapper.innerHTML = htmlBlock;
+        artistWrapper.innerHTML = htmlBlock;
     }
 }
 // Parallax and styling.
@@ -227,7 +229,10 @@ function myFunction(data) {
     songList.innerHTML = listElement
         
         }
-    
+        const closeModal = document.getElementById('closeModal');
+        closeModal.addEventListener('click', function () {
+            modal.style.display = "none";
+        })
     
 }
 
@@ -237,11 +242,6 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
-
-const closeModal = document.getElementById('closeModal');
-closeModal.addEventListener('click', function () {
-    modal.style.display = "none";
-})
 
 document.onkeydown = function (e) {
     if (e.keyCode == 27) {

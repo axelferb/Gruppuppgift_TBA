@@ -113,19 +113,20 @@ body {
                 margin: 5px 0 10px 0;
             }
         }
-        a {
+        span {
             color: #fff;
             text-decoration: none;
             display: inline-block;
+            cursor: pointer;
         }
-        a:after {
+        span:after {
             display: block;
             content: '';
             border-bottom: 2px #fff solid;  
             transform: scaleX(0);  
             transition: transform 250ms ease-in-out;
         }
-        a:hover:after {
+        span:hover:after {
             transform: scaleX(1);
         }
     }

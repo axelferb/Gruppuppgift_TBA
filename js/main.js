@@ -181,7 +181,6 @@ function myFunction() {
     */
     
     modal.style.display = "block";
-    
 }
 
 // When the user clicks anywhere outside of the modal, close it
@@ -191,10 +190,13 @@ window.onclick = function (event) {
     }
 }
 
+const closeModal = document.getElementById('closeModal');
+closeModal.addEventListener('click', function () {
+    modal.style.display = "none";
+})
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-    if (event.target == modal) {
+document.onkeydown = function (e) {
+    if (e.keyCode == 27) {
         modal.style.display = "none";
     }
-}
+};

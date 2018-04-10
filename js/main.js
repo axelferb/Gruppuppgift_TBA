@@ -5,6 +5,7 @@ fetch('https://folksa.ga/api/albums?limit=6&sort=desc&key=flat_eric&populateArti
         setTimeout(function () {
             View.displayAlbumsLimited(albumsLimited);
         }, 1000);
+        console.log(albumsLimited);
     });
 
 // Fetches playlist. Limited to 3.

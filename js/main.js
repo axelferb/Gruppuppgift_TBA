@@ -22,6 +22,7 @@ fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
         View.displayArtists(artist);
     });
 
+
 function addEventListener(listType, divType, looplength) {
         
     
@@ -40,6 +41,7 @@ function fetchSingleItem(listType, ItemId) {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
+            myFunction()
         });
 }
 
@@ -167,9 +169,6 @@ closeSideNav.addEventListener('click', function () {
     document.getElementById("navigation").style.width = "0";
 })
 
-
-
-
 //MODAL FUNCTIONS
 
 var modal = document.getElementById('myModal');
@@ -177,9 +176,8 @@ var modal = document.getElementById('myModal');
 //print out Single information
 function myFunction() {
 
-
+    /* Modal content */
     modal.style.display = "block";
-
 }
 
 // When the user clicks anywhere outside of the modal, close it

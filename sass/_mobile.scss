@@ -181,22 +181,25 @@ body {
 #rating {
     margin: 10px 0 0 0;
     color: #fff;
+    text-align: left;
     direction: rtl;
     unicode-bidi: bidi-override;
     cursor: pointer;
     span {
         padding-right: 10px;
         width: 1.1em;
-        color: rgba(255, 255, 255, 0.5);
+        font-size: .8rem;
+        color: lightgray;
         position: relative;
         display: inline-block;
     }
     span:hover:before,
     span:hover ~ span:before {
         content: "\2B24";
-        color:#fff;
+        color: #4e2791;
         position: absolute;
     }
+
 }
 
 .mainWrapper {

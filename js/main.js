@@ -204,7 +204,7 @@ function myFunction(data) {
                             <h1>${data.title}</h1>
                             <h2>${data.artists[0].name}</h2>
                             <h3>Rating:${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
-                            <h3 id ="rating"></h3>
+                            <div id= "rating"></div>
                             <ul id= "songList">
                             </ul>
                         </div>

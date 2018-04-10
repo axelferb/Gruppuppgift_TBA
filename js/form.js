@@ -1,4 +1,7 @@
 const mainWrapper = document.getElementById("mainWrapper");
+const addArtistButton = document.getElementById("addArtist");
+const addAlbumButton = document.getElementById("addAlbum");
+const addSongButton = document.getElementById("addSong");
 const model = {
     // Creates a new artist to POST in API.
     fetchArtist: function () {
@@ -103,8 +106,6 @@ const model = {
             });
     },
 }
-model.fetchArtist()
-model.fetchAlbum()
 // What to replace the innerHTML on index with!
 const view = {
     replaceArtistForm: function () {
@@ -175,41 +176,91 @@ const view = {
     }
 }
 // Replaces the innerHTML with the form to create a Artist.
-view.replaceSongForm();
-const artistSubmit = document.getElementById("artistSubmit");
-const artistName = document.getElementById("artistName");
-const artistGenre = document.getElementById("genre");
-const artistCountry = document.getElementById("artistCountry");
-const artistSpotifyUrl = document.getElementById("artistSpotifyUrl");
-const artistImgLink = document.getElementById("artistImgLink");
-const artistGender = document.getElementById("artistGender");
-const artistDateBorn = document.getElementById("artistDateBorn");
-const albumTitle = document.getElementById("albumTitle");
-const albumArtist = document.getElementById("albumArtist");
-const albumRelease = document.getElementById("albumRelease");
-const albumGenre = document.getElementById("albumGenre");
-const albumSpotifyUrl = document.getElementById("albumSpotifyUrl");
-const albumImgLink = document.getElementById("albumImgLink");
-const albumSubmit = document.getElementById("albumSubmit");
-const songTitle = document.getElementById("songTitle");
-const songArtist = document.getElementById("songArtist");
-const songGenre = document.getElementById("songGenre");
-const songSubmit = document.getElementById("songSubmit");
-// Sends new artist to API when button is 
-artistSubmit.addEventListener("click", function (e) {
-    model.submitNewArtist()
-        .then(console.log)
-    e.preventDefault();
-});
-// Submits new Album.
-albumSubmit.addEventListener("click", function (e) {
-    model.submitNewArtist()
-        .then(console.log)
-    e.preventDefault();
-});
-// Submits new song.
-songSubmit.addEventListener("click", function (e) {
-    model.submitNewSong()
-        .then(console.log)
-    e.preventDefault();
-});
+addArtistButton.addEventListener("click", function () {
+    view.replaceArtistForm();
+    const artistSubmit = document.getElementById("artistSubmit");
+    const artistName = document.getElementById("artistName");
+    const artistGenre = document.getElementById("genre");
+    const artistCountry = document.getElementById("artistCountry");
+    const artistSpotifyUrl = document.getElementById("artistSpotifyUrl");
+    const artistImgLink = document.getElementById("artistImgLink");
+    const artistGender = document.getElementById("artistGender");
+    const artistDateBorn = document.getElementById("artistDateBorn");
+    const albumTitle = document.getElementById("albumTitle");
+    const albumArtist = document.getElementById("albumArtist");
+    const albumRelease = document.getElementById("albumRelease");
+    const albumGenre = document.getElementById("albumGenre");
+    const albumSpotifyUrl = document.getElementById("albumSpotifyUrl");
+    const albumImgLink = document.getElementById("albumImgLink");
+    const albumSubmit = document.getElementById("albumSubmit");
+    const songTitle = document.getElementById("songTitle");
+    const songArtist = document.getElementById("songArtist");
+    const songGenre = document.getElementById("songGenre");
+    const songSubmit = document.getElementById("songSubmit");
+    // Sends new artist to API when button is 
+    artistSubmit.addEventListener("click", function (e) {
+        model.submitNewArtist()
+            .then(console.log)
+        e.preventDefault();
+    });
+})
+// Replaces the innerHTML with the form to create a Artist.
+addAlbumButton.addEventListener("click", function () {
+    model.fetchArtist()
+    view.replaceAlbumForm();
+    const artistSubmit = document.getElementById("artistSubmit");
+    const artistName = document.getElementById("artistName");
+    const artistGenre = document.getElementById("genre");
+    const artistCountry = document.getElementById("artistCountry");
+    const artistSpotifyUrl = document.getElementById("artistSpotifyUrl");
+    const artistImgLink = document.getElementById("artistImgLink");
+    const artistGender = document.getElementById("artistGender");
+    const artistDateBorn = document.getElementById("artistDateBorn");
+    const albumTitle = document.getElementById("albumTitle");
+    const albumArtist = document.getElementById("albumArtist");
+    const albumRelease = document.getElementById("albumRelease");
+    const albumGenre = document.getElementById("albumGenre");
+    const albumSpotifyUrl = document.getElementById("albumSpotifyUrl");
+    const albumImgLink = document.getElementById("albumImgLink");
+    const albumSubmit = document.getElementById("albumSubmit");
+    const songTitle = document.getElementById("songTitle");
+    const songArtist = document.getElementById("songArtist");
+    const songGenre = document.getElementById("songGenre");
+    const songSubmit = document.getElementById("songSubmit");
+    // Submits new Album.
+    albumSubmit.addEventListener("click", function (e) {
+        model.submitNewArtist()
+            .then(console.log)
+        e.preventDefault();
+    });
+})
+addSongButton.addEventListener("click", function () {
+    model.fetchArtist()
+    model.fetchAlbum()
+    view.replaceSongForm();
+    const artistSubmit = document.getElementById("artistSubmit");
+    const artistName = document.getElementById("artistName");
+    const artistGenre = document.getElementById("genre");
+    const artistCountry = document.getElementById("artistCountry");
+    const artistSpotifyUrl = document.getElementById("artistSpotifyUrl");
+    const artistImgLink = document.getElementById("artistImgLink");
+    const artistGender = document.getElementById("artistGender");
+    const artistDateBorn = document.getElementById("artistDateBorn");
+    const albumTitle = document.getElementById("albumTitle");
+    const albumArtist = document.getElementById("albumArtist");
+    const albumRelease = document.getElementById("albumRelease");
+    const albumGenre = document.getElementById("albumGenre");
+    const albumSpotifyUrl = document.getElementById("albumSpotifyUrl");
+    const albumImgLink = document.getElementById("albumImgLink");
+    const albumSubmit = document.getElementById("albumSubmit");
+    const songTitle = document.getElementById("songTitle");
+    const songArtist = document.getElementById("songArtist");
+    const songGenre = document.getElementById("songGenre");
+    const songSubmit = document.getElementById("songSubmit");
+    // Submits new song.
+    songSubmit.addEventListener("click", function (e) {
+        model.submitNewSong()
+            .then(console.log)
+        e.preventDefault();
+    });
+})

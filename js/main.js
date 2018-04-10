@@ -1,5 +1,5 @@
 // Only fetches 6 Albums to display on the main page.
-fetch('https://folksa.ga/api/albums?limit=25&sort=desc&key=flat_eric&populateArtists=true')
+fetch('https://folksa.ga/api/albums?limit=9&sort=desc&key=flat_eric&populateArtists=true')
     .then((response) => response.json())
     .then((albumsLimited) => {
         setTimeout(function () {
@@ -97,7 +97,7 @@ const View = {
             }
         }
         latestAlbumWrapper.innerHTML = htmlBlock;
-        addEventListener("albums", "latestAlbum", 25);
+        addEventListener("albums", "latestAlbum", 9);
         
     },
     // Diplays the playlists on the main page.
@@ -203,7 +203,7 @@ function myFunction(data) {
                             <h1>${data.title}</h1>
                             <h2>${data.artists[0].name}</h2>
                             <h3>Rating:${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
-                            <h3 id ="rating"></h3>
+                            <div id= "rating"></div>
                             <ul id= "songList">
                             </ul>
                         </div>
@@ -212,7 +212,7 @@ function myFunction(data) {
      `
     
     placeHolder.innerHTML = htmlBlock
-    createVoting()
+    createVoting(data._id)
     var songList = document.getElementById('songList')
     var listElement = ""
     var songNumber = 1; 

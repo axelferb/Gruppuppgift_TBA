@@ -1,5 +1,5 @@
 //ratingArray = [3, 4, 7, 10, 9, 3, 4, 5, 8]
-fetchPlayList('5ac37c251c908334d07e95f9')
+/*fetchPlayList('5ac37c251c908334d07e95f9')
     .then((array) => {
         displayAverage(calculateAverage(calculateSum(array.ratings), array.ratings.length))
     });
@@ -9,10 +9,10 @@ function fetchPlayList(playlistId) {
         .then((response) => response.json())
 
 }
+*/
 
 function calculateSum(array) {
     var sum = array.reduce((a, b) => a + b, 0);
-    console.log(sum)
     return sum
 }
 
@@ -30,8 +30,8 @@ function displayAverage(average) {
 }
 
 
-function votePlaylist(ratingNumber) {
-    fetch(`https://folksa.ga/api/playlists/5ac37c251c908334d07e95f9/vote?key=flat_eric`, {
+function votePlaylist(ratingNumber, id) {
+    fetch(`https://folksa.ga/api/albums/${id}/vote?key=flat_eric`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -42,20 +42,10 @@ function votePlaylist(ratingNumber) {
             })
         })
         .then((response) => response.json())
-        .then((playlist) => {
-            fetchPlayList('5ac37c251c908334d07e95f9')
-                .then((array) => {
-                    displayAverage(calculateAverage(calculateSum(array.ratings), array.ratings.length))
-                });
-
-        });
 }
 
 
-
-createVoting();
-
-function createVoting() {
+function createVoting(id) {
     votingValue = 10
 
     for (i = 10; i > 0; i--) {
@@ -65,7 +55,7 @@ function createVoting() {
         var ratingSymbol = document.createTextNode('⬤')
 
         ratings.appendChild(ratingSymbol)
-        ratings.addEventListener('click', votePlaylist.bind(this, votingValue));
+        ratings.addEventListener('click', votePlaylist.bind(this, votingValue, id));
 
         mumma.appendChild(ratings)
 

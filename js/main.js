@@ -96,7 +96,6 @@ const View = {
                 `
             }
         }
-        
         latestAlbumWrapper.innerHTML = htmlBlock;
         addEventListener("albums", "latestAlbum", 25);
         

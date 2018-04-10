@@ -42,6 +42,14 @@ const model = {
             .then(loopAlbums);
     },
     submitNewArtist: function () {
+        const artistSubmit = document.getElementById("artistSubmit");
+        const artistName = document.getElementById("artistName");
+        const artistGenre = document.getElementById("genre");
+        const artistCountry = document.getElementById("artistCountry");
+        const artistSpotifyUrl = document.getElementById("artistSpotifyUrl");
+        const artistImgLink = document.getElementById("artistImgLink");
+        const artistGender = document.getElementById("artistGender");
+        const artistDateBorn = document.getElementById("artistDateBorn");
         let newArtist = {
             name: artistName.value,
             born: artistDateBorn.value,
@@ -64,6 +72,13 @@ const model = {
             });
     },
     submitNewAlbum: function () {
+        const albumTitle = document.getElementById("albumTitle");
+        const albumArtist = document.getElementById("albumArtist");
+        const albumRelease = document.getElementById("albumRelease");
+        const albumGenre = document.getElementById("albumGenre");
+        const albumSpotifyUrl = document.getElementById("albumSpotifyUrl");
+        const albumImgLink = document.getElementById("albumImgLink");
+        const albumSubmit = document.getElementById("albumSubmit");
         let newAlbum = {
             title: albumTitle.value,
             artists: songArtist.value,
@@ -86,6 +101,10 @@ const model = {
             });
     },
     submitNewSong: function () {
+        const songTitle = document.getElementById("songTitle");
+        const songArtist = document.getElementById("songArtist");
+        const songGenre = document.getElementById("songGenre");
+        const songSubmit = document.getElementById("songSubmit");
         let newSong = {
             title: songTitle.value,
             artists: songArtist.value,
@@ -207,31 +226,13 @@ addArtistButton.addEventListener("click", function () {
     view.hideNavigation();
     view.scrollToMain();
     const artistSubmit = document.getElementById("artistSubmit");
-    const artistName = document.getElementById("artistName");
-    const artistGenre = document.getElementById("genre");
-    const artistCountry = document.getElementById("artistCountry");
-    const artistSpotifyUrl = document.getElementById("artistSpotifyUrl");
-    const artistImgLink = document.getElementById("artistImgLink");
-    const artistGender = document.getElementById("artistGender");
-    const artistDateBorn = document.getElementById("artistDateBorn");
-    const albumTitle = document.getElementById("albumTitle");
-    const albumArtist = document.getElementById("albumArtist");
-    const albumRelease = document.getElementById("albumRelease");
-    const albumGenre = document.getElementById("albumGenre");
-    const albumSpotifyUrl = document.getElementById("albumSpotifyUrl");
-    const albumImgLink = document.getElementById("albumImgLink");
-    const albumSubmit = document.getElementById("albumSubmit");
-    const songTitle = document.getElementById("songTitle");
-    const songArtist = document.getElementById("songArtist");
-    const songGenre = document.getElementById("songGenre");
-    const songSubmit = document.getElementById("songSubmit");
     // Sends new artist to API when button is 
     artistSubmit.addEventListener("click", function (e) {
         model.submitNewArtist()
             .then(console.log)
         e.preventDefault();
     });
-})
+});
 // Replaces the innerHTML with the form to create a Artist.
 addAlbumButton.addEventListener("click", function () {
     model.fetchArtist()
@@ -254,17 +255,13 @@ addAlbumButton.addEventListener("click", function () {
     const albumSpotifyUrl = document.getElementById("albumSpotifyUrl");
     const albumImgLink = document.getElementById("albumImgLink");
     const albumSubmit = document.getElementById("albumSubmit");
-    const songTitle = document.getElementById("songTitle");
-    const songArtist = document.getElementById("songArtist");
-    const songGenre = document.getElementById("songGenre");
-    const songSubmit = document.getElementById("songSubmit");
     // Submits new Album.
     albumSubmit.addEventListener("click", function (e) {
-        model.submitNewArtist()
+        model.submitNewAlbum()
             .then(console.log)
         e.preventDefault();
     });
-})
+});
 addSongButton.addEventListener("click", function () {
     model.fetchArtist()
     model.fetchAlbum()
@@ -297,4 +294,4 @@ addSongButton.addEventListener("click", function () {
             .then(console.log)
         e.preventDefault();
     });
-})
+});

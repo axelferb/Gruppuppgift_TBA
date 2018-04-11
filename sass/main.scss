@@ -4,10 +4,10 @@
 @import "_mobile";
 @import "_modal";
 
-@media screen and (min-width: 650px) {
+@media screen and (min-width: 680px) {
     @import "_tablet";
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 880px) {
     @import "_desktop";
 }

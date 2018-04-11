@@ -1,0 +1,28 @@
+#modalPadding {
+    padding: 40px 80px;
+}
+
+#closeModal {
+    margin: -20px 20px 0 -60px;
+}
+
+.modalAlbumWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+    text-align: left;
+    .modalAlbumInfo {
+        margin-left: 40px;
+    }
+    img {
+        width: 150px;
+    }
+}
+
+#rating {
+    text-align: left;
+    span {
+        font-size: .5rem;
+    }
+}

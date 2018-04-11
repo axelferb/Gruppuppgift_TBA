@@ -34,7 +34,7 @@
 }
 
 #closeModal {
-    margin: -20px 0 0 0;
+    margin: -30px 0 0 -10px;
     width: 50px;
     position: absolute;
     cursor: pointer;
@@ -43,7 +43,9 @@
 .modalAlbumWrapper {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
     h1 {
         margin: 0;
     }
@@ -68,7 +70,7 @@
         }
     }
     .modalAlbumInfo {
-        margin-left: 40px;
+        margin-left: 0px;
         font-size: .8rem;
     }
     ul {
@@ -97,4 +99,49 @@
         transform: scaleX(1);
     }
 }
-    
+
+.modalArtistWrapper {
+    @extend .modalAlbumWrapper;
+        .modalArtistContainer {
+            max-width: 650px;
+            padding: 20px;
+        }
+        .artistInfoContainer {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid black;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+        h2 {
+            font-size: 1.2rem;
+        }
+        h3 {
+            margin: 0;
+        }
+        img {
+            margin-right: 20px;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        ul {
+            margin: 20px 0 0 0;
+            padding: 0;
+            list-style: none;
+            li {
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid #f2f2f2;
+            }
+        }
+        .aristAlbums {
+                        border: 1px solid orange;
+        }
+}
+

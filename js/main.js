@@ -31,17 +31,11 @@ fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
 
 
 function addEventListener(listType, divType, looplength) {
-        
-    
     for (i = 0; i < looplength; i++) {
-
         var itemId = document.getElementById(divType+[i]).getAttribute("value")
-     
-        
         var moreInfo = document.getElementById(divType+[i]);
         
         moreInfo.addEventListener('click', fetchSingleItem.bind(this, listType, itemId));
-
     }
 }
 
@@ -67,7 +61,6 @@ const View = {
 
         for (i = 0; i < albumsLimited.length; i++) {
             if (albumsLimited[i].coverImage === "") {
-
                 htmlBlock += `
                     <div class="latestAlbum" id="latestAlbum${[i]}" value="${albumsLimited[i]._id}">
                         <img src="images/noimage.jpg" />

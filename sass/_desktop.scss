@@ -75,6 +75,11 @@
     }
 }
 
-.modalAlbumWrapper img {
-    width: 200px;
+.modalAlbumWrapper {
+    img {
+        width: 200px;
+    }
+    .modalAlbumInfo {
+        margin-left: 40px;
+    }
 }

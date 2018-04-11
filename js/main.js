@@ -191,7 +191,7 @@ function myFunction(data) {
     /* Modal content */
     modal.style.display = "block";
     var placeHolder = document.getElementById('modalContent') 
-    var htmlBlock =`
+    var htmlBlock = `
         <div id="modalPadding">
             <img id="closeModal" src="images/close-black.svg" alt="Close" />
             <div class="modalAlbumWrapper">
@@ -204,7 +204,7 @@ function myFunction(data) {
                     <h1>${data.title}</h1>
                     <h2>${data.artists[0].name}</h2>
                     <h3>Rating: ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
-                    <div id= "rating"></div>
+                    <div id= "rating"> </div>
                     <ul id= "songList"> </ul>
                 </div>
             </div>

@@ -228,9 +228,9 @@ addArtistButton.addEventListener("click", function () {
     const artistSubmit = document.getElementById("artistSubmit");
     // Sends new artist to API when button is 
     artistSubmit.addEventListener("click", function (e) {
-        e.preventDefault();
         model.submitNewArtist()
-            .then(console.log) 
+            .then(console.log)
+        e.preventDefault();
     });
 });
 // Replaces the innerHTML with the form to create a Artist.
@@ -256,9 +256,9 @@ addAlbumButton.addEventListener("click", function () {
     const albumSubmit = document.getElementById("albumSubmit");
     // Submits new Album.
     albumSubmit.addEventListener("click", function (e) {
-        e.preventDefault();
         model.submitNewAlbum()
             .then(console.log)
+        e.preventDefault();
     });
 });
 addSongButton.addEventListener("click", function () {
@@ -288,9 +288,9 @@ addSongButton.addEventListener("click", function () {
     const songSubmit = document.getElementById("songSubmit");
     // Submits new song.
     songSubmit.addEventListener("click", function (e) {
-        document.getElementById('songTitle').value = '';
-        e.preventDefault();
         model.submitNewSong()
             .then(console.log)
+        e.preventDefault();
+        document.getElementById('songTitle').value = '';
     });
 });

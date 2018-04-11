@@ -101,7 +101,11 @@ const View = {
         for (i = 0; i < playlists.length; i++) {
             htmlBlock += `
                 <div class="playlist">
-                    <p> ${playlists[i].title} </p>
+                    <img src="${playlists[i].coverImage}" />
+                    <div class="playlistInfo">
+                        <h4> ${playlists[i].title} </h4>
+                        <p> ${playlists[i].createdBy} </p>
+                    </div>
                 </div>
             `
         }

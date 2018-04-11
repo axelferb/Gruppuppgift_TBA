@@ -256,10 +256,6 @@ body {
     }
 }
 
-#latestAlbumHeader {
-    margin-top: 60px;
-}
-
 .playlistWrapper,
 .latestAlbumWrapper,
 .artistWrapper {
@@ -271,15 +267,13 @@ body {
     justify-content: space-around;
 }
 
-.playlist {
-    @extend .latestAlbum;
-    padding: 20px;
-    width: 300px;
-    height: 300px;
+.latestAlbumWrapper {
+    margin-bottom: 60px;
 }
 
 .artist,
-.latestAlbum {
+.latestAlbum,
+.playlist {
     margin: 20px;
     background-color: #f2f2f2;
     display: flex;
@@ -287,7 +281,8 @@ body {
     align-items: center;
     flex-direction: column;
     .artistInfo,
-    .albumInfo { 
+    .albumInfo,
+    .playlistInfo { 
         width: 300px;
         height: 300px;
         padding: 20px;
@@ -339,9 +334,11 @@ body {
 }
 
 .latestAlbum:hover,
-.artist:hover {
+.artist:hover,
+.playlist:hover {
     .albumInfo,
-    .artistInfo {
+    .artistInfo,
+    .playlistInfo {
         visibility: visible;
         opacity: 1;
         

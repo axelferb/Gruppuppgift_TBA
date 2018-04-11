@@ -256,10 +256,6 @@ body {
     }
 }
 
-#latestAlbumHeader {
-    margin-top: 60px;
-}
-
 .playlistWrapper,
 .latestAlbumWrapper,
 .artistWrapper {
@@ -269,6 +265,10 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+}
+
+.latestAlbumWrapper {
+    margin-bottom: 60px;
 }
 
 .artist,

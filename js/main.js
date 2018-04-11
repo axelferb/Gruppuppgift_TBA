@@ -8,8 +8,8 @@ fetch('https://folksa.ga/api/albums?limit=6&sort=desc&key=flat_eric&populateArti
         console.log(albumsLimited);
     });
 
-// Fetches playlist. Limited to 3.
-fetch('https://folksa.ga/api/playlists?limit=3&key=flat_eric')
+// Fetches playlist. Limited to 6.
+fetch('https://folksa.ga/api/playlists?limit=6&key=flat_eric')
     .then((response) => response.json())
     .then((playlists) => {
         setTimeout(function () {

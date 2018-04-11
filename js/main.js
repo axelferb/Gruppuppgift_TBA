@@ -243,3 +243,126 @@ document.onkeydown = function (e) {
         modal.style.display = "none";
     }
 };
+
+
+function fetchSearched(type) {
+    return fetch(`https://folksa.ga/api/${type}?key=flat_eric&limit=200&populateArtists=true`)
+        .then((response) => response.json())
+}
+
+function search(list) {
+    var todoValue = document.getElementById("searchBar").value.toLowerCase();
+    var titleList = []
+
+    for (i = 0; i < list.length; i++) {
+
+        var lowerCaseValue = list[i].title.toLowerCase()
+
+        if (lowerCaseValue.includes(todoValue)) {
+            titleList.push(list[i]);
+        }
+    }
+    return titleList
+
+}
+
+
+
+// SEARCH FUNCTIONS
+
+function searchArtist(list) {
+    var todoValue = document.getElementById("searchBar").value.toLowerCase();
+    var titleList = [];
+
+    for (i = 0; i < list.length; i++) {
+
+        var lowerCaseValue = list[i].name.toLowerCase()
+
+        if (lowerCaseValue.includes(todoValue)) {
+            titleList.push(list[i]);
+        }
+    }
+    return titleList
+
+}
+function createPlaceHolder() {
+    modal.style.display = "block";
+
+    var placeHolder = document.getElementById('modalPadding')
+
+    var listFrame = 
+       
+        `
+        <h2>playlist</h2>    
+        <div id="playlists"></div>
+        <h2>Tracks</h2>
+        <div id="tracks"></div>
+        <h2>Albums</h2>
+        <div id="albums"></div>
+        <h2>Artists</h2>
+        <div id="artists"></div>
+        `
+        placeHolder.innerHTML = listFrame
+
+}
+
+function printSearched(list, listDiv) {
+        
+    var jumjum = document.getElementById(listDiv)
+
+    var htmlblock = ''
+
+    for (i = 0; i < list.length; i++) {
+
+        if (listDiv == "playlists") {
+            htmlblock +=
+                `
+            <h3>${list[i].title}</h3>
+            `
+        } else if (listDiv == "albums" || listDiv == "tracks") {
+
+            htmlblock +=
+                `
+        <h3>${list[i].title}</h3>
+        <h3>${list[i].artists[0].name}</h3>
+        `
+        } else {
+            htmlblock +=
+                `
+        <h3>${list[i].name}</h3>
+`
+        }
+    }
+
+    jumjum.innerHTML = htmlblock
+    
+
+    
+}
+
+
+document.getElementById("add").addEventListener("click", function () {
+    createPlaceHolder()
+    
+    fetchSearched("playlists")
+        .then(value => {
+            printSearched(search(value), "playlists")
+        })
+
+    fetchSearched("tracks")
+        .then(value => {
+            printSearched(search(value), "tracks")
+        })
+
+    fetchSearched("albums")
+        .then(value => {
+            printSearched(search(value), "albums")
+        })
+
+    fetchSearched("artists")
+        .then(value => {
+            printSearched(searchArtist(value), "artists")
+        })
+
+
+});

@@ -2,6 +2,7 @@ const mainWrapper = document.getElementById("mainWrapper");
 const addArtistButton = document.getElementById("addArtist");
 const addAlbumButton = document.getElementById("addAlbum");
 const addSongButton = document.getElementById("addSong");
+const addPlaylistButton = document.getElementById("addPlaylist");
 const model = {
     // Creates a new artist to POST in API.
     fetchArtist: function () {
@@ -40,6 +41,25 @@ const model = {
         }
         fetchAlbums()
             .then(loopAlbums);
+    },
+    fetchSong: function () {
+        // Fetch all songs.
+        function fetchSongs() {
+            return fetch('https://folksa.ga/api/tracks?sort=desc&limit=1000&key=flat_eric')
+                .then((response) => response.json())
+        }
+
+        function loopSongs(songs) {
+            for (i = 0; i < songs.length; i++) {
+                mainWrapper.innerHTML += `
+                    <p>
+                        ${songs[i].title.toUpperCase()}
+                    </p>
+                    `
+            }
+        }
+        fetchSongs()
+            .then(loopSongs)
     },
     submitNewArtist: function () {
         const artistSubmit = document.getElementById("artistSubmit");
@@ -124,6 +144,34 @@ const model = {
                 return newSong;
             });
     },
+    // Kolla micke mvh Axel Ferb.
+    submitNewPlaylist: function () {
+        const playlistTitle = document.getElementById("playlistTitle");
+        const playlistGenre = document.getElementById("playlistGenre");
+        const playlistCreator = document.getElementById("playlistCreator");
+        const playlistImgLink = document.getElementById("playlistImgLink");
+        const playlistColor = document.getElementById("playlistColor");
+        let newPlaylist = {
+            title: playlistTitle.value,
+            genres: playlistGenre.value,
+            createdBy: playlistCreator.value,
+            tracks: playlistTracks.value,
+            coverImage: playlistImgLink.value,
+            coverImageColor: playlistColor.value,
+        }
+        return fetch('https://folksa.ga/api/playlists?key=flat_eric', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newPlaylist),
+            })
+            .then((response) => response.json())
+            .then((newPlaylist) => {
+                return newPlaylist;
+            });
+    }
 }
 // What to replace the innerHTML on index with!
 const view = {
@@ -218,7 +266,30 @@ const view = {
                 <button id="songSubmit" type="submit">Submit</button>
             </form>
         `
-    }
+    },
+    // Kolla micke mvh Axel Ferb.
+    replacePlaylistForm: function () {
+        mainWrapper.innerHTML = `
+            <h3>Add playlist</h3>
+            <p>Add a new playlist to the API</p>
+            <form id="addPlaylistForm">
+                <label for="Title">Title:</label>
+                <input id="playlistTitle" name="Title" type="text">
+                
+                <label for="Genre">Genre:</label>
+                <input id="playlistGenre" name="Genre" type="text">
+
+                <label for="Creator">Playlist creator:</label>
+                <input id="playlistCreator" name="Creator" type="text">
+
+                <label for="imgLink">Image URL:</label>
+                <input id="playlistImgLink" name="imgLink" type="text"placeholder="http://" />
+
+                <button id="playlistSubmit" type="submit">Submit</button>
+            </form>
+        `
+    },
+
 }
 // Replaces the innerHTML with the form to create a Artist.
 addArtistButton.addEventListener("click", function () {
@@ -292,5 +363,26 @@ addSongButton.addEventListener("click", function () {
             .then(console.log)
         e.preventDefault();
         document.getElementById('songTitle').value = '';
+    });
+});
+// Kolla micke mvh Axel Ferb.
+addPlaylistButton.addEventListener("click", function () {
+    model.fetchSong();
+    view.replacePlaylistForm();
+    view.hideNavigation();
+    view.scrollToMain();
+    const playlistTitle = document.getElementById("playlistTitle");
+    const playlistGenre = document.getElementById("playlistGenre");
+    const playlistCreator = document.getElementById("playlistCreator");
+    const playlistImgLink = document.getElementById("playlistImgLink");
+    const playlistColor = document.getElementById("playlistColor");
+    const playlistSubmit = document.getElementById("playlistSubmit");
+    // Submits new playlist.
+    console.log("mumsmums");
+    playlistSubmit.addEventListener("click", function (e) {
+        model.submitNewPlaylist()
+            .then(console.log)
+        e.preventDefault();
+        document.getElementById("playlistTitle").value = '';
     });
 });

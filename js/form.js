@@ -144,13 +144,14 @@ const model = {
                 return newSong;
             });
     },
-    // Kolla micke mvh Axel Ferb.
+
     submitNewPlaylist: function () {
         const playlistTitle = document.getElementById("playlistTitle");
         const playlistGenre = document.getElementById("playlistGenre");
         const playlistCreator = document.getElementById("playlistCreator");
         const playlistImgLink = document.getElementById("playlistImgLink");
         const playlistColor = document.getElementById("playlistColor");
+        const playlistSubmit = document.getElementById("playlistSubmit");
         let newPlaylist = {
             title: playlistTitle.value,
             genres: playlistGenre.value,
@@ -267,7 +268,7 @@ const view = {
             </form>
         `
     },
-    // Kolla micke mvh Axel Ferb.
+
     replacePlaylistForm: function () {
         mainWrapper.innerHTML = `
             <h3>Add playlist</h3>
@@ -289,7 +290,6 @@ const view = {
             </form>
         `
     },
-
 }
 // Replaces the innerHTML with the form to create a Artist.
 addArtistButton.addEventListener("click", function () {
@@ -304,7 +304,7 @@ addArtistButton.addEventListener("click", function () {
         e.preventDefault();
     });
 });
-// Replaces the innerHTML with the form to create a Artist.
+// Replaces the innerHTML with the form to create a Album.
 addAlbumButton.addEventListener("click", function () {
     model.fetchArtist()
     view.replaceAlbumForm();
@@ -332,6 +332,7 @@ addAlbumButton.addEventListener("click", function () {
         e.preventDefault();
     });
 });
+// Replaces the innerHTML with the form to create a Song.
 addSongButton.addEventListener("click", function () {
     model.fetchArtist()
     model.fetchAlbum()
@@ -365,7 +366,7 @@ addSongButton.addEventListener("click", function () {
         document.getElementById('songTitle').value = '';
     });
 });
-// Kolla micke mvh Axel Ferb.
+// Replaces the innerHTML with the form to create a Playlist.
 addPlaylistButton.addEventListener("click", function () {
     model.fetchSong();
     view.replacePlaylistForm();
@@ -378,11 +379,10 @@ addPlaylistButton.addEventListener("click", function () {
     const playlistColor = document.getElementById("playlistColor");
     const playlistSubmit = document.getElementById("playlistSubmit");
     // Submits new playlist.
-    console.log("mumsmums");
     playlistSubmit.addEventListener("click", function (e) {
         model.submitNewPlaylist()
             .then(console.log)
         e.preventDefault();
-        document.getElementById("playlistTitle").value = '';
+        document.getElementById('playlistTitle').value = '';
     });
 });

@@ -1,22 +1,14 @@
 .modal {
     display: none;
-    /* Hidden by default */
     position: fixed;
-    /* Stay in place */
     z-index: 3;
-    /* Sit on top */
     left: 0;
     top: 0;
     width: 100%;
-    /* Full width */
     height: 100%;
-    /* Full height */
     overflow: auto;
-    /* Enable scroll if needed */
     background-color: rgb(0, 0, 0);
-    /* Fallback color */
     background-color: rgba(0, 0, 0, 0.8);
-    /* Black w/ opacity */
     color: #000;
 }
     
@@ -31,6 +23,15 @@
 #modalPadding {
     padding: 40px 20px;
     background-color: #fff;
+    h2 {
+        font-size: 1.4rem;
+    }
+    h3 {
+        margin: 0;
+    }
+    p {
+        margin: 5px 0;
+    }
 }
 
 #closeModal {
@@ -64,9 +65,6 @@
         #year {
             font-size: .8rem;
             color: #c0c0c0;
-        }
-        p {
-            margin: 5px 0;
         }
     }
     .modalAlbumInfo {
@@ -120,9 +118,6 @@
         h2 {
             font-size: 1.2rem;
         }
-        h3 {
-            margin: 0;
-        }
         img {
             margin-right: 20px;
             width: 200px;
@@ -145,3 +140,15 @@
         }
 }
 
+.listAlbumContainer,
+.listArtistContainer {
+    display: flex;
+    align-items: center;
+    img {
+        margin-right: 20px;
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 35px;
+    }
+}

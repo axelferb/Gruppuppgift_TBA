@@ -256,21 +256,16 @@ function search(list) {
     var titleList = []
 
     for (i = 0; i < list.length; i++) {
-
         var lowerCaseValue = list[i].title.toLowerCase()
-
+        
         if (lowerCaseValue.includes(todoValue)) {
             titleList.push(list[i]);
         }
     }
     return titleList
-
 }
 
-
-
 // SEARCH FUNCTIONS
-
 function searchArtist(list) {
     var todoValue = document.getElementById("searchBar").value.toLowerCase();
     var titleList = [];
@@ -312,14 +307,30 @@ function printSearched(list, listDiv) {
             htmlblock +=`
                 <h3>${list[i].title}</h3>
             `
-        } else if (listDiv == "albums" || listDiv == "tracks") {
+        } else if( listDiv == "tracks") {
             htmlblock +=`
                 <h3>${list[i].title}</h3>
-                <h3>${list[i].artists[0].name}</h3>
+                <p>${list[i].artists[0].name}</p>
+            `
+        } else if (listDiv == "albums") {
+            htmlblock +=`
+                <div class="listAlbumContainer">
+                    <img src="${list[i].coverImage}" alt="Album cover" />
+                    <div class="listAlbumInfo">
+                        <h3>${list[i].title}</h3>
+                        <p>${list[i].artists[0].name}</p>
+                    </div>
+                </div>
             `
         } else {
             htmlblock +=`
-                <h3>${list[i].name}</h3>
+                <div class="listArtistContainer">
+                    <img src="${list[i].coverImage}" alt="Artist image" />
+                    <div class="listAlbumInfo">
+                        <h3>${list[i].name}</h3>
+                        <p>(${list[i].genres[0]})</p>
+                    </div>
+                </div>
             `
         }
     }

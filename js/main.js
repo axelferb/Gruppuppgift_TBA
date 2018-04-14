@@ -200,7 +200,8 @@ function myFunction(data) {
                 <div class="modalAlbumInfo">
                     <h1>${data.title}</h1>
                     <h2>${data.artists[0].name}</h2>
-                    <h3>Rating: ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
+                    <h3>Rating: 
+                    ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
                     <div id= "rating"> </div>
                     <ul id= "songList"> </ul>
                 </div>
@@ -288,81 +289,69 @@ function searchArtist(list) {
 function createPlaceHolder() {
     modal.style.display = "block";
 
-    var placeHolder = document.getElementById('modalPadding')
-
-    var listFrame = 
-       
-        `
-        <h2>playlist</h2>    
-        <div id="playlists"></div>
-        <h2>Tracks</h2>
-        <div id="tracks"></div>
-        <h2>Albums</h2>
-        <div id="albums"></div>
-        <h2>Artists</h2>
-        <div id="artists"></div>
-        `
-        placeHolder.innerHTML = listFrame
-
+    var placeHolder = document.getElementById('modalPadding');
+    var listFrame =`
+        <h2>Playlists:</h2>    
+        <div id="playlists"> </div>
+        <h2>Tracks:</h2>
+        <div id="tracks"> </div>
+        <h2>Albums:</h2>
+        <div id="albums"> </div>
+        <h2>Artists:</h2>
+        <div id="artists"> </div>
+    `
+    placeHolder.innerHTML = listFrame
 }
 
 function printSearched(list, listDiv) {
-        
-    var jumjum = document.getElementById(listDiv)
-
-    var htmlblock = ''
+    var jumjum = document.getElementById(listDiv);
+    var htmlblock = '';
 
     for (i = 0; i < list.length; i++) {
-
         if (listDiv == "playlists") {
-            htmlblock +=
-                `
-            <h3>${list[i].title}</h3>
+            htmlblock +=`
+                <h3>${list[i].title}</h3>
             `
         } else if (listDiv == "albums" || listDiv == "tracks") {
-
-            htmlblock +=
-                `
-        <h3>${list[i].title}</h3>
-        <h3>${list[i].artists[0].name}</h3>
-        `
+            htmlblock +=`
+                <h3>${list[i].title}</h3>
+                <h3>${list[i].artists[0].name}</h3>
+            `
         } else {
-            htmlblock +=
-                `
-        <h3>${list[i].name}</h3>
-`
+            htmlblock +=`
+                <h3>${list[i].name}</h3>
+            `
         }
     }
-
-    jumjum.innerHTML = htmlblock
-    
-
-    
+    jumjum.innerHTML = htmlblock    
 }
 
 
-document.getElementById("add").addEventListener("click", function () {
-    createPlaceHolder()
-    
-    fetchSearched("playlists")
-        .then(value => {
-            printSearched(search(value), "playlists")
-        })
+document.getElementById("searchBar").addEventListener('keypress', function (e) {
+    const enterKey = e.keyCode;
+    if (enterKey === 13 && searchBar.value === '') { 
+        alert('OH NO!');
+    } else if(enterKey === 13) {
+        createPlaceHolder();
+        
+        fetchSearched("playlists")
+            .then(value => {
+                printSearched(search(value), "playlists")
+            })
 
-    fetchSearched("tracks")
-        .then(value => {
-            printSearched(search(value), "tracks")
-        })
+        fetchSearched("tracks")
+            .then(value => {
+                printSearched(search(value), "tracks")
+            })
 
-    fetchSearched("albums")
-        .then(value => {
-            printSearched(search(value), "albums")
-        })
+        fetchSearched("albums")
+            .then(value => {
+                printSearched(search(value), "albums")
+            })
 
-    fetchSearched("artists")
-        .then(value => {
-            printSearched(searchArtist(value), "artists")
-        })
-
-
+        fetchSearched("artists")
+            .then(value => {
+                printSearched(searchArtist(value), "artists")
+            })
+    }
 });

@@ -113,15 +113,27 @@ const View = {
         const playlistWrapper = document.getElementById('playlistWrapper');
         let htmlBlock = '';
         for (i = 0; i < playlists.length; i++) {
-            htmlBlock += `
+            if (playlists[i].coverImage === "") {
+                htmlBlock += `
                 <div class="playlists" id="playlists${[i]}" value="${playlists[i]._id}">
-                    <img src="${playlists[i].coverImage}" />
+                    <img src="images/noimage.jpg" />
                     <div class="playlistInfo">
                         <h4> ${playlists[i].title} </h4>
                         <p> ${playlists[i].createdBy} </p>
                     </div>
                 </div>
             `
+            } else {
+                htmlBlock += `
+                    <div class="playlists" id="playlists${[i]}" value="${playlists[i]._id}">
+                        <img src="${playlists[i].coverImage}" />
+                        <div class="playlistInfo">
+                            <h4> ${playlists[i].title} </h4>
+                            <p> ${playlists[i].createdBy} </p>
+                        </div>
+                    </div>
+                `
+            }
         }
         playlistWrapper.innerHTML = htmlBlock;
         addEventListener("playlists", "playlists", 6);
@@ -214,9 +226,9 @@ function myFunction(data, listType) {
     /* Modal content */
     modal.style.display = "block";
     var placeHolder = document.getElementById('modalContent')
-    var htmlBlock = ''
-    if (listType === "albums") {
+    let htmlBlock = '';
 
+    if (listType === "albums") {
     htmlBlock =`
         <div id="modalPadding">
             <div class="closeModal">
@@ -232,9 +244,10 @@ function myFunction(data, listType) {
                     <h1>${data.title}</h1>
                     <h2>${data.artists[0].name}</h2>
                     <h3>Rating: 
-                    ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
-                    <div id= "rating"> </div>
-                    <ul id= "trackList"> </ul>
+                        ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}
+                    </h3>
+                    <div id="rating"> </div>
+                    <ul id="trackList"> </ul>
                 </div>
             </div>
         </div>
@@ -247,17 +260,17 @@ function myFunction(data, listType) {
                 <div class="closeModal">
                     <img id="closeModal" src="images/close-black.svg" alt="Close" />
                 </div>
-                <div class="modalAlbumWrapper">
-                    <div class="albumCover">
-                        <img src="${data.coverImage}" alt="Album cover" />
+                <div class="modalPlaylistWrapper">
+                    <div class="playlistCover">
+                        <img src="${data.coverImage}" alt="Playlist cover" />
                     </div>
-                    <div class="modalAlbumInfo">
+                    <div class="modalPlaylistInfo">
                         <h1>${data.title}</h1>
                         <h2>${data.createdBy}</h2>
                         <h3>Rating: 
                         ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
-                        <div id= "rating"> </div>
-                        <ul id= "trackList"> </ul>
+                        <div id="rating"> </div>
+                        <ul id="trackList"> </ul>
                     </div>
                 </div>
             </div>
@@ -303,7 +316,10 @@ function myFunction(data, listType) {
     for (i = 0; i < data.tracks.length; i++) {
 
         listElement += `
-            <li> ${trackNumber}. ${data.tracks[i].title}</li>
+            <li> 
+                ${trackNumber}. ${data.tracks[i].title}
+                (${data.tracks[i].artists[0].name})
+            </li>
         `
         trackNumber += 1
         trackList.innerHTML = listElement;

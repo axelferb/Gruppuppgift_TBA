@@ -49,7 +49,8 @@
     }
 }
 
-.modalAlbumWrapper {
+.modalAlbumWrapper,
+.modalPlaylistWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -94,7 +95,8 @@
     a:hover:after {
         transform: scaleX(1);
     }
-    .albumCover {
+    .albumCover,
+    .playlistCover {
         letter-spacing: .05rem;
         text-align: center;
         #year {
@@ -102,7 +104,8 @@
             color: #c0c0c0;
         }
     }
-    .modalAlbumInfo {
+    .modalAlbumInfo,
+    .modalPlaylistInfo {
         margin-left: 0px;
         font-size: .8rem;
     }

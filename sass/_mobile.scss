@@ -2,7 +2,7 @@ body {
     margin: 0;
     font-family: 'Apercu-mono', monospace;
     color: #232323;
-    font-weight: 300;
+    text-align: center;
 }
 
 .hero {
@@ -10,7 +10,6 @@ body {
     height: 500px;
     background-color: #4e2791;
     background-image: $backgroundPattern;
-    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,27 +26,35 @@ body {
         }
         p {
             margin: 0;
-            font-family: 'Apercu-light', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 100;
+            font-family: $mainFont;
             color: #fff;
         }
     }
 }
 
-.playlistHero {
-    @extend .hero;
-    padding: 100px 40px 40px 40px;
-    height: 300px;
-    background-image: linear-gradient(to left, #a18cd1 0%, #fbc2eb 100%);
-    justify-content: flex-end;
-    align-items: flex-start;
-    h2 {
-        font-size: 6rem;
+.mainWrapper {
+    padding: 40px 20px;
+    transition: padding 3s;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    h3 {
+        margin: 0;
+        font-family: $headerFont;
+        font-size: 3rem;
     }
     p {
-        margin: 30px 0 0 0;
-        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+}
+
+.loadingWrapper {
+    #loadingImage {
+        margin-top: 20px;
+        width: 115px;
+        -webkit-animation: spin 1s linear infinite;
+                animation: spin 1s linear infinite;
     }
 }
 
@@ -74,37 +81,8 @@ body {
     }
 }
 
-.mainWrapper {
-    padding: 40px 20px;
-    transition: padding 3s;
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    h3 {
-        margin: 0;
-        font-family: $headerFont;
-        font-size: 3rem;
-        text-align: center;
-    }
-    p {
-        text-align: center;
-        line-height: 1.5rem;
-    }
-}
-
-.loadingWrapper {
-    text-align: center;
-    #loadingImage {
-        margin-top: 20px;
-        width: 115px;
-        -webkit-animation: spin 1s linear infinite;
-                animation: spin 1s linear infinite;
-    }
-}
-
+.albumWrapper,
 .playlistWrapper,
-.latestAlbumWrapper,
 .artistWrapper {
     margin-top: 20px;
     width: 100%;
@@ -201,6 +179,7 @@ body {
     margin-top: 40px;
     display: flex;
     flex-direction: column;
+    text-align: left;
     label {
         font-size: .8rem;
         margin-bottom: 5px;
@@ -245,6 +224,7 @@ body {
 }
 
 footer {
+    text-align: left;
     background-color: #000;
     background-image: $backgroundPattern;
     display: flex;

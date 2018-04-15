@@ -70,7 +70,7 @@ function fetchSingleAlbum() {
 const View = {
     // Diplays the 6 latest albums on the main page.
     displayAlbumsLimited: function (albumsLimited) {
-        const latestAlbumWrapper = document.getElementById('latestAlbumWrapper');
+        const albumWrapper = document.getElementById('albumWrapper');
         let htmlBlock = '';
 
         for (i = 0; i < albumsLimited.length; i++) {
@@ -104,7 +104,7 @@ const View = {
                 `
             }
         }
-        latestAlbumWrapper.innerHTML = htmlBlock;
+        albumWrapper.innerHTML = htmlBlock;
         addEventListener("albums", "latestAlbum", 6);
 
     },

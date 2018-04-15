@@ -32,9 +32,9 @@ fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
 
 function addEventListener(listType, divType, looplength) {
     for (i = 0; i < looplength; i++) {
-        var itemId = document.getElementById(divType+[i]).getAttribute("value")
-        var moreInfo = document.getElementById(divType+[i]);
-        
+        var itemId = document.getElementById(divType + [i]).getAttribute("value")
+        var moreInfo = document.getElementById(divType + [i]);
+
         moreInfo.addEventListener('click', fetchSingleItem.bind(this, listType, itemId));
     }
 }
@@ -48,7 +48,7 @@ function fetchSingleItem(listType, ItemId) {
         });
 }
 
-function fetchSingleAlbum(){
+function fetchSingleAlbum() {
     console.log("Mumma");
 }
 
@@ -92,7 +92,7 @@ const View = {
         }
         latestAlbumWrapper.innerHTML = htmlBlock;
         addEventListener("albums", "latestAlbum", 9);
-        
+
     },
     // Diplays the playlists on the main page.
     displayPlaylists: function (playlists) {
@@ -187,7 +187,7 @@ function myFunction(data) {
 
     /* Modal content */
     modal.style.display = "block";
-    var placeHolder = document.getElementById('modalContent') 
+    var placeHolder = document.getElementById('modalContent')
     var htmlBlock = `
         <div id="modalPadding">
             <div class="closeModal">
@@ -220,16 +220,16 @@ function myFunction(data) {
 
     var songList = document.getElementById('songList');
     var listElement = '';
-    var songNumber = 1; 
-        for (i = 0; i < data.tracks.length; i++) {
-        
-        listElement +=`
+    var songNumber = 1;
+    for (i = 0; i < data.tracks.length; i++) {
+
+        listElement += `
             <li> ${songNumber}. ${data.tracks[i].title}</li>
         `
-            
-        songNumber+=1    
+
+        songNumber += 1
         songList.innerHTML = listElement;
-        }
+    }
 }
 
 // When the user clicks anywhere outside of the modal, close it
@@ -256,7 +256,7 @@ function search(list) {
 
     for (i = 0; i < list.length; i++) {
         var lowerCaseValue = list[i].title.toLowerCase()
-        
+
         if (lowerCaseValue.includes(searchBarValue)) {
             titleList.push(list[i]);
         }
@@ -283,7 +283,7 @@ function createPlaceHolder() {
     modal.style.display = "block";
 
     var placeHolder = document.getElementById('modalPadding');
-    var listFrame =`
+    var listFrame = `
         <div class="closeModal">
             <img id="closeModal" src="images/close-black.svg" alt="Close" />
         </div>
@@ -309,7 +309,7 @@ function printSearched(list, listDiv) {
 
     for (i = 0; i < list.length; i++) {
         if (listDiv == "playlists") {
-            htmlBlock +=`
+            htmlBlock += `
             <div class="listAlbumContainer">
                 <img src="${list[i].coverImage}" alt="Album cover" />
                 <div class="listAlbumInfo">
@@ -318,13 +318,13 @@ function printSearched(list, listDiv) {
                 </div>
             </div>
             `
-        } else if( listDiv == "tracks") {
-            htmlBlock +=`
+        } else if (listDiv == "tracks") {
+            htmlBlock += `
                 <h3>${list[i].title}</h3>
                 <p>${list[i].artists[0].name}</p>
             `
         } else if (listDiv == "albums") {
-            htmlBlock +=`
+            htmlBlock += `
                 <div class="listAlbumContainer">
                     <img src="${list[i].coverImage}" alt="Album cover" />
                     <div class="listAlbumInfo">
@@ -334,7 +334,7 @@ function printSearched(list, listDiv) {
                 </div>
             `
         } else {
-            htmlBlock +=`
+            htmlBlock += `
                 <div class="listArtistContainer">
                     <img src="${list[i].coverImage}" alt="Artist image" />
                     <div class="listAlbumInfo">
@@ -351,11 +351,11 @@ function printSearched(list, listDiv) {
 
 document.getElementById("searchBar").addEventListener('keypress', function (e) {
     const enterKey = e.keyCode;
-    if (enterKey === 13 && searchBar.value === '') { 
+    if (enterKey === 13 && searchBar.value === '') {
         alert('OH NO!');
-    } else if(enterKey === 13) {
+    } else if (enterKey === 13) {
         createPlaceHolder();
-        
+
         fetchSearched("playlists")
             .then(value => {
                 printSearched(search(value), "playlists")

@@ -308,7 +308,7 @@ body {
 
 .latestAlbum:hover,
 .artist:hover,
-.playlist:hover {
+.playlists:hover {
     .albumInfo,
     .artistInfo,
     .playlistInfo {
@@ -322,7 +322,8 @@ body {
 #addAlbumForm,
 #deleteAlbumForm,
 #addSongForm,
-#deleteSongForm {
+#deleteSongForm,
+#deletePlaylistForm {
     margin-top: 40px;
     display: flex;
     flex-direction: column;

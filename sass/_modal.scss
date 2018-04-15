@@ -120,19 +120,15 @@
         .artistInfoContainer {
             margin-bottom: 20px;
             padding-bottom: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             border-bottom: 1px solid black;
         }
         h1 {
-            font-size: 3rem;
+            font-size: 2rem;
         }
         h2 {
             font-size: 1.2rem;
         }
         img {
-            margin-right: 20px;
             width: 200px;
             height: 200px;
             object-fit: cover;

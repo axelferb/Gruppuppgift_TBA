@@ -84,3 +84,20 @@ span:hover:after {
 .modalAlbumWrapper img {
     width: 200px;
 }
+.modalArtistWrapper {
+    .artistInfoContainer {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        border-bottom: 1px solid black;
+    }
+    h1 {
+        font-size: 3rem;
+    }
+    img {
+        margin-right: 20px;
+    }
+}

@@ -1,25 +1,37 @@
-// Only fetches 6 Albums to display on the main page.
-fetch('https://folksa.ga/api/albums?limit=6&sort=desc&key=flat_eric&populateArtists=true')
-    .then((response) => response.json())
-    .then((albumsLimited) => {
-        setTimeout(function () {
-            View.displayAlbumsLimited(albumsLimited);
-        }, 1000);
-        console.log(albumsLimited);
-    });
 
-// Fetches playlist. Limited to 6.
-fetch('https://folksa.ga/api/playlists?limit=6&key=flat_eric')
-    .then((response) => response.json())
-    .then((playlists) => {
-        setTimeout(function () {
-            View.displayPlaylists(playlists);
-        }, 1000);
-        console.log(playlists);
-    });
+
+function fetchAlbums(amount) {
+    return fetch(`https://folksa.ga/api/albums?limit=${amount}&sort=desc&key=flat_eric&populateArtists=true`)
+        .then((response) => response.json())
+}
+
+fetchAlbums('6')
+.then(value => {
+    View.displayAlbumsLimited(value);
+        })
+
+function fetchPlaylists(amount) {
+    return fetch(`https://folksa.ga/api/playlists?limit=${amount}&sort=desc&key=flat_eric&populateArtists=true`)
+        .then((response) => response.json())
+}
+
+fetchPlaylists('6')
+.then(value => {
+    View.displayPlaylists(value);
+        })
+
+function fetchArtists(amount) {
+    return fetch(`https://folksa.ga/api/artists?limit=${amount}&sort=desc&key=flat_eric&populateArtists=true`)
+        .then((response) => response.json())
+}
+
+/*fetchArtists('6')
+.then(value => {
+    View.displayArtists(value);
+        })
 
 // Fetches artists, limited to 9
-fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
+/*fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
     .then((response) => response.json())
     .then((artists) => {
         artist = artists;
@@ -28,7 +40,7 @@ fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
         }, 1000);
         console.log(artist);
     });
-
+*/
 
 function addEventListener(listType, divType, looplength) {
     for (i = 0; i < looplength; i++) {

@@ -132,6 +132,7 @@ const View = {
             top: 502,
             behavior: "smooth"
         });
+        document.getElementById("navigation").style.width = "0";
         let htmlBlock =`
             <h3>Artists</h3>
             <p>All the happy campers in our catalogue</p>

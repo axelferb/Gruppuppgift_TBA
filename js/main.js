@@ -210,28 +210,26 @@ function myFunction(data) {
             </div>
         </div>
     `
-    
-    placeHolder.innerHTML = htmlBlock
-    createVoting(data._id)
-    var songList = document.getElementById('songList')
-    var listElement = ""
+    placeHolder.innerHTML = htmlBlock;
+    const closeModal = document.getElementById('closeModal');
+    closeModal.addEventListener('click', function () {
+        modal.style.display = "none";
+    })
+
+    createVoting(data._id);
+
+    var songList = document.getElementById('songList');
+    var listElement = '';
     var songNumber = 1; 
         for (i = 0; i < data.tracks.length; i++) {
         
-        listElement += 
-            `
+        listElement +=`
             <li> ${songNumber}. ${data.tracks[i].title}</li>
-    `
+        `
             
-    songNumber+=1    
-    songList.innerHTML = listElement
-        
+        songNumber+=1    
+        songList.innerHTML = listElement;
         }
-        const closeModal = document.getElementById('closeModal');
-        closeModal.addEventListener('click', function () {
-            modal.style.display = "none";
-        })
-    
 }
 
 // When the user clicks anywhere outside of the modal, close it
@@ -245,8 +243,7 @@ document.onkeydown = function (e) {
     if (e.keyCode == 27) {
         modal.style.display = "none";
     }
-};
-
+}
 
 function fetchSearched(type) {
     return fetch(`https://folksa.ga/api/${type}?key=flat_eric&limit=200&populateArtists=true`)
@@ -264,7 +261,7 @@ function search(list) {
             titleList.push(list[i]);
         }
     }
-    return titleList
+    return titleList;
 }
 
 // SEARCH FUNCTIONS
@@ -273,7 +270,6 @@ function searchArtist(list) {
     var titleList = [];
 
     for (i = 0; i < list.length; i++) {
-
         var lowerCaseValue = list[i].name.toLowerCase()
 
         if (lowerCaseValue.includes(searchBarValue)) {
@@ -288,7 +284,10 @@ function createPlaceHolder() {
 
     var placeHolder = document.getElementById('modalPadding');
     var listFrame =`
-        <h2>Playlists:</h2>    
+        <div class="closeModal">
+            <img id="closeModal" src="images/close-black.svg" alt="Close" />
+        </div>
+        <h2 id="playlistHeader">Playlists:</h2>    
         <div id="playlists"> </div>
         <h2>Tracks:</h2>
         <div id="tracks"> </div>
@@ -297,8 +296,12 @@ function createPlaceHolder() {
         <h2>Artists:</h2>
         <div id="artists"> </div>
     `
-    placeHolder.innerHTML = listFrame
+    placeHolder.innerHTML = listFrame;
+    document.getElementById('closeModal').addEventListener('click', function () {
+        modal.style.display = "none";
+    })
 }
+
 
 function printSearched(list, listDiv) {
     var jumjum = document.getElementById(listDiv);

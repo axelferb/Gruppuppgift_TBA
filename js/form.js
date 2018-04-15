@@ -2,7 +2,7 @@ const mainWrapper = document.getElementById("mainWrapper");
 const addArtistButton = document.getElementById("addArtist");
 const addAlbumButton = document.getElementById("addAlbum");
 const addSongButton = document.getElementById("addSong");
-const delButton = document.getElementById("delButton");
+const deleteButton = document.getElementById("deleteButton");
 const model = {
     // Creates a new artist to POST in API.
     fetchArtist: function () {
@@ -341,7 +341,7 @@ addSongButton.addEventListener("click", function () {
         document.getElementById('songTitle').value = '';
     });
 });
-delButton.addEventListener("click", function () {
+deleteButton.addEventListener("click", function () {
     model.deleteItem()
     view.replaceDeleteForm()
     view.hideNavigation()

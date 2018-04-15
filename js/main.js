@@ -124,7 +124,6 @@ const View = {
             `
         }
         playlistWrapper.innerHTML = htmlBlock;
-        addEventListener("playlists", "playlists", 6);
 
     },
     // Display artists
@@ -267,10 +266,22 @@ function myFunction(data, listType) {
     if (listType === "artist") {
         htmlBlock =`
             <div id="modalPadding">
-                <div class="closeModal">
-                    <img id="closeModal" src="images/close-black.svg" alt="Close" />
+                <img id="closeModal" src="images/close-black.svg" alt="Close" />
+                <div class="modalArtistWrapper">
+                    <div class="modalArtistContainer">
+                        <div class="artistInfoContainer">
+                            <img src="${data.coverImage}" alt="Album cover" />
+                            <div class="modalArtistInfo">
+                                <h1>${data.artists[0].name}</h1>
+                                <h2>(${data.genres[0]})</h2>
+                            </div>
+                        </div>
+                        <h3>Albums:</h3>  
+                        <ul>
+                            <li>${data.albums}</li>
+                        </ul>
+                    </div>
                 </div>
-                <p> Hej! </p>
             </div>
         `
     }

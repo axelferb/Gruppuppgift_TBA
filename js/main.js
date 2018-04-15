@@ -302,6 +302,23 @@ function createPlaceHolder() {
     })
 }
 
+function searchError() {
+    modal.style.display = "block";
+
+    var placeHolder = document.getElementById('modalPadding');
+    var listFrame = `
+        <div class="closeModal">
+            <img id="closeModal" src="images/close-black.svg" alt="Close" />
+        </div>
+        <h2 id="errorHeader">OH NOES!</h2>
+        <p>Seems like you forgot to enter a search string...</p>
+    `
+    placeHolder.innerHTML = listFrame;
+    document.getElementById('closeModal').addEventListener('click', function () {
+        modal.style.display = "none";
+    })
+}
+
 
 function printSearched(list, listDiv) {
     var jumjum = document.getElementById(listDiv);
@@ -352,7 +369,7 @@ function printSearched(list, listDiv) {
 document.getElementById("searchBar").addEventListener('keypress', function (e) {
     const enterKey = e.keyCode;
     if (enterKey === 13 && searchBar.value === '') {
-        alert('OH NO!');
+        searchError();
     } else if (enterKey === 13) {
         createPlaceHolder();
 

@@ -14,7 +14,6 @@
     
 #modalContent {
     margin: 5% auto;
-    /* 15% from the top and centered */
     width: 80%;
     -webkit-animation: scale-in-center 0.5s ease-in-out ;
             animation: scale-in-center 0.5s ease-in-out ;
@@ -23,6 +22,7 @@
 #modalPadding {
     padding: 40px 20px;
     background-color: #fff;
+    #errorHeader,
     #playlistHeader {
         margin-top: 0;
     }

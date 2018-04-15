@@ -324,7 +324,7 @@ document.onkeydown = function (e) {
 }
 
 function fetchSearched(type) {
-    return fetch(`https://folksa.ga/api/${type}?key=flat_eric&limit=200&populateArtists=true`)
+    return fetch(`https://folksa.ga/api/${type}?key=flat_eric&limit=1000&populateArtists=true`)
         .then((response) => response.json())
 }
 

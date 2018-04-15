@@ -108,9 +108,9 @@ body {
     .artistInfo,
     .albumInfo,
     .playlistInfo { 
+        padding: 20px;
         width: 300px;
         height: 300px;
-        padding: 20px;
         color: #fff;
         text-align: center;
         background-color: hsla(262, 58%, 36%, 0.8);
@@ -224,6 +224,7 @@ body {
 }
 
 footer {
+    color: #fff;
     text-align: left;
     background-color: #000;
     background-image: $backgroundPattern;
@@ -242,11 +243,7 @@ footer {
         }
         ul {
             margin: 0;
-            color: #fff;
             list-style: none;
-            li {
-                margin: 0px;
-            }
             h4 {
                 margin: 0 0 10px 0;
                 font-family: $headerFont;

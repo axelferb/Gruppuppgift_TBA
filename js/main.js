@@ -229,29 +229,29 @@ function myFunction(data, listType) {
     let htmlBlock = '';
 
     if (listType === "albums") {
-    htmlBlock =`
-        <div id="modalPadding">
-            <div class="closeModal">
-                <img id="closeModal" src="images/close-black.svg" alt="Close" />
-            </div>
-            <div class="modalAlbumWrapper">
-                <div class="albumCover">
-                    <img src="${data.coverImage}" alt="Album cover" />
-                    <p><a href="${data.spotifyURL}" target="_blank">Listen on Spotify</a></p>
-                    <p id="year">(${data.releaseDate})</p>
+        htmlBlock =`
+            <div id="modalPadding">
+                <div class="closeModal">
+                    <img id="closeModal" src="images/close-black.svg" alt="Close" />
                 </div>
-                <div class="modalAlbumInfo">
-                    <h1>${data.title}</h1>
-                    <h2>${data.artists[0].name}</h2>
-                    <h3>Rating: 
-                        ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}
-                    </h3>
-                    <div id="rating"> </div>
-                    <ul id="trackList"> </ul>
+                <div class="modalAlbumWrapper">
+                    <div class="albumCover">
+                        <img src="${data.coverImage}" alt="Album cover" />
+                        <p><a href="${data.spotifyURL}" target="_blank">Listen on Spotify</a></p>
+                        <p id="year">(${data.releaseDate})</p>
+                    </div>
+                    <div class="modalAlbumInfo">
+                        <h1>${data.title}</h1>
+                        <h2>${data.artists[0].name}</h2>
+                        <h3>Rating: 
+                            ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}
+                        </h3>
+                        <div id="rating"> </div>
+                        <ul id="trackList"> </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    `
+        `
     }
 
     if (listType === "playlists") {
@@ -313,16 +313,26 @@ function myFunction(data, listType) {
     var trackList = document.getElementById('trackList');
     var listElement = '';
     var trackNumber = 1;
-    for (i = 0; i < data.tracks.length; i++) {
 
-        listElement += `
-            <li> 
-                ${trackNumber}. ${data.tracks[i].title}
-                (${data.tracks[i].artists[0].name})
-            </li>
-        `
-        trackNumber += 1
-        trackList.innerHTML = listElement;
+    if (listType !== "playlists") {
+        for (i = 0; i < data.tracks.length; i++) {
+            listElement +=`
+                <li>${trackNumber}. ${data.tracks[i].title}</li>
+            `
+            trackNumber += 1
+            trackList.innerHTML = listElement;
+        }
+    } else {
+        for (i = 0; i < data.tracks.length; i++) {
+            listElement +=`
+                <li> 
+                    ${trackNumber}. ${data.tracks[i].title}
+                    (${data.tracks[i].artists[0].name})
+                </li>
+            `
+            trackNumber += 1
+            trackList.innerHTML = listElement;
+        }
     }
 }
 
@@ -371,8 +381,8 @@ function searchArtist(list) {
         }
     }
     return titleList;
-
 }
+
 function createPlaceHolder() {
     modal.style.display = "block";
 

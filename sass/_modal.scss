@@ -68,6 +68,31 @@
         height: 200px;
         object-fit: cover;
     }
+    ul {
+        margin: 20px 0 0 0;
+        padding: 0;
+        list-style: none;
+        li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f2f2f2;
+        }
+    }
+    a {
+        color: #000;
+        display: inline-block;
+        text-decoration: none;
+    }
+    a:after {
+        display: block;
+        content: '';
+        border-bottom: 2px #000 solid;  
+        transform: scaleX(0);  
+        transition: transform 250ms ease-in-out;
+    }
+    a:hover:after {
+        transform: scaleX(1);
+    }
     .albumCover {
         letter-spacing: .05rem;
         text-align: center;
@@ -79,16 +104,6 @@
     .modalAlbumInfo {
         margin-left: 0px;
         font-size: .8rem;
-    }
-    ul {
-        margin: 20px 0 0 0;
-        padding: 0;
-        list-style: none;
-        li {
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #f2f2f2;
-        }
     }
 }
 
@@ -142,20 +157,4 @@
         object-fit: cover;
         border-radius: 35px;
     }
-}
-
-a {
-    color: #000;
-    display: inline-block;
-    text-decoration: none;
-}
-a:after {
-    display: block;
-    content: '';
-    border-bottom: 2px #000 solid;  
-    transform: scaleX(0);  
-    transition: transform 250ms ease-in-out;
-}
-a:hover:after {
-    transform: scaleX(1);
 }

@@ -124,6 +124,7 @@ const View = {
             `
         }
         playlistWrapper.innerHTML = htmlBlock;
+        addEventListener("playlists", "playlists", 6);
 
     },
     // Display artists
@@ -140,7 +141,7 @@ const View = {
         `
         for (i = 0; i < artist.length; i++) {
             htmlBlock +=`
-                <div class="artist">
+                <div class="artists" id="artists${[i]}" value="${artist[i]._id}">
                     <img src="${artist[i].coverImage}" />
                     <div class="artistInfo">
                         <h4> ${artist[i].name} </h4>
@@ -154,7 +155,7 @@ const View = {
         </div>
         `
         mainWrapper.innerHTML = htmlBlock;
-        addEventListener("artist", "artist", 6);
+        addEventListener("artists", "artists", artist.length);
     }
 }
 // Parallax and styling.
@@ -210,7 +211,6 @@ var modal = document.getElementById('myModal');
 
 //print out Single information
 function myFunction(data, listType) {
-    
     /* Modal content */
     modal.style.display = "block";
     var placeHolder = document.getElementById('modalContent')
@@ -264,7 +264,7 @@ function myFunction(data, listType) {
         `
     }
 
-    if (listType === "artist") {
+    if (listType === "artists") {
         htmlBlock =`
             <div id="modalPadding">
                 <img id="closeModal" src="images/close-black.svg" alt="Close" />
@@ -273,8 +273,7 @@ function myFunction(data, listType) {
                         <div class="artistInfoContainer">
                             <img src="${data.coverImage}" alt="Album cover" />
                             <div class="modalArtistInfo">
-                                <h1>${data.artists[0].name}</h1>
-                                <h2>(${data.genres[0]})</h2>
+                                
                             </div>
                         </div>
                         <h3>Albums:</h3>  
@@ -287,6 +286,10 @@ function myFunction(data, listType) {
         `
     }
     
+    /*
+    <h1>${data.artists[0].name}</h1>
+    <h2>(${data.genres[0]})</h2>
+    */
     
     placeHolder.innerHTML = htmlBlock;
     const closeModal = document.getElementById('closeModal');
@@ -359,8 +362,9 @@ function searchArtist(list) {
 function createPlaceHolder() {
     modal.style.display = "block";
 
-    var placeHolder = document.getElementById('modalPadding');
+    var placeHolder = document.getElementById('modalContent');
     var listFrame = `
+        <div id="modalPadding">
         <div class="closeModal">
             <img id="closeModal" src="images/close-black.svg" alt="Close" />
         </div>
@@ -372,6 +376,7 @@ function createPlaceHolder() {
         <div id="albums"> </div>
         <h2>Artists:</h2>
         <div id="artists"> </div>
+        </div>
     `
     placeHolder.innerHTML = listFrame;
     document.getElementById('closeModal').addEventListener('click', function () {
@@ -412,11 +417,12 @@ function printSearched(list, listDiv) {
                 </div>
             </div>
             `
-        } else if (listDiv == "tracks") {
+     /*   } else if (listDiv == "tracks") {
             htmlBlock += `
                 <h3>${list[i].title}</h3>
                 <p>${list[i].artists[0].name}</p>
-            `
+       `
+       */
         } else if (listDiv == "albums") {
             htmlBlock += `
                 <div class="listAlbumContainer">

@@ -219,11 +219,11 @@ const view = {
                 <label for="Title">Title:</label>
                 <input id="trackTitle" name="Title" type="text">
 
-                <label for="Artist">Artist(s)</label>
+                <label for="Artist">Artist(s):</label>
                 <select id="trackArtist" name="Artist">
                 </select>
 
-                <label for="Album">Album</label>
+                <label for="Album">Album:</label>
                 <select id="trackAlbum" name="Album">
                 </select>
 

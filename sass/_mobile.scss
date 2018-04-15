@@ -229,33 +229,6 @@ body {
     }
 }
 
-.playlistList {
-    width: 100%;
-    .songWrapper {
-        margin-bottom: 10px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #f2f2f2;
-        display: flex;
-        align-items: flex-start;
-        #songNumber {
-            margin: 0 20px 0 0;
-            p {
-                margin: 0;
-            }
-        }
-        #song {
-            text-align: left;
-            h3 {
-                margin: -3px 0 0 0;
-                font-size: 1.2rem;
-            }
-            p {
-                margin: 0;
-            }
-        }
-    }
-}
-
 .playlistWrapper,
 .latestAlbumWrapper,
 .artistWrapper {
@@ -341,7 +314,6 @@ body {
     .playlistInfo {
         visibility: visible;
         opacity: 1;
-        
     }
 }
 

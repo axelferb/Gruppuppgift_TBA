@@ -32,9 +32,9 @@ fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
 
 function addEventListener(listType, divType, looplength) {
     for (i = 0; i < looplength; i++) {
-        var itemId = document.getElementById(divType+[i]).getAttribute("value")
-        var moreInfo = document.getElementById(divType+[i]);
-        
+        var itemId = document.getElementById(divType + [i]).getAttribute("value")
+        var moreInfo = document.getElementById(divType + [i]);
+
         moreInfo.addEventListener('click', fetchSingleItem.bind(this, listType, itemId));
     }
 }
@@ -48,7 +48,7 @@ function fetchSingleItem(listType, ItemId) {
         });
 }
 
-function fetchSingleAlbum(){
+function fetchSingleAlbum() {
     console.log("Mumma");
 }
 
@@ -92,7 +92,7 @@ const View = {
         }
         latestAlbumWrapper.innerHTML = htmlBlock;
         addEventListener("albums", "latestAlbum", 9);
-        
+
     },
     // Diplays the playlists on the main page.
     displayPlaylists: function (playlists) {
@@ -187,48 +187,48 @@ function myFunction(data) {
 
     /* Modal content */
     modal.style.display = "block";
-    var placeHolder = document.getElementById('modalContent') 
-    var htmlBlock = `
+    var placeHolder = document.getElementById('modalContent')
+    let htmlBlock =`
         <div id="modalPadding">
-            <img id="closeModal" src="images/close-black.svg" alt="Close" />
+            <div class="closeModal">
+                <img id="closeModal" src="images/close-black.svg" alt="Close" />
+            </div>
             <div class="modalAlbumWrapper">
                 <div class="albumCover">
                     <img src="${data.coverImage}" alt="Album cover" />
-                    <p><a href="${data.spotifyURL}">Listen on Spotify</a></p>
+                    <p><a href="${data.spotifyURL}" target="_blank">Listen on Spotify</a></p>
                     <p id="year">(${data.releaseDate})</p>
                 </div>
                 <div class="modalAlbumInfo">
                     <h1>${data.title}</h1>
                     <h2>${data.artists[0].name}</h2>
-                    <h3>Rating: ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
+                    <h3>Rating: 
+                    ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
                     <div id= "rating"> </div>
                     <ul id= "songList"> </ul>
                 </div>
             </div>
         </div>
     `
-    
-    placeHolder.innerHTML = htmlBlock
-    createVoting(data._id)
-    var songList = document.getElementById('songList')
-    var listElement = ""
-    var songNumber = 1; 
-        for (i = 0; i < data.tracks.length; i++) {
-        
-        listElement += 
-            `
+    placeHolder.innerHTML = htmlBlock;
+    const closeModal = document.getElementById('closeModal');
+    closeModal.addEventListener('click', function () {
+        modal.style.display = "none";
+    })
+
+    createVoting(data._id);
+
+    var songList = document.getElementById('songList');
+    var listElement = '';
+    var songNumber = 1;
+    for (i = 0; i < data.tracks.length; i++) {
+
+        listElement += `
             <li> ${songNumber}. ${data.tracks[i].title}</li>
-    `
-            
-    songNumber+=1    
-    songList.innerHTML = listElement
-        
-        }
-        const closeModal = document.getElementById('closeModal');
-        closeModal.addEventListener('click', function () {
-            modal.style.display = "none";
-        })
-    
+        `
+        songNumber += 1
+        songList.innerHTML = listElement;
+    }
 }
 
 // When the user clicks anywhere outside of the modal, close it
@@ -242,8 +242,7 @@ document.onkeydown = function (e) {
     if (e.keyCode == 27) {
         modal.style.display = "none";
     }
-};
-
+}
 
 function fetchSearched(type) {
     return fetch(`https://folksa.ga/api/${type}?key=flat_eric&limit=200&populateArtists=true`)
@@ -251,118 +250,150 @@ function fetchSearched(type) {
 }
 
 function search(list) {
-    var todoValue = document.getElementById("searchBar").value.toLowerCase();
+    var searchBarValue = document.getElementById("searchBar").value.toLowerCase();
     var titleList = []
 
     for (i = 0; i < list.length; i++) {
-
         var lowerCaseValue = list[i].title.toLowerCase()
 
-        if (lowerCaseValue.includes(todoValue)) {
+        if (lowerCaseValue.includes(searchBarValue)) {
             titleList.push(list[i]);
         }
     }
-    return titleList
-
+    return titleList;
 }
 
-
-
 // SEARCH FUNCTIONS
-
 function searchArtist(list) {
-    var todoValue = document.getElementById("searchBar").value.toLowerCase();
+    var searchBarValue = document.getElementById("searchBar").value.toLowerCase();
     var titleList = [];
 
     for (i = 0; i < list.length; i++) {
-
         var lowerCaseValue = list[i].name.toLowerCase()
 
-        if (lowerCaseValue.includes(todoValue)) {
+        if (lowerCaseValue.includes(searchBarValue)) {
             titleList.push(list[i]);
         }
     }
-    return titleList
+    return titleList;
 
 }
 function createPlaceHolder() {
     modal.style.display = "block";
 
-    var placeHolder = document.getElementById('modalPadding')
-
-    var listFrame = 
-       
-        `
-        <h2>playlist</h2>    
-        <div id="playlists"></div>
-        <h2>Tracks</h2>
-        <div id="tracks"></div>
-        <h2>Albums</h2>
-        <div id="albums"></div>
-        <h2>Artists</h2>
-        <div id="artists"></div>
-        `
-        placeHolder.innerHTML = listFrame
-
+    var placeHolder = document.getElementById('modalPadding');
+    var listFrame = `
+        <div class="closeModal">
+            <img id="closeModal" src="images/close-black.svg" alt="Close" />
+        </div>
+        <h2 id="playlistHeader">Playlists:</h2>    
+        <div id="playlists"> </div>
+        <h2>Tracks:</h2>
+        <div id="tracks"> </div>
+        <h2>Albums:</h2>
+        <div id="albums"> </div>
+        <h2>Artists:</h2>
+        <div id="artists"> </div>
+    `
+    placeHolder.innerHTML = listFrame;
+    document.getElementById('closeModal').addEventListener('click', function () {
+        modal.style.display = "none";
+    })
 }
+
+function searchError() {
+    modal.style.display = "block";
+
+    var placeHolder = document.getElementById('modalPadding');
+    var listFrame = `
+        <div class="closeModal">
+            <img id="closeModal" src="images/close-black.svg" alt="Close" />
+        </div>
+        <h2 id="errorHeader">OH NOES!</h2>
+        <p>Seems like you forgot to enter a search string...</p>
+    `
+    placeHolder.innerHTML = listFrame;
+    document.getElementById('closeModal').addEventListener('click', function () {
+        modal.style.display = "none";
+    })
+}
+
 
 function printSearched(list, listDiv) {
-        
-    var jumjum = document.getElementById(listDiv)
-
-    var htmlblock = ''
+    const jumjum = document.getElementById(listDiv);
+    let htmlBlock = '';
 
     for (i = 0; i < list.length; i++) {
-
         if (listDiv == "playlists") {
-            htmlblock +=
-                `
-            <h3>${list[i].title}</h3>
+            htmlBlock += `
+            <div class="listAlbumContainer">
+                <img src="${list[i].coverImage}" alt="Album cover" />
+                <div class="listAlbumInfo">
+                    <h3>${list[i].title}</h3>
+                    <p>${list[i].createdBy}</p>
+                </div>
+            </div>
             `
-        } else if (listDiv == "albums" || listDiv == "tracks") {
-
-            htmlblock +=
-                `
-        <h3>${list[i].title}</h3>
-        <h3>${list[i].artists[0].name}</h3>
-        `
+        } else if (listDiv == "tracks") {
+            htmlBlock += `
+                <h3>${list[i].title}</h3>
+                <p>${list[i].artists[0].name}</p>
+            `
+        } else if (listDiv == "albums") {
+            htmlBlock += `
+                <div class="listAlbumContainer">
+                    <img src="${list[i].coverImage}" alt="Album cover" />
+                    <div class="listAlbumInfo">
+                        <h3>${list[i].title}</h3>
+                        <p>${list[i].artists[0].name}</p>
+                    </div>
+                </div>
+            `
         } else {
-            htmlblock +=
-                `
-        <h3>${list[i].name}</h3>
-`
+            htmlBlock += `
+                <div class="listArtistContainer">
+                    <img src="${list[i].coverImage}" alt="Artist image" />
+                    <div class="listAlbumInfo">
+                        <h3>${list[i].name}</h3>
+                        <p>(${list[i].genres[0]})</p>
+                    </div>
+                </div>
+            `
         }
     }
-
-    jumjum.innerHTML = htmlblock
-    
-
-    
+    jumjum.innerHTML = htmlBlock;
 }
 
 
-document.getElementById("add").addEventListener("click", function () {
-    createPlaceHolder()
-    
-    fetchSearched("playlists")
-        .then(value => {
-            printSearched(search(value), "playlists")
-        })
+document.getElementById("searchBar").addEventListener('keypress', function (e) {
+    const enterKey = e.keyCode;
+    if (enterKey === 13 && searchBar.value === '') {
+        searchError();
+        document.getElementById("navigation").style.width = "0";
+        document.getElementById('searchBar').blur();
+    } else if (enterKey === 13) {
+        createPlaceHolder();
+        document.getElementById("navigation").style.width = "0";
+        document.getElementById('searchBar').blur();
 
-    fetchSearched("tracks")
-        .then(value => {
-            printSearched(search(value), "tracks")
-        })
+        fetchSearched("playlists")
+            .then(value => {
+                printSearched(search(value), "playlists")
+            })
 
-    fetchSearched("albums")
-        .then(value => {
-            printSearched(search(value), "albums")
-        })
+        fetchSearched("tracks")
+            .then(value => {
+                printSearched(search(value), "tracks")
+            })
 
-    fetchSearched("artists")
-        .then(value => {
-            printSearched(searchArtist(value), "artists")
-        })
+        fetchSearched("albums")
+            .then(value => {
+                printSearched(search(value), "albums")
+            })
 
-
+        fetchSearched("artists")
+            .then(value => {
+                printSearched(searchArtist(value), "artists")
+            })
+    }
 });

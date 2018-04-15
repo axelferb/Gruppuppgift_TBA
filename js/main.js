@@ -55,8 +55,8 @@ function fetchSingleItem(listType, ItemId) {
     return fetch('https://folksa.ga/api/' + listType + '/' + ItemId + '?key=flat_eric')
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
-            myFunction(data)
+            console.log(listType);
+            myFunction(data, listType)
         });
 }
 
@@ -103,7 +103,7 @@ const View = {
             }
         }
         latestAlbumWrapper.innerHTML = htmlBlock;
-        addEventListener("albums", "latestAlbum", 9);
+        addEventListener("albums", "latestAlbum", 6);
 
     },
     // Diplays the playlists on the main page.
@@ -112,7 +112,7 @@ const View = {
         let htmlBlock = '';
         for (i = 0; i < playlists.length; i++) {
             htmlBlock += `
-                <div class="playlist">
+                <div class="playlists" id="playlists${[i]}" value="${playlists[i]._id}">
                     <img src="${playlists[i].coverImage}" />
                     <div class="playlistInfo">
                         <h4> ${playlists[i].title} </h4>
@@ -122,6 +122,8 @@ const View = {
             `
         }
         playlistWrapper.innerHTML = htmlBlock;
+        addEventListener("playlists", "playlists", 6);
+
     },
     // Display artists
     displayArtists: function (artist) {
@@ -141,6 +143,7 @@ const View = {
             `
         }
         artistWrapper.innerHTML = htmlBlock;
+        
     }
 }
 // Parallax and styling.
@@ -195,12 +198,15 @@ closeSideNav.addEventListener('click', function () {
 var modal = document.getElementById('myModal');
 
 //print out Single information
-function myFunction(data) {
-
+function myFunction(data, listType) {
+    
     /* Modal content */
     modal.style.display = "block";
     var placeHolder = document.getElementById('modalContent')
-    let htmlBlock =`
+    var htmlBlock = ''
+    if (listType === "albums") {
+    
+    htmlBlock =`
         <div id="modalPadding">
             <div class="closeModal">
                 <img id="closeModal" src="images/close-black.svg" alt="Close" />
@@ -222,6 +228,24 @@ function myFunction(data) {
             </div>
         </div>
     `
+    }
+    
+    if (listType === "playlists") {
+        htmlBlock =`
+        <div id="modalPadding">
+            <div class="closeModal">
+                <img id="closeModal" src="images/close-black.svg" alt="Close" />
+            </div>
+            <div class="modalAlbumWrapper">
+                <p> in med playlistskit här </p>
+                </div>
+            </div>
+        </div>
+    `
+        
+    }
+    
+    
     placeHolder.innerHTML = htmlBlock;
     const closeModal = document.getElementById('closeModal');
     closeModal.addEventListener('click', function () {

@@ -342,7 +342,6 @@ addSongButton.addEventListener("click", function () {
     });
 });
 deleteButton.addEventListener("click", function () {
-    model.deleteItem()
     view.replaceDeleteForm()
     view.hideNavigation()
     view.scrollToMain()
@@ -353,7 +352,7 @@ deleteButton.addEventListener("click", function () {
 
         e.preventDefault();
         console.log(artistID.value);
-        deleteFunction('artists', artistID.value);
+        model.deleteItem('artists', artistID.value);
         document.getElementById('artistID').value = '';
 
     });
@@ -365,7 +364,7 @@ deleteButton.addEventListener("click", function () {
 
         e.preventDefault();
         console.log(albumID.value);
-        deleteFunction('albums', albumID.value);
+        model.deleteItem('albums', albumID.value);
         document.getElementById('albumID').value = '';
     });
 
@@ -376,7 +375,7 @@ deleteButton.addEventListener("click", function () {
 
         e.preventDefault();
         console.log(songID.value);
-        deleteFunction('tracks', songID.value);
+        model.deleteItem('tracks', songID.value);
         document.getElementById('songID').value = '';
     });
 
@@ -387,7 +386,7 @@ deleteButton.addEventListener("click", function () {
 
         e.preventDefault();
         console.log(playlistID.value);
-        deleteFunction('playlists', playlistID.value);
+        model.deleteItem('playlists', playlistID.value);
         document.getElementById('playlistID').value = '';
     });
 })

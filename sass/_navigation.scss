@@ -99,6 +99,23 @@
     }
 }
 
+span#deleteButton {
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+span#deleteButton:after {
+    display: block;
+    content: '';
+    border-bottom: 2px #fff solid;  
+    transform: scaleX(0);  
+    transition: transform 250ms ease-in-out;
+}
+span#deleteButton:hover:after {
+    transform: scaleX(1);
+}
+
 .browseDropButton,
 .addDropButton {
     padding: 0;

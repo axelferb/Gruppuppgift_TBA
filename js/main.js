@@ -25,22 +25,26 @@ function fetchArtists(amount) {
         .then((response) => response.json())
 }
 
-/*fetchArtists('6')
-.then(value => {
-    View.displayArtists(value);
-        })
+const browseArtists = document.getElementById('browseArtists');
+browseArtists.addEventListener('click', function (){
+    fetchArtists('6')
+    .then(value => {
+        View.displayArtists(value);
+            })
+})
 
-// Fetches artists, limited to 9
-/*fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
-    .then((response) => response.json())
-    .then((artists) => {
-        artist = artists;
-        setTimeout(function () {
-            View.displayArtists(artist);
-        }, 1000);
-        console.log(artist);
-    });
-*/
+
+// // Fetches artists, limited to 9
+// fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
+//     .then((response) => response.json())
+//     .then((artists) => {
+//         artist = artists;
+//         setTimeout(function () {
+//             View.displayArtists(artist);
+//         }, 1000);
+//         console.log(artist);
+//     });
+
 
 function addEventListener(listType, divType, looplength) {
     for (i = 0; i < looplength; i++) {
@@ -125,11 +129,17 @@ const View = {
     },
     // Display artists
     displayArtists: function (artist) {
-        const artistWrapper = document.getElementById('artistWrapper');
-        let htmlBlock = '';
-
+        window.scrollTo({
+            top: 502,
+            behavior: "smooth"
+        });
+        let htmlBlock =`
+            <h3>Artists</h3>
+            <p>All the happy campers in our catalogue</p>
+            <div id="artistWrapper" class="artistWrapper">
+        `
         for (i = 0; i < artist.length; i++) {
-            htmlBlock += `
+            htmlBlock +=`
                 <div class="artist">
                     <img src="${artist[i].coverImage}" />
                     <div class="artistInfo">
@@ -140,7 +150,10 @@ const View = {
                 </div>
             `
         }
-        artistWrapper.innerHTML = htmlBlock;
+        htmlBlock +=`
+        </div>
+        `
+        mainWrapper.innerHTML = htmlBlock;
     }
 }
 // Parallax and styling.

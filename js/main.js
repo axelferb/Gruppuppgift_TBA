@@ -62,11 +62,6 @@ function fetchSingleItem(listType, ItemId) {
         });
 }
 
-function fetchSingleAlbum() {
-    console.log("Mumma");
-}
-
-
 const View = {
     // Diplays the 6 latest albums on the main page.
     displayAlbumsLimited: function (albumsLimited) {
@@ -243,7 +238,7 @@ function myFunction(data, listType) {
                     <div class="modalAlbumInfo">
                         <h1>${data.title}</h1>
                         <h2>${data.artists[0].name}</h2>
-                        <h3>Rating: 
+                        <h3>Rating:
                             ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}
                         </h3>
                         <div id="rating"> </div>
@@ -322,7 +317,7 @@ function myFunction(data, listType) {
             trackNumber += 1
             trackList.innerHTML = listElement;
         }
-    } else {
+    } else if (listType === "playlists") {
         for (i = 0; i < data.tracks.length; i++) {
             listElement +=`
                 <li> 

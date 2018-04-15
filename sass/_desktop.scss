@@ -28,15 +28,6 @@
     position: relative;
     display: flex;
     justify-content: center;
-    .browseDropButton,
-    .addDropButton {
-        background-color: transparent;
-        font-size: 1rem;
-        color: #fff;
-        padding: 0 0px;
-        border: none;
-        cursor: pointer;
-    }
     #browseDropDownContent,
     #addDropDownContent {
         margin: 21px 0 0 0;
@@ -48,26 +39,40 @@
         transition: background-color 800ms;
         z-index: 1;
     }
-    span {
-        color: #fff;
-        text-decoration: none;
-        display: inline-block;
-        cursor: pointer;
-    }
-    span:after {
-        display: block;
-        content: '';
-        border-bottom: 2px #fff solid;  
-        transform: scaleX(0);  
-        transition: transform 250ms ease-in-out;
-    }
-    span:hover:after {
-        transform: scaleX(1);
-    }
 }
 .browseDropDown:hover #browseDropDownContent,
 .addDropDown:hover #addDropDownContent {
     display: block;
+}
+
+#deleteButton,
+.browseDropButton,
+.addDropButton {
+    background-color: transparent;
+    font-size: 1rem;
+    color: #fff;
+    padding: 0 0px;
+    border: none;
+    cursor: pointer;
+}
+
+span {
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+span:after {
+    display: block;
+    content: '';
+    border-bottom: 2px #fff solid;  
+    transform: scaleX(0);  
+    transition: transform 250ms ease-in-out;
+}
+
+span:hover:after {
+    transform: scaleX(1);
 }
 
 #rating {

@@ -2,6 +2,7 @@ const mainWrapper = document.getElementById("mainWrapper");
 const addArtistButton = document.getElementById("addArtist");
 const addAlbumButton = document.getElementById("addAlbum");
 const addSongButton = document.getElementById("addSong");
+const delButton = document.getElementById("delButton");
 const model = {
     // Creates a new artist to POST in API.
     fetchArtist: function () {
@@ -124,6 +125,19 @@ const model = {
                 return newSong;
             });
     },
+    deleteItem: function (param, id) {
+        fetch(`https://folksa.ga/api/${param}/${id}?key=flat_eric`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((response) => response.json())
+            .then((artist) => {
+                console.log(artist);
+            });
+    }
 }
 // What to replace the innerHTML on index with!
 const view = {
@@ -218,6 +232,39 @@ const view = {
                 <button id="songSubmit" type="submit">Submit</button>
             </form>
         `
+    },
+    replaceDeleteForm: function () {
+        mainWrapper.innerHTML = `
+            <h3>Clean up the API</h3>
+                <p>Here you can delete all the shitty shit that
+                <br />makes the API look really sad.</p>
+                <div id="deleteSuccess"> </div>
+                <form id="deleteArtistForm">
+                    <label for="deleteArtist">Delete artist by ID:</label>
+                    <input id="artistID" name="deleteArtist" type="text" />
+
+                    <button id="deleteArtistButton" type="submit">Delete artist</button>
+                </form>
+                <form id="deleteSongForm">
+                        <label for="deleteSong">Delete song by ID:</label>
+                        <input id="songID" name="deleteSong" type="text" />
+
+                        <button id="deleteSongButton" type="submit">Delete song</button>
+                    </form>
+                <form id="deleteAlbumForm">
+                    <label for="deleteAlbum">Delete album by ID:</label>
+                    <input id="albumID" name="deleteAlbum" type="text" />
+
+                    <button id="deleteAlbumButton" type="submit">Delete album</button>
+                </form>
+                <form id="deletePlaylistForm">
+                    <label for="deletePlaylist">Delete playlist by ID:</label>
+                    <input id="playlistID" name="deletePlaylist" type="text" />
+
+                    <button id="deletePlaylistButton" type="submit">Delete playlist</button>
+                </form>
+            </div>
+        `
     }
 }
 // Replaces the innerHTML with the form to create a Artist.
@@ -294,3 +341,53 @@ addSongButton.addEventListener("click", function () {
         document.getElementById('songTitle').value = '';
     });
 });
+delButton.addEventListener("click", function () {
+    model.deleteItem()
+    view.replaceDeleteForm()
+    view.hideNavigation()
+    view.scrollToMain()
+    // Deletes artist by ID
+    const deleteArtistButton = document.getElementById("deleteArtistButton");
+    deleteArtistButton.addEventListener("click", function (e) {
+        const artistID = document.getElementById("artistID");
+
+        e.preventDefault();
+        console.log(artistID.value);
+        deleteFunction('artists', artistID.value);
+        document.getElementById('artistID').value = '';
+
+    });
+
+    // Deletes album by ID
+    const deleteAlbumButton = document.getElementById("deleteAlbumButton");
+    deleteAlbumButton.addEventListener("click", function (e) {
+        const albumID = document.getElementById("albumID");
+
+        e.preventDefault();
+        console.log(albumID.value);
+        deleteFunction('albums', albumID.value);
+        document.getElementById('albumID').value = '';
+    });
+
+    // Deletes song by ID
+    const deleteSongButton = document.getElementById("deleteSongButton");
+    deleteSongButton.addEventListener("click", function (e) {
+        const songID = document.getElementById("songID");
+
+        e.preventDefault();
+        console.log(songID.value);
+        deleteFunction('tracks', songID.value);
+        document.getElementById('songID').value = '';
+    });
+
+    // Deletes playlist by ID
+    const deletePlaylistButton = document.getElementById("deletePlaylistButton");
+    deletePlaylistButton.addEventListener("click", function (e) {
+        const playlistID = document.getElementById("playlistID");
+
+        e.preventDefault();
+        console.log(playlistID.value);
+        deleteFunction('playlists', playlistID.value);
+        document.getElementById('playlistID').value = '';
+    });
+})

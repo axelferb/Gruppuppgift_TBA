@@ -409,20 +409,19 @@ function printSearched(list, listDiv) {
     for (i = 0; i < list.length; i++) {
         if (listDiv == "playlists") {
             htmlBlock += `
-            <div class="listAlbumContainer">
-                <img src="${list[i].coverImage}" alt="Album cover" />
-                <div class="listAlbumInfo">
-                    <h3>${list[i].title}</h3>
-                    <p>${list[i].createdBy}</p>
+                <div class="listAlbumContainer">
+                    <img src="${list[i].coverImage}" alt="Album cover" />
+                    <div class="listAlbumInfo">
+                        <h3>${list[i].title}</h3>
+                        <p>${list[i].createdBy}</p>
+                    </div>
                 </div>
-            </div>
             `
-     /*   } else if (listDiv == "tracks") {
+        } else if (listDiv == "tracks") {
             htmlBlock += `
                 <h3>${list[i].title}</h3>
                 <p>${list[i].artists[0].name}</p>
-       `
-       */
+            `
         } else if (listDiv == "albums") {
             htmlBlock += `
                 <div class="listAlbumContainer">

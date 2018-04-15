@@ -223,7 +223,10 @@ function myFunction(data, listType) {
     var placeHolder = document.getElementById('modalContent')
     let htmlBlock = '';
 
-    const rating = displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length));
+    var rating = displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length));
+    if (isNaN(rating)){
+        rating = 0;
+    }
     if (listType === "albums") {
         htmlBlock =`
             <div id="modalPadding">
@@ -261,8 +264,7 @@ function myFunction(data, listType) {
                     <div class="modalPlaylistInfo">
                         <h1>${data.title}</h1>
                         <h2>${data.createdBy}</h2>
-                        <h3>Rating: 
-                        ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
+                        <h3>Rating: ${rating}</h3>
                         <div id="rating"> </div>
                         <ul id="trackList"> </ul>
                     </div>

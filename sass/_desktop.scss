@@ -39,7 +39,7 @@
     }
     #browseDropDownContent,
     #addDropDownContent {
-        margin: 20px 0 0 0;
+        margin: 21px 0 0 0;
         text-align: center;
         padding: 20px 20px 5px 20px;
         display: none;
@@ -47,21 +47,22 @@
         background-color: transparent;
         transition: background-color 800ms;
         z-index: 1;
-        a {
+    }
+    span {
         color: #fff;
         text-decoration: none;
         display: inline-block;
-        }
-        a:after {
-            display: block;
-            content: '';
-            border-bottom: solid 2px #fff;  
-            transform: scaleX(0);  
-            transition: transform 250ms ease-in-out;
-        }
-        a:hover:after {
-            transform: scaleX(1);
-        }
+        cursor: pointer;
+    }
+    span:after {
+        display: block;
+        content: '';
+        border-bottom: 2px #fff solid;  
+        transform: scaleX(0);  
+        transition: transform 250ms ease-in-out;
+    }
+    span:hover:after {
+        transform: scaleX(1);
     }
 }
 .browseDropDown:hover #browseDropDownContent,

@@ -99,7 +99,7 @@ body {
     }
     #browseDropDownContent,
     #addDropDownContent {
-        margin: 20px 0;
+        margin: 21px 0;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -111,22 +111,22 @@ body {
                 width: 100%;
                 margin: 5px 0 10px 0;
             }
-        }
-        span {
-            color: #fff;
-            text-decoration: none;
-            display: inline-block;
-            cursor: pointer;
-        }
-        span:after {
-            display: block;
-            content: '';
-            border-bottom: 2px #fff solid;  
-            transform: scaleX(0);  
-            transition: transform 250ms ease-in-out;
-        }
-        span:hover:after {
-            transform: scaleX(1);
+            span {
+                color: #fff;
+                text-decoration: none;
+                display: inline-block;
+                cursor: pointer;
+            }
+            span:after {
+                display: block;
+                content: '';
+                border-bottom: 2px #fff solid;  
+                transform: scaleX(0);  
+                transition: transform 250ms ease-in-out;
+            }
+            span:hover:after {
+                transform: scaleX(1);
+            }
         }
     }
 }

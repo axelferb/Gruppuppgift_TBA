@@ -1,7 +1,7 @@
 const mainWrapper = document.getElementById("mainWrapper");
 const addArtistButton = document.getElementById("addArtist");
 const addAlbumButton = document.getElementById("addAlbum");
-const addSongButton = document.getElementById("addSong");
+const addTrackButton = document.getElementById("addTrack");
 const deleteButton = document.getElementById("deleteButton");
 const model = {
     // Creates a new artist to POST in API.
@@ -13,7 +13,7 @@ const model = {
 
         function loopArtists(artists) {
             for (i = 0; i < artists.length; i++) {
-                songArtist.innerHTML += `
+                trackArtist.innerHTML += `
                 <option value="${artists[i]._id}" id="${artists[i]._id}">
                     ${artists[i].name.toUpperCase()}
                 </option>
@@ -32,7 +32,7 @@ const model = {
 
         function loopAlbums(albums) {
             for (i = 0; i < albums.length; i++) {
-                songAlbum.innerHTML += `
+                trackAlbum.innerHTML += `
         <option value="${albums[i]._id}" id="${albums[i]._id}">
             ${albums[i].title.toUpperCase()}
         </option >
@@ -82,7 +82,7 @@ const model = {
         const albumSubmit = document.getElementById("albumSubmit");
         let newAlbum = {
             title: albumTitle.value,
-            artists: songArtist.value,
+            artists: trackArtist.value,
             releaseDate: albumRelease.value,
             genres: albumGenre.value,
             spotifyURL: albumSpotifyUrl.value,
@@ -101,16 +101,16 @@ const model = {
                 return newAlbum;
             });
     },
-    submitNewSong: function () {
-        const songTitle = document.getElementById("songTitle");
-        const songArtist = document.getElementById("songArtist");
-        const songGenre = document.getElementById("songGenre");
-        const songSubmit = document.getElementById("songSubmit");
-        let newSong = {
-            title: songTitle.value,
-            artists: songArtist.value,
-            album: songAlbum.value,
-            genres: songGenre.value,
+    submitNewTrack: function () {
+        const trackTitle = document.getElementById("trackTitle");
+        const trackArtist = document.getElementById("trackArtist");
+        const trackGenre = document.getElementById("trackGenre");
+        const trackSubmit = document.getElementById("trackSubmit");
+        let newTrack = {
+            title: trackTitle.value,
+            artists: trackArtist.value,
+            album: trackAlbum.value,
+            genres: trackGenre.value,
         }
         return fetch('https://folksa.ga/api/tracks?key=flat_eric', {
                 method: 'POST',
@@ -118,11 +118,11 @@ const model = {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(newSong),
+                body: JSON.stringify(newTrack),
             })
             .then((response) => response.json())
-            .then((newSong) => {
-                return newSong;
+            .then((newTrack) => {
+                return newTrack;
             });
     },
     deleteItem: function (param, id) {
@@ -193,7 +193,7 @@ const view = {
                 <input id="albumTitle" name="Title" type="text" />
                 
                 <label for="Artist">Artist(s):</label>
-                <select id="songArtist" name="Artist"> </select>
+                <select id="trackArtist" name="Artist"> </select>
                 
                 <label for="ReleaseDate">Year of release:</label>
                 <input id="albumRelease" name="ReleaseDate" type="number" />
@@ -211,25 +211,25 @@ const view = {
             </form>
         `
     },
-    replaceSongForm: function () {
+    replaceTrackForm: function () {
         mainWrapper.innerHTML = `
-            <h3>Add song</h3>
-            <p>Add a new song to the API</p>
-            <form id="addSongForm">
+            <h3>Add track</h3>
+            <p>Add a new track to the API</p>
+            <form id="addTrackForm">
                 <label for="Title">Title:</label>
-                <input id="songTitle" name="Title" type="text">
+                <input id="trackTitle" name="Title" type="text">
 
                 <label for="Artist">Artist(s)</label>
-                <select id="songArtist" name="Artist">
+                <select id="trackArtist" name="Artist">
                 </select>
 
                 <label for="Album">Album</label>
-                <select id="songAlbum" name="Album">
+                <select id="trackAlbum" name="Album">
                 </select>
 
                 <label for="Genre">Genre:</label>
-                <input id="songGenre" name="Genre" type="text">
-                <button id="songSubmit" type="submit">Submit</button>
+                <input id="trackGenre" name="Genre" type="text">
+                <button id="trackSubmit" type="submit">Submit</button>
             </form>
         `
     },
@@ -245,11 +245,11 @@ const view = {
 
                     <button id="deleteArtistButton" type="submit">Delete artist</button>
                 </form>
-                <form id="deleteSongForm">
-                        <label for="deleteSong">Delete song by ID:</label>
-                        <input id="songID" name="deleteSong" type="text" />
+                <form id="deleteTrackForm">
+                        <label for="deleteTrack">Delete track by ID:</label>
+                        <input id="trackID" name="deleteTrack" type="text" />
 
-                        <button id="deleteSongButton" type="submit">Delete song</button>
+                        <button id="deleteTrackButton" type="submit">Delete track</button>
                     </form>
                 <form id="deleteAlbumForm">
                     <label for="deleteAlbum">Delete album by ID:</label>
@@ -308,10 +308,10 @@ addAlbumButton.addEventListener("click", function () {
         e.preventDefault();
     });
 });
-addSongButton.addEventListener("click", function () {
+addTrackButton.addEventListener("click", function () {
     model.fetchArtist()
     model.fetchAlbum()
-    view.replaceSongForm();
+    view.replaceTrackForm();
     view.hideNavigation();
     view.scrollToMain();
     const artistSubmit = document.getElementById("artistSubmit");
@@ -329,16 +329,16 @@ addSongButton.addEventListener("click", function () {
     const albumSpotifyUrl = document.getElementById("albumSpotifyUrl");
     const albumImgLink = document.getElementById("albumImgLink");
     const albumSubmit = document.getElementById("albumSubmit");
-    const songTitle = document.getElementById("songTitle");
-    const songArtist = document.getElementById("songArtist");
-    const songGenre = document.getElementById("songGenre");
-    const songSubmit = document.getElementById("songSubmit");
-    // Submits new song.
-    songSubmit.addEventListener("click", function (e) {
-        model.submitNewSong()
+    const trackTitle = document.getElementById("trackTitle");
+    const trackArtist = document.getElementById("trackArtist");
+    const trackGenre = document.getElementById("trackGenre");
+    const trackSubmit = document.getElementById("trackSubmit");
+    // Submits new track.
+    trackSubmit.addEventListener("click", function (e) {
+        model.submitNewTrack()
             .then(console.log)
         e.preventDefault();
-        document.getElementById('songTitle').value = '';
+        document.getElementById('trackTitle').value = '';
     });
 });
 deleteButton.addEventListener("click", function () {
@@ -368,15 +368,15 @@ deleteButton.addEventListener("click", function () {
         document.getElementById('albumID').value = '';
     });
 
-    // Deletes song by ID
-    const deleteSongButton = document.getElementById("deleteSongButton");
-    deleteSongButton.addEventListener("click", function (e) {
-        const songID = document.getElementById("songID");
+    // Deletes track by ID
+    const deleteTrackButton = document.getElementById("deleteTrackButton");
+    deleteTrackButton.addEventListener("click", function (e) {
+        const trackID = document.getElementById("trackID");
 
         e.preventDefault();
-        console.log(songID.value);
-        model.deleteItem('tracks', songID.value);
-        document.getElementById('songID').value = '';
+        console.log(trackID.value);
+        model.deleteItem('tracks', trackID.value);
+        document.getElementById('trackID').value = '';
     });
 
     // Deletes playlist by ID

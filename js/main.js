@@ -234,7 +234,7 @@ function myFunction(data, listType) {
                     <h3>Rating: 
                     ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
                     <div id= "rating"> </div>
-                    <ul id= "songList"> </ul>
+                    <ul id= "trackList"> </ul>
                 </div>
             </div>
         </div>
@@ -257,7 +257,7 @@ function myFunction(data, listType) {
                         <h3>Rating: 
                         ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
                         <div id= "rating"> </div>
-                        <ul id= "songList"> </ul>
+                        <ul id= "trackList"> </ul>
                     </div>
                 </div>
             </div>
@@ -297,16 +297,16 @@ function myFunction(data, listType) {
 
     createVoting(data._id);
 
-    var songList = document.getElementById('songList');
+    var trackList = document.getElementById('trackList');
     var listElement = '';
-    var songNumber = 1;
+    var trackNumber = 1;
     for (i = 0; i < data.tracks.length; i++) {
 
         listElement += `
-            <li> ${songNumber}. ${data.tracks[i].title}</li>
+            <li> ${trackNumber}. ${data.tracks[i].title}</li>
         `
-        songNumber += 1
-        songList.innerHTML = listElement;
+        trackNumber += 1
+        trackList.innerHTML = listElement;
     }
 }
 
@@ -324,7 +324,7 @@ document.onkeydown = function (e) {
 }
 
 function fetchSearched(type) {
-    return fetch(`https://folksa.ga/api/${type}?key=flat_eric&limit=200&populateArtists=true`)
+    return fetch(`https://folksa.ga/api/${type}?key=flat_eric&limit=1000&populateArtists=true`)
         .then((response) => response.json())
 }
 

@@ -190,11 +190,13 @@ function myFunction(data) {
     var placeHolder = document.getElementById('modalContent') 
     var htmlBlock = `
         <div id="modalPadding">
-            <img id="closeModal" src="images/close-black.svg" alt="Close" />
+            <div class="closeModal">
+                <img id="closeModal" src="images/close-black.svg" alt="Close" />
+            </div>
             <div class="modalAlbumWrapper">
                 <div class="albumCover">
                     <img src="${data.coverImage}" alt="Album cover" />
-                    <p><a href="${data.spotifyURL}">Listen on Spotify</a></p>
+                    <p><a href="${data.spotifyURL}" target="_blank">Listen on Spotify</a></p>
                     <p id="year">(${data.releaseDate})</p>
                 </div>
                 <div class="modalAlbumInfo">
@@ -252,13 +254,13 @@ function fetchSearched(type) {
 }
 
 function search(list) {
-    var todoValue = document.getElementById("searchBar").value.toLowerCase();
+    var searchBarValue = document.getElementById("searchBar").value.toLowerCase();
     var titleList = []
 
     for (i = 0; i < list.length; i++) {
         var lowerCaseValue = list[i].title.toLowerCase()
         
-        if (lowerCaseValue.includes(todoValue)) {
+        if (lowerCaseValue.includes(searchBarValue)) {
             titleList.push(list[i]);
         }
     }
@@ -267,18 +269,18 @@ function search(list) {
 
 // SEARCH FUNCTIONS
 function searchArtist(list) {
-    var todoValue = document.getElementById("searchBar").value.toLowerCase();
+    var searchBarValue = document.getElementById("searchBar").value.toLowerCase();
     var titleList = [];
 
     for (i = 0; i < list.length; i++) {
 
         var lowerCaseValue = list[i].name.toLowerCase()
 
-        if (lowerCaseValue.includes(todoValue)) {
+        if (lowerCaseValue.includes(searchBarValue)) {
             titleList.push(list[i]);
         }
     }
-    return titleList
+    return titleList;
 
 }
 function createPlaceHolder() {
@@ -300,20 +302,26 @@ function createPlaceHolder() {
 
 function printSearched(list, listDiv) {
     var jumjum = document.getElementById(listDiv);
-    var htmlblock = '';
+    var htmlBlock = '';
 
     for (i = 0; i < list.length; i++) {
         if (listDiv == "playlists") {
-            htmlblock +=`
-                <h3>${list[i].title}</h3>
+            htmlBlock +=`
+            <div class="listAlbumContainer">
+                <img src="${list[i].coverImage}" alt="Album cover" />
+                <div class="listAlbumInfo">
+                    <h3>${list[i].title}</h3>
+                    <p>${list[i].createdBy}</p>
+                </div>
+            </div>
             `
         } else if( listDiv == "tracks") {
-            htmlblock +=`
+            htmlBlock +=`
                 <h3>${list[i].title}</h3>
                 <p>${list[i].artists[0].name}</p>
             `
         } else if (listDiv == "albums") {
-            htmlblock +=`
+            htmlBlock +=`
                 <div class="listAlbumContainer">
                     <img src="${list[i].coverImage}" alt="Album cover" />
                     <div class="listAlbumInfo">
@@ -323,7 +331,7 @@ function printSearched(list, listDiv) {
                 </div>
             `
         } else {
-            htmlblock +=`
+            htmlBlock +=`
                 <div class="listArtistContainer">
                     <img src="${list[i].coverImage}" alt="Artist image" />
                     <div class="listAlbumInfo">
@@ -334,7 +342,7 @@ function printSearched(list, listDiv) {
             `
         }
     }
-    jumjum.innerHTML = htmlblock    
+    jumjum.innerHTML = htmlBlock;
 }
 
 

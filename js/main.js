@@ -188,7 +188,7 @@ function myFunction(data) {
     /* Modal content */
     modal.style.display = "block";
     var placeHolder = document.getElementById('modalContent')
-    var htmlBlock = `
+    let htmlBlock =`
         <div id="modalPadding">
             <div class="closeModal">
                 <img id="closeModal" src="images/close-black.svg" alt="Close" />
@@ -226,7 +226,6 @@ function myFunction(data) {
         listElement += `
             <li> ${songNumber}. ${data.tracks[i].title}</li>
         `
-
         songNumber += 1
         songList.innerHTML = listElement;
     }
@@ -321,8 +320,8 @@ function searchError() {
 
 
 function printSearched(list, listDiv) {
-    var jumjum = document.getElementById(listDiv);
-    var htmlBlock = '';
+    const jumjum = document.getElementById(listDiv);
+    let htmlBlock = '';
 
     for (i = 0; i < list.length; i++) {
         if (listDiv == "playlists") {
@@ -370,8 +369,12 @@ document.getElementById("searchBar").addEventListener('keypress', function (e) {
     const enterKey = e.keyCode;
     if (enterKey === 13 && searchBar.value === '') {
         searchError();
+        document.getElementById("navigation").style.width = "0";
+        document.getElementById('searchBar').blur();
     } else if (enterKey === 13) {
         createPlaceHolder();
+        document.getElementById("navigation").style.width = "0";
+        document.getElementById('searchBar').blur();
 
         fetchSearched("playlists")
             .then(value => {

@@ -13,22 +13,19 @@ function fetchPlayList(playlistId) {
 
 function calculateSum(array) {
     var sum = array.reduce((a, b) => a + b, 0);
-    return sum
+    return sum;
 }
 
-
 function calculateAverage(sum, arrayLength) {
-    average = sum / arrayLength
-    console.log(average)
+    average = sum / arrayLength;
+    console.log(average);
     return average;
 }
 
-
 function displayAverage(average) {
-    var display = average.toFixed(1)
-    return display
+    var display = parseFloat(average.toFixed(1));
+    return display;
 }
-
 
 function votePlaylist(ratingNumber, id) {
     fetch(`https://folksa.ga/api/albums/${id}/vote?key=flat_eric`, {
@@ -44,20 +41,18 @@ function votePlaylist(ratingNumber, id) {
         .then((response) => response.json())
 }
 
-
 function createVoting(id) {
-    votingValue = 10
+    votingValue = 10;
 
     for (i = 10; i > 0; i--) {
+        var mumma = document.getElementById('rating');
+        var ratings = document.createElement("SPAN");
+        var ratingSymbol = document.createTextNode('⬤');
 
-        var mumma = document.getElementById('rating')
-        var ratings = document.createElement("SPAN")
-        var ratingSymbol = document.createTextNode('⬤')
-
-        ratings.appendChild(ratingSymbol)
+        ratings.appendChild(ratingSymbol);
         ratings.addEventListener('click', votePlaylist.bind(this, votingValue, id));
 
-        mumma.appendChild(ratings)
+        mumma.appendChild(ratings);
 
         votingValue -= 1
 

@@ -62,11 +62,6 @@ function fetchSingleItem(listType, ItemId) {
         });
 }
 
-function fetchSingleAlbum() {
-    console.log("Mumma");
-}
-
-
 const View = {
     // Diplays the 6 latest albums on the main page.
     displayAlbumsLimited: function (albumsLimited) {
@@ -113,15 +108,27 @@ const View = {
         const playlistWrapper = document.getElementById('playlistWrapper');
         let htmlBlock = '';
         for (i = 0; i < playlists.length; i++) {
-            htmlBlock += `
+            if (playlists[i].coverImage === "") {
+                htmlBlock += `
                 <div class="playlists" id="playlists${[i]}" value="${playlists[i]._id}">
-                    <img src="${playlists[i].coverImage}" />
+                    <img src="images/noimage.jpg" />
                     <div class="playlistInfo">
                         <h4> ${playlists[i].title} </h4>
                         <p> ${playlists[i].createdBy} </p>
                     </div>
                 </div>
             `
+            } else {
+                htmlBlock += `
+                    <div class="playlists" id="playlists${[i]}" value="${playlists[i]._id}">
+                        <img src="${playlists[i].coverImage}" />
+                        <div class="playlistInfo">
+                            <h4> ${playlists[i].title} </h4>
+                            <p> ${playlists[i].createdBy} </p>
+                        </div>
+                    </div>
+                `
+            }
         }
         playlistWrapper.innerHTML = htmlBlock;
         addEventListener("playlists", "playlists", 6);
@@ -214,34 +221,13 @@ function myFunction(data, listType) {
     /* Modal content */
     modal.style.display = "block";
     var placeHolder = document.getElementById('modalContent')
-    var htmlBlock = ''
-    if (listType === "albums") {
+    let htmlBlock = '';
 
-    htmlBlock =`
-        <div id="modalPadding">
-            <div class="closeModal">
-                <img id="closeModal" src="images/close-black.svg" alt="Close" />
-            </div>
-            <div class="modalAlbumWrapper">
-                <div class="albumCover">
-                    <img src="${data.coverImage}" alt="Album cover" />
-                    <p><a href="${data.spotifyURL}" target="_blank">Listen on Spotify</a></p>
-                    <p id="year">(${data.releaseDate})</p>
-                </div>
-                <div class="modalAlbumInfo">
-                    <h1>${data.title}</h1>
-                    <h2>${data.artists[0].name}</h2>
-                    <h3>Rating: 
-                    ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
-                    <div id= "rating"> </div>
-                    <ul id= "trackList"> </ul>
-                </div>
-            </div>
-        </div>
-    `
+    var rating = displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length));
+    if (isNaN(rating)){
+        rating = 0;
     }
-
-    if (listType === "playlists") {
+    if (listType === "albums") {
         htmlBlock =`
             <div id="modalPadding">
                 <div class="closeModal">
@@ -250,14 +236,37 @@ function myFunction(data, listType) {
                 <div class="modalAlbumWrapper">
                     <div class="albumCover">
                         <img src="${data.coverImage}" alt="Album cover" />
+                        <p><a href="${data.spotifyURL}" target="_blank">Listen on Spotify</a></p>
+                        <p id="year">(${data.releaseDate})</p>
                     </div>
                     <div class="modalAlbumInfo">
                         <h1>${data.title}</h1>
+                        <h2>${data.artists[0].name}</h2>
+                        <h3>Rating: ${rating}</h3>
+                        <div id="rating"> </div>
+                        <ul id="trackList"> </ul>
+                    </div>
+                </div>
+            </div>
+        `
+    }
+
+    if (listType === "playlists") {
+        htmlBlock =`
+            <div id="modalPadding">
+                <div class="closeModal">
+                    <img id="closeModal" src="images/close-black.svg" alt="Close" />
+                </div>
+                <div class="modalPlaylistWrapper">
+                    <div class="playlistCover">
+                        <img src="${data.coverImage}" alt="Playlist cover" />
+                    </div>
+                    <div class="modalPlaylistInfo">
+                        <h1>${data.title}</h1>
                         <h2>${data.createdBy}</h2>
-                        <h3>Rating: 
-                        ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
-                        <div id= "rating"> </div>
-                        <ul id= "trackList"> </ul>
+                        <h3>Rating: ${rating}</h3>
+                        <div id="rating"> </div>
+                        <ul id="trackList"> </ul>
                     </div>
                 </div>
             </div>
@@ -300,13 +309,26 @@ function myFunction(data, listType) {
     var trackList = document.getElementById('trackList');
     var listElement = '';
     var trackNumber = 1;
-    for (i = 0; i < data.tracks.length; i++) {
 
-        listElement += `
-            <li> ${trackNumber}. ${data.tracks[i].title}</li>
-        `
-        trackNumber += 1
-        trackList.innerHTML = listElement;
+    if (listType !== "playlists") {
+        for (i = 0; i < data.tracks.length; i++) {
+            listElement +=`
+                <li>${trackNumber}. ${data.tracks[i].title}</li>
+            `
+            trackNumber += 1
+            trackList.innerHTML = listElement;
+        }
+    } else if (listType === "playlists") {
+        for (i = 0; i < data.tracks.length; i++) {
+            listElement +=`
+                <li> 
+                    ${trackNumber}. ${data.tracks[i].title}
+                    (${data.tracks[i].artists[0].name})
+                </li>
+            `
+            trackNumber += 1
+            trackList.innerHTML = listElement;
+        }
     }
 }
 
@@ -355,8 +377,8 @@ function searchArtist(list) {
         }
     }
     return titleList;
-
 }
+
 function createPlaceHolder() {
     modal.style.display = "block";
 

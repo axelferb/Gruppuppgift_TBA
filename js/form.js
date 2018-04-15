@@ -48,7 +48,7 @@ const model = {
         const artistGenre = document.getElementById("genre");
         const artistCountry = document.getElementById("artistCountry");
         const artistSpotifyUrl = document.getElementById("artistSpotifyUrl");
-        const artistImgLink = document.getElementById("artistImgLink");
+        const artistImageLink = document.getElementById("artistImageLink");
         const artistGender = document.getElementById("artistGender");
         const artistDateBorn = document.getElementById("artistDateBorn");
         let newArtist = {
@@ -57,7 +57,7 @@ const model = {
             gender: artistGender.value,
             genres: artistGenre.value,
             spotifyURL: artistSpotifyUrl.value,
-            coverImage: artistImgLink.value,
+            coverImage: artistImageLink.value,
         }
         return fetch('https://folksa.ga/api/artists?key=flat_eric', {
                 method: 'POST',
@@ -78,7 +78,7 @@ const model = {
         const albumRelease = document.getElementById("albumRelease");
         const albumGenre = document.getElementById("albumGenre");
         const albumSpotifyUrl = document.getElementById("albumSpotifyUrl");
-        const albumImgLink = document.getElementById("albumImgLink");
+        const albumImageLink = document.getElementById("albumImageLink");
         const albumSubmit = document.getElementById("albumSubmit");
         let newAlbum = {
             title: albumTitle.value,
@@ -86,7 +86,7 @@ const model = {
             releaseDate: albumRelease.value,
             genres: albumGenre.value,
             spotifyURL: albumSpotifyUrl.value,
-            coverImage: albumImgLink.value,
+            coverImage: albumImageLink.value,
         }
         return fetch('https://folksa.ga/api/albums?key=flat_eric', {
                 method: 'POST',
@@ -171,8 +171,8 @@ const view = {
             <label for="spotifyURL">Spotify URL:</label>
             <input id="artistSpotifyUrl" name="spotifyURL" type="text" placeholder="http://" />
             
-            <label for="imgLink">Image URL:</label>
-            <input id="artistImgLink" name="imgLink" type="text" placeholder="http://" />
+            <label for="imageLink">Image URL:</label>
+            <input id="artistImageLink" name="imageLink" type="text" placeholder="http://" />
             
             <label for="Gender">Gender:</label>
             <select id="artistGender" name="Gender">
@@ -204,8 +204,8 @@ const view = {
                 <label for="spotifyURL">Spotify URL:</label>
                 <input id="albumSpotifyUrl" name="spotifyURL" type="text" placeholder="http://" />
                 
-                <label for="imgLink">Image URL:</label>
-                <input id="albumImgLink" name="imgLink" type="text"placeholder="http://" />
+                <label for="imageLink">Image URL:</label>
+                <input id="albumImageLink" name="imageLink" type="text"placeholder="http://" />
                 
                 <button id="albumSubmit" type="submit">Submit</button>
             </form>
@@ -219,11 +219,11 @@ const view = {
                 <label for="Title">Title:</label>
                 <input id="trackTitle" name="Title" type="text">
 
-                <label for="Artist">Artist(s)</label>
+                <label for="Artist">Artist(s):</label>
                 <select id="trackArtist" name="Artist">
                 </select>
 
-                <label for="Album">Album</label>
+                <label for="Album">Album:</label>
                 <select id="trackAlbum" name="Album">
                 </select>
 
@@ -291,7 +291,7 @@ addAlbumButton.addEventListener("click", function () {
     const artistGenre = document.getElementById("genre");
     const artistCountry = document.getElementById("artistCountry");
     const artistSpotifyUrl = document.getElementById("artistSpotifyUrl");
-    const artistImgLink = document.getElementById("artistImgLink");
+    const artistImageLink = document.getElementById("artistImageLink");
     const artistGender = document.getElementById("artistGender");
     const artistDateBorn = document.getElementById("artistDateBorn");
     const albumTitle = document.getElementById("albumTitle");
@@ -299,7 +299,7 @@ addAlbumButton.addEventListener("click", function () {
     const albumRelease = document.getElementById("albumRelease");
     const albumGenre = document.getElementById("albumGenre");
     const albumSpotifyUrl = document.getElementById("albumSpotifyUrl");
-    const albumImgLink = document.getElementById("albumImgLink");
+    const albumImageLink = document.getElementById("albumImageLink");
     const albumSubmit = document.getElementById("albumSubmit");
     // Submits new Album.
     albumSubmit.addEventListener("click", function (e) {
@@ -319,7 +319,7 @@ addTrackButton.addEventListener("click", function () {
     const artistGenre = document.getElementById("genre");
     const artistCountry = document.getElementById("artistCountry");
     const artistSpotifyUrl = document.getElementById("artistSpotifyUrl");
-    const artistImgLink = document.getElementById("artistImgLink");
+    const artistImageLink = document.getElementById("artistImageLink");
     const artistGender = document.getElementById("artistGender");
     const artistDateBorn = document.getElementById("artistDateBorn");
     const albumTitle = document.getElementById("albumTitle");
@@ -327,7 +327,7 @@ addTrackButton.addEventListener("click", function () {
     const albumRelease = document.getElementById("albumRelease");
     const albumGenre = document.getElementById("albumGenre");
     const albumSpotifyUrl = document.getElementById("albumSpotifyUrl");
-    const albumImgLink = document.getElementById("albumImgLink");
+    const albumImageLink = document.getElementById("albumImageLink");
     const albumSubmit = document.getElementById("albumSubmit");
     const trackTitle = document.getElementById("trackTitle");
     const trackArtist = document.getElementById("trackArtist");

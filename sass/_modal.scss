@@ -49,7 +49,8 @@
     }
 }
 
-.modalAlbumWrapper {
+.modalAlbumWrapper,
+.modalPlaylistWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,7 +60,7 @@
         margin: 0;
     }
     h2 {
-        margin: 0;
+        margin: 0 0 15px 0;
     }
     h3 {
         margin: 5px 0;
@@ -94,7 +95,8 @@
     a:hover:after {
         transform: scaleX(1);
     }
-    .albumCover {
+    .albumCover,
+    .playlistCover {
         letter-spacing: .05rem;
         text-align: center;
         #year {
@@ -102,7 +104,8 @@
             color: #c0c0c0;
         }
     }
-    .modalAlbumInfo {
+    .modalAlbumInfo,
+    .modalPlaylistInfo {
         margin-left: 0px;
         font-size: .8rem;
     }
@@ -117,19 +120,15 @@
         .artistInfoContainer {
             margin-bottom: 20px;
             padding-bottom: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             border-bottom: 1px solid black;
         }
         h1 {
-            font-size: 3rem;
+            font-size: 2rem;
         }
         h2 {
             font-size: 1.2rem;
         }
         img {
-            margin-right: 20px;
             width: 200px;
             height: 200px;
             object-fit: cover;
@@ -149,6 +148,7 @@
 
 .listAlbumContainer,
 .listArtistContainer {
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     img {
@@ -158,4 +158,14 @@
         object-fit: cover;
         border-radius: 35px;
     }
+}
+
+#tracks p {
+    margin-bottom: 20px;
+}
+
+#playlists,
+#tracks,
+#albums {
+    margin-bottom: 40px;
 }

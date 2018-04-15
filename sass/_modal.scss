@@ -59,7 +59,7 @@
         margin: 0;
     }
     h2 {
-        margin: 0;
+        margin: 0 0 15px 0;
     }
     h3 {
         margin: 5px 0;
@@ -149,6 +149,7 @@
 
 .listAlbumContainer,
 .listArtistContainer {
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     img {
@@ -158,4 +159,8 @@
         object-fit: cover;
         border-radius: 35px;
     }
+}
+
+#tracks p {
+    margin-bottom: 20px;
 }

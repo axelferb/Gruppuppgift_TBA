@@ -70,13 +70,13 @@ function fetchSingleAlbum() {
 const View = {
     // Diplays the 6 latest albums on the main page.
     displayAlbumsLimited: function (albumsLimited) {
-        const latestAlbumWrapper = document.getElementById('latestAlbumWrapper');
+        const albumWrapper = document.getElementById('albumWrapper');
         let htmlBlock = '';
 
         for (i = 0; i < albumsLimited.length; i++) {
             if (albumsLimited[i].coverImage === "") {
                 htmlBlock += `
-                    <div class="latestAlbum" id="latestAlbum${[i]}" value="${albumsLimited[i]._id}">
+                    <div class="albums" id="albums${[i]}" value="${albumsLimited[i]._id}">
                         <img src="images/noimage.jpg" />
                         <div class="albumInfo">
                             <h4> ${albumsLimited[i].title} </h4>
@@ -90,7 +90,7 @@ const View = {
                 `
             } else {
                 htmlBlock += `
-                    <div class="latestAlbum" id="latestAlbum${[i]}" value="${albumsLimited[i]._id}">
+                    <div class="albums" id="albums${[i]}" value="${albumsLimited[i]._id}">
                         <img src="${albumsLimited[i].coverImage}" />
                         <div class="albumInfo">
                             <h4> ${albumsLimited[i].title} </h4>
@@ -104,8 +104,8 @@ const View = {
                 `
             }
         }
-        latestAlbumWrapper.innerHTML = htmlBlock;
-        addEventListener("albums", "latestAlbum", 6);
+        albumWrapper.innerHTML = htmlBlock;
+        addEventListener("albums", "albums", 6);
 
     },
     // Diplays the playlists on the main page.

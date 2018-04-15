@@ -267,13 +267,16 @@ function myFunction(data, listType) {
     if (listType === "artists") {
         htmlBlock =`
             <div id="modalPadding">
-                <img id="closeModal" src="images/close-black.svg" alt="Close" />
+                <div class="closeModal">
+                    <img id="closeModal" src="images/close-black.svg" alt="Close" />
+                </div>
                 <div class="modalArtistWrapper">
                     <div class="modalArtistContainer">
                         <div class="artistInfoContainer">
                             <img src="${data.coverImage}" alt="Album cover" />
                             <div class="modalArtistInfo">
-                                
+                            <h1>${data.name}</h1>
+                            <h2>(${data.genres[0]})</h2>
                             </div>
                         </div>
                         <h3>Albums:</h3>  
@@ -282,13 +285,12 @@ function myFunction(data, listType) {
                         </ul>
                     </div>
                 </div>
-            </div>
         `
     }
     
     /*
-    <h1>${data.artists[0].name}</h1>
-    <h2>(${data.genres[0]})</h2>
+    
+   
     */
     
     placeHolder.innerHTML = htmlBlock;

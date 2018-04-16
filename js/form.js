@@ -44,23 +44,26 @@ const model = {
             .then(loopAlbums);
     },
     fetchTrack: function () {
-        // Fetch all Tracks.
+        // Fetch all tracks.
         function fetchTracks() {
             return fetch('https://folksa.ga/api/tracks?sort=desc&limit=1000&key=flat_eric')
                 .then((response) => response.json())
         }
 
-        function loopTracks(Tracks) {
-            for (i = 0; i < Tracks.length; i++) {
-                addPlaylistForm.innerHTML += `
-                <p class="loopedTracks" id="${Tracks[i]._id}">
-                ${Tracks[i].title.toUpperCase()} - ${Tracks[i].artists[0].name.toUpperCase()}
+        function loopTracks(tracks) {
+            for (i = 0; i < tracks.length; i++) {
+                const playlistTrackWrapper = document.getElementById('playlistTrackWrapper');
+                playlistTrackWrapper.innerHTML += `
+                <p class="loopedTracks" id="${tracks[i]._id}">
+                    ${tracks[i].title} (${tracks[i].artists[0].name})
                 </p>
                 `
                 trackArray = []
                 const loopedTracks = document.getElementsByClassName("loopedTracks");
                 for (let loopedTrack of loopedTracks) {
                     loopedTrack.addEventListener("click", function () {
+                        loopedTrack.style.color = "#fff";
+                        loopedTrack.style.backgroundColor = "#4e2791";
                         trackArray.push(this.id);
                         console.log(trackArray);
                     })
@@ -302,6 +305,9 @@ const view = {
 
                 <label for="Author">Author:</label>
                 <input id="playlistAuthor" name="Author" type="text">
+
+                <div id="playlistTrackWrapper"> </div>
+
                 <button id="playlistSubmit" type="submit">Submit</button>
             </form>
         `

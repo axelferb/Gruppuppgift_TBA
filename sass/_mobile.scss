@@ -17,6 +17,8 @@ body {
     transition: background-color 800ms;
     #heroText {
         transition: opacity 400ms;
+        -webkit-animation: fade-in 1.8s linear;
+                animation: fade-in 1.8s linear;
         h2 {
             margin: -40px 0 10px 0;
             font-family: $headerFont;

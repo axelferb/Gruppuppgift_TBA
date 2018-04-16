@@ -119,7 +119,7 @@ const View = {
             htmlBlock += `
                 <div class='albumInfo'>
                     <h4> ${albums[i].title} </h4>
-                    <h4>(${albums[i].genres[0]}) </h4>
+                    <p>(${albums[i].genres[0]}) </p>
                     <p> <a href='${albums[i].spotifyURL}' target='_blank'>Listen on Spotify</a> </p>
                 </div>
             </div>
@@ -148,7 +148,7 @@ const View = {
                 `
             } else {
                 htmlBlock += `
-                    <img src='${playlists[i].coverImage}' alt="Playlist cover" />
+                    <img src='${playlists[i].coverImage}' alt='Playlist cover' />
                 `
             }
             htmlBlock += ` 
@@ -185,7 +185,7 @@ const View = {
                 `
             } else {
                 htmlBlock += `
-                    <img src='${playlists[i].coverImage}' alt="Playlist cover" />
+                    <img src='${playlists[i].coverImage}' alt='Playlist cover' />
                 `
             }
             htmlBlock += ` 
@@ -579,7 +579,7 @@ const Controller = {
     triggerEventListeners: function () {
         const browseArtists = document.getElementById('browseArtists');
         browseArtists.addEventListener('click', function () {
-            Fetch.fetchArtists('6')
+            Fetch.fetchArtists('108')
                 .then(value => {
                     View.displayArtists(value);
                 })
@@ -587,7 +587,7 @@ const Controller = {
 
         const browseAlbums = document.getElementById('browseAlbums');
         browseAlbums.addEventListener('click', function () {
-            Fetch.fetchAlbums('18')
+            Fetch.fetchAlbums('106')
                 .then(value => {
                     View.displayAlbums(value);
                 })
@@ -595,7 +595,7 @@ const Controller = {
 
         const browsePlaylists = document.getElementById('browsePlaylists');
         browsePlaylists.addEventListener('click', function () {
-            Fetch.fetchPlaylists('18')
+            Fetch.fetchPlaylists('108')
                 .then(value => {
                     View.displayAllPlaylists(value);
                 })

@@ -428,12 +428,9 @@ async function myFunction(data, listType) {
                             <div class="modalArtistInfo">
                                 <h1>${data.name}</h1>
                                 <h2>(${data.genres[0]})</h2>
+                                <a href="${data.spotifyURL}">Listen on Spotify</a>
                             </div>
                         </div>
-                        <h3>Albums:</h3>  
-                        <ul>
-                            <li>${data.albums[0]}</li>
-                        </ul>
                     </div>
                 </div>
             </div>

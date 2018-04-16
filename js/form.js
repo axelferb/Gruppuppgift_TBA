@@ -85,6 +85,7 @@ const model = {
         let newArtist = {
             name: artistName.value,
             born: artistDateBorn.value,
+            countryBorn: artistCountry.value,
             gender: artistGender.value,
             genres: artistGenre.value,
             spotifyURL: artistSpotifyUrl.value,

@@ -165,8 +165,8 @@ const model = {
             genres: playlistGenre.value,
             createdBy: playlistAuthor.value,
             tracks: trackArray.join(","),
-            // coverImage: playlistImageLink.value,
-            // coverImageColor: playlistImageColor.value
+            coverImage: playlistImageLink.value,
+            coverImageColor: playlistImageColor.value
         }
         return fetch('https://folksa.ga/api/playlists?key=flat_eric', {
                 method: 'POST',
@@ -302,6 +302,13 @@ const view = {
 
                 <label for="Author">Author:</label>
                 <input id="playlistAuthor" name="Author" type="text">
+
+                <label for="imageLink">Image URL:</label>
+                <input id="playlistImageLink" name="imageLink" type="text" placeholder="http://" />
+
+                <label for="Color">Color:</label>
+                <input id="playlistImageColor name="Color" type="text">
+
                 <button id="playlistSubmit" type="submit">Submit</button>
             </form>
         `

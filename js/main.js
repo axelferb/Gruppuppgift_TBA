@@ -38,28 +38,24 @@ function fetchComments(id) {
 
 function displayComments(value) {
     //var commentsArray = []
-    console.log(value)
-    var commentHtmlBlock = ''
+    console.log(value);
+    var commentHtmlBlock = '';
     
     if (value === undefined || value.length == 0) {
-        commentHtmlBlock = `
-            <p> No comments yet </p>
-            `
-    
+        commentHtmlBlock =`
+            <p class="comment"> No comments yet </p>
+        `
     }
-    
     else {
-    for (let comment of value) {
-        
-        //commentsArray.push(mumma.body)
-        commentHtmlBlock += `
-            <p> ${comment.body} </p>
-            <p> ${comment.username}</p>
+        for (let comment of value) {   
+            //commentsArray.push(mumma.body)
+            commentHtmlBlock += `
+                <p> ${comment.username}</p>
+                <p class="comment"> ${comment.body} </p>   
             `
+        }
     }
-    }
-    return commentHtmlBlock
-    
+    return commentHtmlBlock;
 }
 
 const browseArtists = document.getElementById('browseArtists');
@@ -210,7 +206,6 @@ const View = {
                     </div>
                 `
             }
-
         }
         playlistWrapper.innerHTML = htmlBlock;
         addEventListener("playlists", "playlists", 6);
@@ -350,29 +345,27 @@ async function myFunction(data, listType) {
                 <div class="closeModal">
                     <img id="closeModal" src="images/close-black.svg" alt="Close" />
                 </div>
-                <div class="modalPlaylistWrapper">
-                    <div class="playlistCover">
-                        <img src="${data.coverImage}" alt="Playlist cover" />
-                    </div>
-                    <div class="modalPlaylistInfo">
-                        <h1>${data.title}</h1>
-                        <h2>${data.createdBy}</h2>
-
-                        <h3>Rating: 
-                        ${rating}</h3>
-                        <div id= "rating"> </div>
-                        <ul id= "trackList"> </ul>
-                        <div id="playListComments">
-                        ${await fetchComments(data._id)}
+                <div class="playlistContainer">
+                    <div class="modalPlaylistWrapper">
+                        <div class="playlistCover">
+                            <img src="${data.coverImage}" alt="Playlist cover" />
                         </div>
-
-
+                        <div class="modalPlaylistInfo">
+                            <h1>${data.title}</h1>
+                            <h2>${data.createdBy}</h2>
+                            <h3>Rating: 
+                            ${rating}</h3>
+                            <div id= "rating"> </div>
+                            <ul id= "trackList"> </ul>
+                        </div>
+                    </div>
+                    <div id="playListComments">
+                        <h2>Comments:</h2>
+                        ${await fetchComments(data._id)}
                     </div>
                 </div>
             </div>
         `
-
-//5aae312ee3534b03981f6521
     }
 
     if (listType === "artists") {

@@ -531,7 +531,7 @@ function printSearched(list, listDiv) {
                 <div class="listAlbumContainer">
                     <img src="${list[i].coverImage}" alt="Album cover" />
                     <div class="listAlbumInfo">
-                        <h3>${list[i].title}</h3>
+                        <h3 id="playlists${[i]}" value="${list[i]._id}">${list[i].title}</h3>
                         <p>${list[i].createdBy}</p>
                     </div>
                 </div>
@@ -548,7 +548,7 @@ function printSearched(list, listDiv) {
                 <div class="listAlbumContainer">
                     <img src="${list[i].coverImage}" alt="Album cover" />
                     <div class="listAlbumInfo">
-                        <h3>${list[i].title}</h3>
+                        <h3 id="albums${[i]}" value="${list[i]._id}"> ${list[i].title}</h3>
                         <p>${list[i].artists[0].name}</p>
                     </div>
                 </div>
@@ -558,16 +558,27 @@ function printSearched(list, listDiv) {
                 <div class="listArtistContainer">
                     <img src="${list[i].coverImage}" alt="Artist image" />
                     <div class="listAlbumInfo">
-                        <h3>${list[i].name}</h3>
+                        <h3 id="artists${[i]}" value="${list[i]._id}">${list[i].name}</h3>
                         <p>(${list[i].genres[0]})</p>
                     </div>
                 </div>
             `
+            console.log(list.length)
         }
     }
     jumjum.innerHTML = htmlBlock;
+    addEventListener(listDiv, listDiv, list.length);
+    
 }
 
+/*function addEventListener(listType, divType, looplength) {
+    for (i = 0; i < looplength; i++) {
+        var itemId = document.getElementById(divType + [i]).getAttribute("value")
+        var moreInfo = document.getElementById(divType + [i]);
+
+        moreInfo.addEventListener('click', fetchSingleItem.bind(this, listType, itemId));
+    }
+}*/
 
 document.getElementById("searchBar").addEventListener('keypress', function (e) {
     const enterKey = e.keyCode;

@@ -40,16 +40,26 @@ function displayComments(value) {
     //var commentsArray = []
     console.log(value)
     var commentHtmlBlock = ''
-    for (let mumma of value) {
-
+    
+    if (value === undefined || value.length == 0) {
+        commentHtmlBlock = `
+            <p> No comments yet </p>
+            `
+    
+    }
+    
+    else {
+    for (let comment of value) {
+        
         //commentsArray.push(mumma.body)
         commentHtmlBlock += `
-            <p> ${mumma.body} </p>
+            <p> ${comment.body} </p>
+            <p> ${comment.username}</p>
             `
-        console.log(mumma.body)
+    }
     }
     return commentHtmlBlock
-
+    
 }
 
 const browseArtists = document.getElementById('browseArtists');
@@ -310,7 +320,7 @@ async function myFunction(data, listType) {
                         <div id= "rating"> </div>
                         <ul id= "trackList"> </ul>
                         <div id="playListComments">
-                        ${await fetchComments("5aae312ee3534b03981f6521")}
+                        ${await fetchComments(data._id)}
                         </div>
 
 
@@ -319,7 +329,7 @@ async function myFunction(data, listType) {
             </div>
         `
 
-
+//5aae312ee3534b03981f6521
     }
 
     if (listType === "artists") {

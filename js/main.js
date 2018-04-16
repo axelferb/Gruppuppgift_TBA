@@ -74,6 +74,13 @@ browseAlbums.addEventListener('click', function (){
             })
 })
 
+const browsePlaylists = document.getElementById('browsePlaylists');
+browsePlaylists.addEventListener('click', function (){
+    fetchPlaylists('18')
+    .then(value => {
+        View.displayAllPlaylists(value);
+            })
+})
 
 // // Fetches artists, limited to 9
 // fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
@@ -210,6 +217,32 @@ const View = {
         playlistWrapper.innerHTML = htmlBlock;
         addEventListener("playlists", "playlists", 6);
 
+    },
+    displayAllPlaylists: function (playlists) {
+        View.hideNavigation();
+        View.scrollToMain();
+        document.getElementById("navigation").style.width = "0";
+        let htmlBlock =`
+            <h3>Playlists</h3>
+            <p>Try to find one great playlists and you'll win a cookie</p>
+            <div id="playlistWrapper" class="playlistWrapper">
+        `
+        for (i = 0; i < playlists.length; i++) {
+            htmlBlock +=`
+                <div class="playlists" id="playlists${[i]}" value="${playlists[i]._id}">
+                    <img src="${playlists[i].coverImage}" />
+                    <div class="albumInfo">
+                        <h4> ${playlists[i].title} </h4>
+                        <p> ${playlists[i].createdBy} </p>
+                    </div>
+                </div>
+            `
+        }
+        htmlBlock +=`
+        </div>
+        `
+        mainWrapper.innerHTML = htmlBlock;
+        addEventListener("playlists", "playlists", playlists.length);
     },
     // Display artists
     displayArtists: function (artist) {

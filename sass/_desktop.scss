@@ -81,9 +81,15 @@ span:hover:after {
     }
 }
 
-.modalAlbumWrapper img {
-    width: 200px;
+.modalAlbumWrapper,
+.modalPlaylistWrapper {
+    img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+    }
 }
+
 .modalArtistWrapper {
     .artistInfoContainer {
         margin-bottom: 20px;

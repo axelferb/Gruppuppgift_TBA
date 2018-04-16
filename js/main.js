@@ -128,7 +128,7 @@ const View = {
                 <div class="artists" id="albums${[i]}" value="${albums[i]._id}">
                     <img src="${albums[i].coverImage}" />
                     <div class="albumInfo">
-                        <h4> ${albums[i].name} </h4>
+                        <h4> ${albums[i].title} </h4>
                         <h4>(${albums[i].genres[0]}) </h4>
                         <p> <a href="${albums[i].spotifyURL}" target="_blank">Listen on Spotify</a> </p>
                     </div>

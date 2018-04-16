@@ -82,17 +82,6 @@ browsePlaylists.addEventListener('click', function (){
             })
 })
 
-// // Fetches artists, limited to 9
-// fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
-//     .then((response) => response.json())
-//     .then((artists) => {
-//         artist = artists;
-//         setTimeout(function () {
-//             View.displayArtists(artist);
-//         }, 1000);
-//         console.log(artist);
-//     });
-
 
 function addEventListener(listType, divType, looplength) {
     for (i = 0; i < looplength; i++) {
@@ -403,7 +392,7 @@ async function myFunction(data, listType) {
     }
 
     if (listType === "playlists") {
-        htmlBlock = `
+        htmlBlock =`
             <div id="modalPadding">
                 <div class="closeModal">
                     <img id="closeModal" src="images/close-black.svg" alt="Close" />

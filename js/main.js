@@ -148,7 +148,7 @@ const View = {
                 `
             } else {
                 htmlBlock += `
-                    <img src='${playlists[i].coverImage}' />
+                    <img src='${playlists[i].coverImage}' alt="Playlist cover" />
                 `
             }
             htmlBlock += ` 
@@ -185,7 +185,7 @@ const View = {
                 `
             } else {
                 htmlBlock += `
-                    <img src='${playlists[i].coverImage}' />
+                    <img src='${playlists[i].coverImage}' alt="Playlist cover" />
                 `
             }
             htmlBlock += ` 
@@ -225,7 +225,7 @@ const View = {
                 `
             } else {
                 htmlBlock += `
-                    <img src='${artist[i].coverImage}' />
+                    <img src='${artist[i].coverImage}' alt='Artist image' />
                 `
             }
             htmlBlock += ` 
@@ -318,7 +318,7 @@ const View = {
                     <div class='modalArtistWrapper'>
                         <div class='modalArtistContainer'>
                             <div class='artistInfoContainer'>
-                                <img src='${data.coverImage}' alt='Album cover' />
+                                <img src='${data.coverImage}' alt='Artist image' />
                                 <div class='modalArtistInfo'>
                                     <h1>${data.name}</h1>
                                     <h2>(${data.genres[0]})</h2>
@@ -374,7 +374,7 @@ const View = {
             if (listDiv == 'playlists') {
                 htmlBlock += `
                     <div class='listAlbumContainer'>
-                        <img src='${list[i].coverImage}' alt='Album cover' />
+                        <img src='${list[i].coverImage}' alt='Playlist cover' />
                         <div class='listAlbumInfo'>
                             <h3 id='playlists${[i]}' value='${list[i]._id}'>${list[i].title}</h3>
                             <p>${list[i].createdBy}</p>

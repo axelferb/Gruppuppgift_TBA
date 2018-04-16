@@ -176,6 +176,7 @@ body {
 #deleteAlbumForm,
 #addTrackForm,
 #deleteTrackForm,
+#addPlaylistForm,
 #deletePlaylistForm {
     margin-top: 40px;
     display: flex;
@@ -221,6 +222,22 @@ body {
     select:focus {
         outline: 0;
         background-color: #ebebeb;
+    }
+}
+
+#playlistTrackWrapper {
+    margin-bottom: 20px;
+    padding: 10px 0;
+    width: 340px;
+    height: 200px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    overflow: scroll;
+    p {
+        margin: 0;
+        padding: 0 15px;
+        font-size: .7rem;
+        transition: 400ms;
     }
 }
 

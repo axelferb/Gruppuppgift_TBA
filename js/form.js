@@ -48,9 +48,9 @@ const ModelForm = {
             for (i = 0; i < tracks.length; i++) {
                 const playlistTrackWrapper = document.getElementById('playlistTrackWrapper');
                 playlistTrackWrapper.innerHTML += `
-                <p class="loopedTracks" id="${tracks[i]._id}">
-                    ${tracks[i].title} (${tracks[i].artists[0].name})
-                </p>
+                    <p class="loopedTracks" id="${tracks[i]._id}">
+                        ${tracks[i].title} (${tracks[i].artists[0].name})
+                    </p>
                 `
                 // Creates a empty array where the user puts the songs Id's selected below. 
                 trackArray = []

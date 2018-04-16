@@ -400,7 +400,7 @@ async function myFunction(data, listType) {
         modal.style.display = "none";
     })
 
-    createVoting(data._id);
+    createVoting(data._id, listType);
 
     var trackList = document.getElementById('trackList');
     var listElement = '';

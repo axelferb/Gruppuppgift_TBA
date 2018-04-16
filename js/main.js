@@ -37,7 +37,6 @@ function fetchComments(id) {
 }
 
 function displayComments(value) {
-    //var commentsArray = []
     console.log(value)
     var commentHtmlBlock = ''
     
@@ -45,13 +44,11 @@ function displayComments(value) {
         commentHtmlBlock = `
             <p> No comments yet </p>
             `
-    
     }
     
     else {
     for (let comment of value) {
         
-        //commentsArray.push(mumma.body)
         commentHtmlBlock += `
             <p> ${comment.body} </p>
             <p> ${comment.username}</p>
@@ -372,7 +369,6 @@ async function myFunction(data, listType) {
             </div>
         `
 
-//5aae312ee3534b03981f6521
     }
 
     if (listType === "artists") {
@@ -407,7 +403,7 @@ async function myFunction(data, listType) {
         modal.style.display = "none";
     })
 
-    createVoting(data._id);
+    createVoting(data._id, listType);
 
     var trackList = document.getElementById('trackList');
     var listElement = '';

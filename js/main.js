@@ -37,26 +37,25 @@ function fetchComments(id) {
 }
 
 function displayComments(value) {
-    console.log(value)
-    var commentHtmlBlock = ''
+    //var commentsArray = []
+    console.log(value);
+    var commentHtmlBlock = '';
     
     if (value === undefined || value.length == 0) {
-        commentHtmlBlock = `
-            <p> No comments yet </p>
-            `
+        commentHtmlBlock =`
+            <p class="comment"> No comments yet </p>
+        `
     }
-    
     else {
-    for (let comment of value) {
-        
-        commentHtmlBlock += `
-            <p> ${comment.body} </p>
-            <p> ${comment.username}</p>
+        for (let comment of value) {   
+            //commentsArray.push(mumma.body)
+            commentHtmlBlock += `
+                <p> ${comment.username}</p>
+                <p class="comment"> ${comment.body} </p>   
             `
+        }
     }
-    }
-    return commentHtmlBlock
-    
+    return commentHtmlBlock;
 }
 
 const browseArtists = document.getElementById('browseArtists');
@@ -75,17 +74,13 @@ browseAlbums.addEventListener('click', function (){
             })
 })
 
-
-// // Fetches artists, limited to 9
-// fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
-//     .then((response) => response.json())
-//     .then((artists) => {
-//         artist = artists;
-//         setTimeout(function () {
-//             View.displayArtists(artist);
-//         }, 1000);
-//         console.log(artist);
-//     });
+const browsePlaylists = document.getElementById('browsePlaylists');
+browsePlaylists.addEventListener('click', function (){
+    fetchPlaylists('18')
+    .then(value => {
+        View.displayAllPlaylists(value);
+            })
+})
 
 
 function addEventListener(listType, divType, looplength) {
@@ -113,38 +108,32 @@ const View = {
         let htmlBlock = '';
 
         for (i = 0; i < albumsLimited.length; i++) {
-            if (albumsLimited[i].coverImage === "" ||
-                albumsLimited[i].coverImage === null ||
-                albumsLimited[i].coverImage === undefined
-            ) {
-                htmlBlock += `
-                    <div class="albums" id="albums${[i]}" value="${albumsLimited[i]._id}">
-                        <img src="images/noimage.jpg" />
-                        <div class="albumInfo">
-                            <h4> ${albumsLimited[i].title} </h4>
-                            <h4> (${albumsLimited[i].releaseDate}) </h4>
-                            <p> ${albumsLimited[i].artists[0].name} </p>
-                            <p id="spotifyLink">
-                                <a href="${albumsLimited[i].spotifyURL}" target="_blank">Listen on Spotify</a>
-                            </p>
-                        </div>
-                    </div>
+            htmlBlock += `
+                <div class="albums" id="albums${[i]}" value="${albumsLimited[i]._id}">
                 `
-            } else {
-                htmlBlock += `
-                    <div class="albums" id="albums${[i]}" value="${albumsLimited[i]._id}">
-                        <img src="${albumsLimited[i].coverImage}" />
-                        <div class="albumInfo">
-                            <h4> ${albumsLimited[i].title} </h4>
-                            <h4> (${albumsLimited[i].releaseDate}) </h4>
-                            <p> ${albumsLimited[i].artists[0].name} </p>
-                            <p id="spotifyLink">
-                                <a href="${albumsLimited[i].spotifyURL}" target="_blank">Listen on Spotify</a>
-                            </p>
-                        </div>
+                if (albumsLimited[i].coverImage === "" ||
+                    albumsLimited[i].coverImage === null ||
+                    albumsLimited[i].coverImage === undefined
+                ) {
+                    htmlBlock +=`
+                        <img src="images/noimage.jpg" alt="No image available" />
+                    `
+                } else {
+                    htmlBlock +=`
+                        <img src="${albumsLimited[i].coverImage}" alt="Cover image" />
+                    `
+                }
+                htmlBlock +=`
+                    <div class="albumInfo">
+                        <h4> ${albumsLimited[i].title} </h4>
+                        <h4> (${albumsLimited[i].releaseDate}) </h4>
+                        <p> ${albumsLimited[i].artists[0].name} </p>
+                        <p id="spotifyLink">
+                            <a href="${albumsLimited[i].spotifyURL}" target="_blank">Listen on Spotify</a>
+                        </p>
                     </div>
-                `
-            }
+                </div>
+            `
         }
         albumWrapper.innerHTML = htmlBlock;
         addEventListener("albums", "albums", 6);
@@ -162,7 +151,20 @@ const View = {
         for (i = 0; i < albums.length; i++) {
             htmlBlock +=`
                 <div class="artists" id="albums${[i]}" value="${albums[i]._id}">
-                    <img src="${albums[i].coverImage}" />
+                `
+                if (albums[i].coverImage === "" ||
+                    albums[i].coverImage === null ||
+                    albums[i].coverImage === undefined
+                ) {
+                    htmlBlock +=`
+                        <img src="images/noimage.jpg" alt="No image available" />
+                    `
+                } else {
+                    htmlBlock +=`
+                        <img src="${albums[i].coverImage}" alt="Cover image" />
+                    `
+                }
+                htmlBlock +=`
                     <div class="albumInfo">
                         <h4> ${albums[i].title} </h4>
                         <h4>(${albums[i].genres[0]}) </h4>
@@ -182,36 +184,71 @@ const View = {
         const playlistWrapper = document.getElementById('playlistWrapper');
         let htmlBlock = '';
         for (i = 0; i < playlists.length; i++) {
-            if (playlists[i].coverImage === "" ||
-                playlists[i].coverImage === null ||
-                playlists[i].coverImage === undefined
-            ) {
-                htmlBlock += `
+            htmlBlock +=`
                 <div class="playlists" id="playlists${[i]}" value="${playlists[i]._id}">
-                    <img src="images/noimage.jpg" />
-                    <div class="playlistInfo">
+            `
+            if (playlists[i].coverImage === '' || 
+                playlists[i].coverImage === undefined || 
+                playlists[i].coverImage === null
+            ) {
+                htmlBlock +=`
+                    <img src="images/noimage.jpg" alt="No image" />
+                `
+            } else {
+                htmlBlock +=`
+                    <img src="${playlists[i].coverImage}" />
+                `
+            }
+            htmlBlock +=` 
+                    <div class="albumInfo">
                         <h4> ${playlists[i].title} </h4>
                         <p> ${playlists[i].createdBy} </p>
                     </div>
                 </div>
             `
-
-            } else {
-                htmlBlock += `
-                    <div class="playlists" id="playlists${[i]}" value="${playlists[i]._id}">
-                        <img src="${playlists[i].coverImage}" />
-                        <div class="playlistInfo">
-                            <h4> ${playlists[i].title} </h4>
-                            <p> ${playlists[i].createdBy} </p>
-                        </div>
-                    </div>
-                `
-            }
-
         }
         playlistWrapper.innerHTML = htmlBlock;
         addEventListener("playlists", "playlists", 6);
 
+    },
+    displayAllPlaylists: function (playlists) {
+        View.hideNavigation();
+        View.scrollToMain();
+        document.getElementById("navigation").style.width = "0";
+        let htmlBlock =`
+            <h3>Playlists</h3>
+            <p>Try to find one great playlists and you'll win a cookie</p>
+            <div id="playlistWrapper" class="playlistWrapper">
+        `
+        for (i = 0; i < playlists.length; i++) {
+            htmlBlock +=`
+                <div class="playlists" id="playlists${[i]}" value="${playlists[i]._id}">
+            `
+            if (playlists[i].coverImage === '' || 
+                playlists[i].coverImage === undefined || 
+                playlists[i].coverImage === null
+            ) {
+                htmlBlock +=`
+                    <img src="images/noimage.jpg" alt="No image" />
+                `
+            } else {
+                htmlBlock +=`
+                    <img src="${playlists[i].coverImage}" />
+                `
+            }
+            htmlBlock +=` 
+                    <div class="albumInfo">
+                        <h4> ${playlists[i].title} </h4>
+                        <p> ${playlists[i].createdBy} </p>
+                    </div>
+                </div>
+            `
+        }
+        htmlBlock +=`
+        </div>
+        `
+        mainWrapper.innerHTML = htmlBlock;
+        addEventListener("playlists", "playlists", playlists.length);
     },
     // Display artists
     displayArtists: function (artist) {
@@ -226,7 +263,20 @@ const View = {
         for (i = 0; i < artist.length; i++) {
             htmlBlock += `
                 <div class="artists" id="artists${[i]}" value="${artist[i]._id}">
-                    <img src="${artist[i].coverImage}" />
+                `
+                if (artist[i].coverImage === '' || 
+                    artist[i].coverImage === undefined || 
+                    artist[i].coverImage === null
+                ) {
+                    htmlBlock +=`
+                        <img src="images/noimage.jpg" alt="No image" />
+                    `
+                } else {
+                    htmlBlock +=`
+                        <img src="${artist[i].coverImage}" />
+                    `
+                }
+                htmlBlock +=` 
                     <div class="artistInfo">
                         <h4> ${artist[i].name} </h4>
                         <h4>(${artist[i].genres[0]}) </h4>
@@ -342,33 +392,32 @@ async function myFunction(data, listType) {
     }
 
     if (listType === "playlists") {
-        htmlBlock = `
+        htmlBlock =`
             <div id="modalPadding">
                 <div class="closeModal">
                     <img id="closeModal" src="images/close-black.svg" alt="Close" />
                 </div>
-                <div class="modalPlaylistWrapper">
-                    <div class="playlistCover">
-                        <img src="${data.coverImage}" alt="Playlist cover" />
-                    </div>
-                    <div class="modalPlaylistInfo">
-                        <h1>${data.title}</h1>
-                        <h2>${data.createdBy}</h2>
-
-                        <h3>Rating: 
-                        ${rating}</h3>
-                        <div id= "rating"> </div>
-                        <ul id= "trackList"> </ul>
-                        <div id="playListComments">
-                        ${await fetchComments(data._id)}
+                <div class="playlistContainer">
+                    <div class="modalPlaylistWrapper">
+                        <div class="playlistCover">
+                            <img src="${data.coverImage}" alt="Playlist cover" />
                         </div>
-
-
+                        <div class="modalPlaylistInfo">
+                            <h1>${data.title}</h1>
+                            <h2>${data.createdBy}</h2>
+                            <h3>Rating: 
+                            ${rating}</h3>
+                            <div id= "rating"> </div>
+                            <ul id= "trackList"> </ul>
+                        </div>
+                    </div>
+                    <div id="playListComments">
+                        <h2>Comments:</h2>
+                        ${await fetchComments(data._id)}
                     </div>
                 </div>
             </div>
         `
-
     }
 
     if (listType === "artists") {

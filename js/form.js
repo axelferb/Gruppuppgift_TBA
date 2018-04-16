@@ -46,7 +46,7 @@ const model = {
     fetchTrack: function () {
         // Fetch all tracks.
         function fetchTracks() {
-            return fetch('https://folksa.ga/api/tracks?sort=desc&limit=1000&key=flat_eric')
+            return fetch('https://folksa.ga/api/tracks?sort=desc&limit=10000&key=flat_eric')
                 .then((response) => response.json())
         }
 
@@ -65,7 +65,6 @@ const model = {
                         loopedTrack.style.color = "#fff";
                         loopedTrack.style.backgroundColor = "#4e2791";
                         trackArray.push(this.id);
-                        console.log(trackArray);
                     })
                 }
             }
@@ -191,9 +190,6 @@ const model = {
                 }
             })
             .then((response) => response.json())
-            .then((artist) => {
-                console.log(artist);
-            });
     }
 }
 // What to replace the innerHTML on index with!
@@ -356,7 +352,6 @@ addArtistButton.addEventListener("click", function () {
     // Sends new artist to API when button is 
     addArtistForm.addEventListener("submit", function (e) {
         model.submitNewArtist()
-            .then(console.log)
         e.preventDefault();
     });
 });
@@ -376,7 +371,6 @@ addAlbumButton.addEventListener("click", function () {
     // Submits new Album.
     addAlbumForm.addEventListener("submit", function (e) {
         model.submitNewAlbum()
-            .then(console.log)
         e.preventDefault();
     });
 });
@@ -393,7 +387,6 @@ addTrackButton.addEventListener("click", function () {
     // Submits new track.
     addTrackForm.addEventListener("submit", function (e) {
         model.submitNewTrack()
-            .then(console.log)
         e.preventDefault();
         document.getElementById('trackTitle').value = '';
     });
@@ -407,7 +400,6 @@ addPlaylistButton.addEventListener("click", function () {
     playlistSubmit.addEventListener("submit", function (e) {
         e.preventDefault();
         model.submitNewPlaylist()
-            .then(console.log)
         document.getElementById("playlistTitle").value = "";
     });
 })
@@ -420,7 +412,6 @@ deleteButton.addEventListener("click", function () {
     deleteArtistForm.addEventListener("submit", function (e) {
         const artistID = document.getElementById("artistID");
         e.preventDefault();
-        console.log(artistID.value);
         model.deleteItem('artists', artistID.value);
         document.getElementById('artistID').value = '';
 
@@ -430,9 +421,7 @@ deleteButton.addEventListener("click", function () {
     const deleteAlbumForm = document.getElementById("deleteAlbumForm");
     deleteAlbumForm.addEventListener("submit", function (e) {
         const albumID = document.getElementById("albumID");
-
         e.preventDefault();
-        console.log(albumID.value);
         model.deleteItem('albums', albumID.value);
         document.getElementById('albumID').value = '';
     });
@@ -441,9 +430,7 @@ deleteButton.addEventListener("click", function () {
     const deleteTrackForm = document.getElementById("deleteTrackForm");
     deleteTrackForm.addEventListener("submit", function (e) {
         const trackID = document.getElementById("trackID");
-
         e.preventDefault();
-        console.log(trackID.value);
         model.deleteItem('tracks', trackID.value);
         document.getElementById('trackID').value = '';
     });
@@ -451,10 +438,8 @@ deleteButton.addEventListener("click", function () {
     // Deletes playlist by ID
     const deletePlaylistButton = document.getElementById("deletePlaylistButton");
     deletePlaylistButton.addEventListener("click", function (e) {
-        const playlistID = document.getElementById("playlistID");
-
+        const playlistID = document.getElementById("playlistID")
         e.preventDefault();
-        console.log(playlistID.value);
         model.deleteItem('playlists', playlistID.value);
         document.getElementById('playlistID').value = '';
     });

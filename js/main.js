@@ -4,31 +4,60 @@ function fetchAlbums(amount) {
 }
 
 fetchAlbums('6')
-.then(value => {
-    View.displayAlbumsLimited(value);
-        })
+    .then(value => {
+        View.displayAlbumsLimited(value);
+    })
 
 function fetchPlaylists(amount) {
+
     return fetch(`https://folksa.ga/api/playlists?limit=${amount}&sort=desc&key=flat_eric&populateArtists=true`)
         .then((response) => response.json())
 }
 
 fetchPlaylists('6')
-.then(value => {
-    View.displayPlaylists(value);
-        })
+    .then(value => {
+        View.displayPlaylists(value);
+    })
 
 function fetchArtists(amount) {
     return fetch(`https://folksa.ga/api/artists?limit=${amount}&sort=desc&key=flat_eric&populateArtists=true`)
         .then((response) => response.json())
 }
 
+
+
+function fetchComments(id) {
+    return fetch(` https://folksa.ga/api/playlists/${id}/comments?key=flat_eric`)
+        //return fetch(` https://folksa.ga/api/comments/${id}/?key=flat_eric`)
+        .then((response) => response.json())
+        .then(function (value) {
+            return displayComments(value);
+        })
+ 
+}
+
+function displayComments(value) {
+    //var commentsArray = []
+    console.log(value)
+    var commentHtmlBlock =''
+    for (let mumma of value) {
+
+        //commentsArray.push(mumma.body)
+        commentHtmlBlock += `
+            <p> ${mumma.body} </p>
+            `
+        console.log(mumma.body)
+    }
+    return commentHtmlBlock
+    
+}
+
 const browseArtists = document.getElementById('browseArtists');
-browseArtists.addEventListener('click', function (){
+browseArtists.addEventListener('click', function () {
     fetchArtists('6')
-    .then(value => {
-        View.displayArtists(value);
-            })
+        .then(value => {
+            View.displayArtists(value);
+        })
 })
 
 
@@ -122,6 +151,9 @@ const View = {
                     </div>
                 </div>
             `
+            
+
+            
         }
         playlistWrapper.innerHTML = htmlBlock;
         addEventListener("playlists", "playlists", 6);
@@ -134,13 +166,13 @@ const View = {
             behavior: "smooth"
         });
         document.getElementById("navigation").style.width = "0";
-        let htmlBlock =`
+        let htmlBlock = `
             <h3>Artists</h3>
             <p>All the happy campers in our catalogue</p>
             <div id="artistWrapper" class="artistWrapper">
         `
         for (i = 0; i < artist.length; i++) {
-            htmlBlock +=`
+            htmlBlock += `
                 <div class="artists" id="artists${[i]}" value="${artist[i]._id}">
                     <img src="${artist[i].coverImage}" />
                     <div class="artistInfo">
@@ -151,7 +183,7 @@ const View = {
                 </div>
             `
         }
-        htmlBlock +=`
+        htmlBlock += `
         </div>
         `
         mainWrapper.innerHTML = htmlBlock;
@@ -210,14 +242,22 @@ closeSideNav.addEventListener('click', function () {
 var modal = document.getElementById('myModal');
 
 //print out Single information
-function myFunction(data, listType) {
+async function myFunction(data, listType) {
     /* Modal content */
     modal.style.display = "block";
     var placeHolder = document.getElementById('modalContent')
+    var CommentsplaceHolder = document.getElementById('playListComments')
+    var rating = displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))
+    if (isNaN(rating)){
+        rating = 0;
+    }
+    console.log(rating)
     var htmlBlock = ''
-    if (listType === "albums") {
+        
     
-    htmlBlock =`
+    if (listType === "albums") {
+
+        htmlBlock = `
         <div id="modalPadding">
             <div class="closeModal">
                 <img id="closeModal" src="images/close-black.svg" alt="Close" />
@@ -232,17 +272,18 @@ function myFunction(data, listType) {
                     <h1>${data.title}</h1>
                     <h2>${data.artists[0].name}</h2>
                     <h3>Rating: 
-                    ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
+                    ${rating}</h3>
                     <div id= "rating"> </div>
                     <ul id= "songList"> </ul>
                 </div>
             </div>
         </div>
     `
+        
     }
-    
+
     if (listType === "playlists") {
-        htmlBlock =`
+        htmlBlock = `
             <div id="modalPadding">
                 <div class="closeModal">
                     <img id="closeModal" src="images/close-black.svg" alt="Close" />
@@ -255,17 +296,23 @@ function myFunction(data, listType) {
                         <h1>${data.title}</h1>
                         <h2>${data.createdBy}</h2>
                         <h3>Rating: 
-                        ${displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))}</h3>
+                        ${rating}</h3>
                         <div id= "rating"> </div>
                         <ul id= "songList"> </ul>
+                        <div id="playListComments">
+                        ${await fetchComments("5aae312ee3534b03981f6521")}
+                        </div>
+
                     </div>
                 </div>
             </div>
         `
+        
+        
     }
 
     if (listType === "artists") {
-        htmlBlock =`
+        htmlBlock = `
             <div id="modalPadding">
                 <img id="closeModal" src="images/close-black.svg" alt="Close" />
                 <div class="modalArtistWrapper">
@@ -285,13 +332,13 @@ function myFunction(data, listType) {
             </div>
         `
     }
-    
+
     /*
     <h1>${data.artists[0].name}</h1>
     <h2>(${data.genres[0]})</h2>
     */
-    
     placeHolder.innerHTML = htmlBlock;
+    
     const closeModal = document.getElementById('closeModal');
     closeModal.addEventListener('click', function () {
         modal.style.display = "none";
@@ -359,6 +406,7 @@ function searchArtist(list) {
     return titleList;
 
 }
+
 function createPlaceHolder() {
     modal.style.display = "block";
 
@@ -417,12 +465,12 @@ function printSearched(list, listDiv) {
                 </div>
             </div>
             `
-     /*   } else if (listDiv == "tracks") {
+        } else if (listDiv == "tracks") {
             htmlBlock += `
                 <h3>${list[i].title}</h3>
                 <p>${list[i].artists[0].name}</p>
        `
-       */
+
         } else if (listDiv == "albums") {
             htmlBlock += `
                 <div class="listAlbumContainer">

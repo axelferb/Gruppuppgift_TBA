@@ -306,6 +306,12 @@ const view = {
                 <label for="Author">Author:</label>
                 <input id="playlistAuthor" name="Author" type="text">
 
+                <label for="imageLink">Image URL:</label>
+                <input id="playlistImageLink" name="imageLink" type="text" placeholder="http://" />
+
+                <label for="Color">Color:</label>
+                <input id="playlistImageColor name="Color" type="text">
+                
                 <div id="playlistTrackWrapper"> </div>
 
                 <button id="playlistSubmit" type="submit">Submit</button>

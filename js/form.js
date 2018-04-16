@@ -4,7 +4,7 @@ const addAlbumButton = document.getElementById("addAlbum");
 const addTrackButton = document.getElementById("addTrack");
 const addPlaylistButton = document.getElementById("addPlaylist");
 const deleteButton = document.getElementById("deleteButton");
-const model = {
+const Model = {
     // Fetches artists and loops through them to use later in the HTML.
     fetchArtist: function () {
         function fetchArtists() {
@@ -201,7 +201,7 @@ const model = {
     }
 }
 
-const view = {
+const View = {
     hideNavigation: function () {
         document.getElementById("navigation").style.width = "0";
     },
@@ -357,22 +357,22 @@ const view = {
 }
 // Replaces the innerHTML with the form to create a Artist.
 addArtistButton.addEventListener("click", function () {
-    view.replaceArtistForm();
-    view.hideNavigation();
-    view.scrollToMain();
+    View.replaceArtistForm();
+    View.hideNavigation();
+    View.scrollToMain();
     const artistSubmit = document.getElementById("artistSubmit");
     // Sends new artist to API when button is 
     addArtistForm.addEventListener("submit", function (e) {
-        model.submitNewArtist()
+        Model.submitNewArtist()
         e.preventDefault();
     });
 });
 // What happens when you press "add new album".
 addAlbumButton.addEventListener("click", function () {
-    model.fetchArtist()
-    view.replaceAlbumForm();
-    view.hideNavigation();
-    view.scrollToMain();
+    Model.fetchArtist()
+    View.replaceAlbumForm();
+    View.hideNavigation();
+    View.scrollToMain();
     const albumTitle = document.getElementById("albumTitle");
     const albumArtist = document.getElementById("albumArtist");
     const albumRelease = document.getElementById("albumRelease");
@@ -382,52 +382,52 @@ addAlbumButton.addEventListener("click", function () {
     const albumSubmit = document.getElementById("albumSubmit");
     // Submits new Album.
     addAlbumForm.addEventListener("submit", function (e) {
-        model.submitNewAlbum()
+        Model.submitNewAlbum()
         e.preventDefault();
     });
 });
 // What happens when you press "add new track".
 addTrackButton.addEventListener("click", function () {
-    model.fetchArtist()
-    model.fetchAlbum()
-    view.replaceTrackForm();
-    view.hideNavigation();
-    view.scrollToMain();
+    Model.fetchArtist()
+    Model.fetchAlbum()
+    View.replaceTrackForm();
+    View.hideNavigation();
+    View.scrollToMain();
     const trackTitle = document.getElementById("trackTitle");
     const trackArtist = document.getElementById("trackArtist");
     const trackGenre = document.getElementById("trackGenre");
     const trackSubmit = document.getElementById("trackSubmit");
     // Submits new track.
     addTrackForm.addEventListener("submit", function (e) {
-        model.submitNewTrack()
+        Model.submitNewTrack()
         e.preventDefault();
         document.getElementById('trackTitle').value = '';
     });
 });
 // What happens when you press "add new playlist".
 addPlaylistButton.addEventListener("click", function () {
-    model.fetchTrack()
-    view.replacePlaylistForm()
-    view.hideNavigation()
-    view.scrollToMain()
+    Model.fetchTrack()
+    View.replacePlaylistForm()
+    View.hideNavigation()
+    View.scrollToMain()
     const playlistSubmit = document.getElementById("addPlaylistForm");
     playlistSubmit.addEventListener("submit", function (e) {
         e.preventDefault();
-        model.submitNewPlaylist()
+        Model.submitNewPlaylist()
         document.getElementById("playlistTitle").value = "";
     });
 })
 // What happens when you press "delete".
 deleteButton.addEventListener("click", function () {
-    view.replaceDeleteForm()
-    view.hideNavigation()
-    view.scrollToMain()
+    View.replaceDeleteForm()
+    View.hideNavigation()
+    View.scrollToMain()
     // Deletes artist by ID
     const deleteArtistForm = document.getElementById("deleteArtistForm");
     deleteArtistForm.addEventListener("submit", function (e) {
         const artistID = document.getElementById("artistID");
         e.preventDefault();
-        model.deleteItem('artists', artistID.value);
+        Model.deleteItem('artists', artistID.value);
         document.getElementById('artistID').value = '';
 
     });
@@ -437,7 +437,7 @@ deleteButton.addEventListener("click", function () {
     deleteAlbumForm.addEventListener("submit", function (e) {
         const albumID = document.getElementById("albumID");
         e.preventDefault();
-        model.deleteItem('albums', albumID.value);
+        Model.deleteItem('albums', albumID.value);
         document.getElementById('albumID').value = '';
     });
 
@@ -446,7 +446,7 @@ deleteButton.addEventListener("click", function () {
     deleteTrackForm.addEventListener("submit", function (e) {
         const trackID = document.getElementById("trackID");
         e.preventDefault();
-        model.deleteItem('tracks', trackID.value);
+        Model.deleteItem('tracks', trackID.value);
         document.getElementById('trackID').value = '';
     });
 
@@ -455,7 +455,7 @@ deleteButton.addEventListener("click", function () {
     deletePlaylistButton.addEventListener("click", function (e) {
         const playlistID = document.getElementById("playlistID")
         e.preventDefault();
-        model.deleteItem('playlists', playlistID.value);
+        Model.deleteItem('playlists', playlistID.value);
         document.getElementById('playlistID').value = '';
     });
 })

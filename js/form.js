@@ -347,7 +347,7 @@ addArtistButton.addEventListener("click", function () {
     view.scrollToMain();
     const artistSubmit = document.getElementById("artistSubmit");
     // Sends new artist to API when button is 
-    artistSubmit.addEventListener("click", function (e) {
+    addArtistForm.addEventListener("submit", function (e) {
         model.submitNewArtist()
             .then(console.log)
         e.preventDefault();
@@ -359,14 +359,6 @@ addAlbumButton.addEventListener("click", function () {
     view.replaceAlbumForm();
     view.hideNavigation();
     view.scrollToMain();
-    const artistSubmit = document.getElementById("artistSubmit");
-    const artistName = document.getElementById("artistName");
-    const artistGenre = document.getElementById("genre");
-    const artistCountry = document.getElementById("artistCountry");
-    const artistSpotifyUrl = document.getElementById("artistSpotifyUrl");
-    const artistImageLink = document.getElementById("artistImageLink");
-    const artistGender = document.getElementById("artistGender");
-    const artistDateBorn = document.getElementById("artistDateBorn");
     const albumTitle = document.getElementById("albumTitle");
     const albumArtist = document.getElementById("albumArtist");
     const albumRelease = document.getElementById("albumRelease");
@@ -375,7 +367,7 @@ addAlbumButton.addEventListener("click", function () {
     const albumImageLink = document.getElementById("albumImageLink");
     const albumSubmit = document.getElementById("albumSubmit");
     // Submits new Album.
-    albumSubmit.addEventListener("click", function (e) {
+    addAlbumForm.addEventListener("submit", function (e) {
         model.submitNewAlbum()
             .then(console.log)
         e.preventDefault();
@@ -387,27 +379,12 @@ addTrackButton.addEventListener("click", function () {
     view.replaceTrackForm();
     view.hideNavigation();
     view.scrollToMain();
-    const artistSubmit = document.getElementById("artistSubmit");
-    const artistName = document.getElementById("artistName");
-    const artistGenre = document.getElementById("genre");
-    const artistCountry = document.getElementById("artistCountry");
-    const artistSpotifyUrl = document.getElementById("artistSpotifyUrl");
-    const artistImageLink = document.getElementById("artistImageLink");
-    const artistGender = document.getElementById("artistGender");
-    const artistDateBorn = document.getElementById("artistDateBorn");
-    const albumTitle = document.getElementById("albumTitle");
-    const albumArtist = document.getElementById("albumArtist");
-    const albumRelease = document.getElementById("albumRelease");
-    const albumGenre = document.getElementById("albumGenre");
-    const albumSpotifyUrl = document.getElementById("albumSpotifyUrl");
-    const albumImageLink = document.getElementById("albumImageLink");
-    const albumSubmit = document.getElementById("albumSubmit");
     const trackTitle = document.getElementById("trackTitle");
     const trackArtist = document.getElementById("trackArtist");
     const trackGenre = document.getElementById("trackGenre");
     const trackSubmit = document.getElementById("trackSubmit");
     // Submits new track.
-    trackSubmit.addEventListener("click", function (e) {
+    addTrackForm.addEventListener("submit", function (e) {
         model.submitNewTrack()
             .then(console.log)
         e.preventDefault();
@@ -421,8 +398,6 @@ addPlaylistButton.addEventListener("click", function () {
     view.scrollToMain()
     const playlistSubmit = document.getElementById("addPlaylistForm");
     playlistSubmit.addEventListener("submit", function (e) {
-        e.stopImmediatePropagation();
-        e.stopPropagation();
         e.preventDefault();
         model.submitNewPlaylist()
             .then(console.log)
@@ -434,8 +409,8 @@ deleteButton.addEventListener("click", function () {
     view.hideNavigation()
     view.scrollToMain()
     // Deletes artist by ID
-    const deleteArtistButton = document.getElementById("deleteArtistButton");
-    deleteArtistButton.addEventListener("click", function (e) {
+    const deleteArtistForm = document.getElementById("deleteArtistForm");
+    deleteArtistForm.addEventListener("submit", function (e) {
         const artistID = document.getElementById("artistID");
         e.preventDefault();
         console.log(artistID.value);
@@ -445,8 +420,8 @@ deleteButton.addEventListener("click", function () {
     });
 
     // Deletes album by ID
-    const deleteAlbumButton = document.getElementById("deleteAlbumButton");
-    deleteAlbumButton.addEventListener("click", function (e) {
+    const deleteAlbumForm = document.getElementById("deleteAlbumForm");
+    deleteAlbumForm.addEventListener("submit", function (e) {
         const albumID = document.getElementById("albumID");
 
         e.preventDefault();
@@ -456,8 +431,8 @@ deleteButton.addEventListener("click", function () {
     });
 
     // Deletes track by ID
-    const deleteTrackButton = document.getElementById("deleteTrackButton");
-    deleteTrackButton.addEventListener("click", function (e) {
+    const deleteTrackForm = document.getElementById("deleteTrackForm");
+    deleteTrackForm.addEventListener("submit", function (e) {
         const trackID = document.getElementById("trackID");
 
         e.preventDefault();

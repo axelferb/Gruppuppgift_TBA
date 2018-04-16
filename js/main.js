@@ -37,6 +37,19 @@ const Fetch = {
             .then((response) => response.json())
     },
 
+    vote: function (ratingNumber, id, type) {
+        fetch(`https://folksa.ga/api/${type}/${id}/vote?key=flat_eric`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    rating: ratingNumber
+                })
+            })
+            .then((response) => response.json())
+    },
 }
 
 
@@ -240,7 +253,7 @@ const View = {
 
         let htmlBlock = '';
 
-        var rating = displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length));
+        var rating = Model.displayAverage(Model.calculateAverage(Model.calculateSum(data.ratings), data.ratings.length));
         if (isNaN(rating)) {
             rating = 0;
         }
@@ -326,7 +339,7 @@ const View = {
             modal.style.display = "none";
         })
     
-        createVoting(data._id, listType);
+        View.createVoting(data._id, listType);
     
         var trackList = document.getElementById('trackList');
         var listElement = '';
@@ -482,6 +495,22 @@ const View = {
             modal.style.display = "none";
         })
     }, 
+
+    createVoting: function (id, type) {
+        votingValue = 10;
+        for (i = 10; i > 0; i--) {
+            var ratingPlaceHolder = document.getElementById('rating');
+            var ratings = document.createElement("SPAN");
+            var ratingSymbol = document.createTextNode('⬤');
+    
+            ratings.appendChild(ratingSymbol);
+            ratings.addEventListener('click', Fetch.vote.bind(this, votingValue, id, type));
+    
+            ratingPlaceHolder.appendChild(ratings);
+    
+            votingValue -= 1;
+        }
+    },
 }
 
 const Model = {
@@ -529,6 +558,20 @@ const Model = {
             }
         }
         return titleList;
+    },
+    calculateSum: function (array) {
+        var sum = array.reduce((a, b) => a + b, 0);
+        return sum;
+    },
+    
+    calculateAverage: function (sum, arrayLength) {
+        average = sum / arrayLength;
+        return average;
+    },
+    
+    displayAverage: function (average) {
+        var display = parseFloat(average.toFixed(1));
+        return display;
     },
 }
 

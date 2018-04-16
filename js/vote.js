@@ -5,7 +5,6 @@ function calculateSum(array) {
 
 function calculateAverage(sum, arrayLength) {
     average = sum / arrayLength;
-    console.log(average);
     return average;
 }
 
@@ -30,18 +29,16 @@ function vote(ratingNumber, id, type) {
 
 function createVoting(id, type) {
     votingValue = 10;
-    //console.log(type)
     for (i = 10; i > 0; i--) {
-        var mumma = document.getElementById('rating');
+        var ratingPlaceHolder = document.getElementById('rating');
         var ratings = document.createElement("SPAN");
         var ratingSymbol = document.createTextNode('⬤');
 
         ratings.appendChild(ratingSymbol);
         ratings.addEventListener('click', vote.bind(this, votingValue, id, type));
 
-        mumma.appendChild(ratings);
+        ratingPlaceHolder.appendChild(ratings);
 
         votingValue -= 1
-
     }
 }

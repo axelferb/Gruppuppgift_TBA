@@ -33,13 +33,13 @@ function fetchComments(id) {
         .then(function (value) {
             return displayComments(value);
         })
- 
+
 }
 
 function displayComments(value) {
     //var commentsArray = []
     console.log(value)
-    var commentHtmlBlock =''
+    var commentHtmlBlock = ''
     for (let mumma of value) {
 
         //commentsArray.push(mumma.body)
@@ -49,7 +49,7 @@ function displayComments(value) {
         console.log(mumma.body)
     }
     return commentHtmlBlock
-    
+
 }
 
 const browseArtists = document.getElementById('browseArtists');
@@ -91,21 +91,19 @@ function fetchSingleItem(listType, ItemId) {
         });
 }
 
-function fetchSingleAlbum() {
-    console.log("Mumma");
-}
-
-
 const View = {
     // Diplays the 6 latest albums on the main page.
     displayAlbumsLimited: function (albumsLimited) {
-        const latestAlbumWrapper = document.getElementById('latestAlbumWrapper');
+        const albumWrapper = document.getElementById('albumWrapper');
         let htmlBlock = '';
 
         for (i = 0; i < albumsLimited.length; i++) {
-            if (albumsLimited[i].coverImage === "") {
+            if (albumsLimited[i].coverImage === "" ||
+                albumsLimited[i].coverImage === null ||
+                albumsLimited[i].coverImage === undefined
+            ) {
                 htmlBlock += `
-                    <div class="latestAlbum" id="latestAlbum${[i]}" value="${albumsLimited[i]._id}">
+                    <div class="albums" id="albums${[i]}" value="${albumsLimited[i]._id}">
                         <img src="images/noimage.jpg" />
                         <div class="albumInfo">
                             <h4> ${albumsLimited[i].title} </h4>
@@ -119,7 +117,7 @@ const View = {
                 `
             } else {
                 htmlBlock += `
-                    <div class="latestAlbum" id="latestAlbum${[i]}" value="${albumsLimited[i]._id}">
+                    <div class="albums" id="albums${[i]}" value="${albumsLimited[i]._id}">
                         <img src="${albumsLimited[i].coverImage}" />
                         <div class="albumInfo">
                             <h4> ${albumsLimited[i].title} </h4>
@@ -133,8 +131,8 @@ const View = {
                 `
             }
         }
-        latestAlbumWrapper.innerHTML = htmlBlock;
-        addEventListener("albums", "latestAlbum", 6);
+        albumWrapper.innerHTML = htmlBlock;
+        addEventListener("albums", "albums", 6);
 
     },
     // Diplays the playlists on the main page.
@@ -142,18 +140,32 @@ const View = {
         const playlistWrapper = document.getElementById('playlistWrapper');
         let htmlBlock = '';
         for (i = 0; i < playlists.length; i++) {
-            htmlBlock += `
+            if (playlists[i].coverImage === "" ||
+                playlists[i].coverImage === null ||
+                playlists[i].coverImage === undefined
+            ) {
+                htmlBlock += `
                 <div class="playlists" id="playlists${[i]}" value="${playlists[i]._id}">
-                    <img src="${playlists[i].coverImage}" />
+                    <img src="images/noimage.jpg" />
                     <div class="playlistInfo">
                         <h4> ${playlists[i].title} </h4>
                         <p> ${playlists[i].createdBy} </p>
                     </div>
                 </div>
             `
-            
 
-            
+            } else {
+                htmlBlock += `
+                    <div class="playlists" id="playlists${[i]}" value="${playlists[i]._id}">
+                        <img src="${playlists[i].coverImage}" />
+                        <div class="playlistInfo">
+                            <h4> ${playlists[i].title} </h4>
+                            <p> ${playlists[i].createdBy} </p>
+                        </div>
+                    </div>
+                `
+            }
+
         }
         playlistWrapper.innerHTML = htmlBlock;
         addEventListener("playlists", "playlists", 6);
@@ -247,42 +259,14 @@ async function myFunction(data, listType) {
     modal.style.display = "block";
     var placeHolder = document.getElementById('modalContent')
     var CommentsplaceHolder = document.getElementById('playListComments')
-    var rating = displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length))
-    if (isNaN(rating)){
+
+    let htmlBlock = '';
+
+    var rating = displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length));
+    if (isNaN(rating)) {
         rating = 0;
     }
-    console.log(rating)
-    var htmlBlock = ''
-        
-    
     if (listType === "albums") {
-
-        htmlBlock = `
-        <div id="modalPadding">
-            <div class="closeModal">
-                <img id="closeModal" src="images/close-black.svg" alt="Close" />
-            </div>
-            <div class="modalAlbumWrapper">
-                <div class="albumCover">
-                    <img src="${data.coverImage}" alt="Album cover" />
-                    <p><a href="${data.spotifyURL}" target="_blank">Listen on Spotify</a></p>
-                    <p id="year">(${data.releaseDate})</p>
-                </div>
-                <div class="modalAlbumInfo">
-                    <h1>${data.title}</h1>
-                    <h2>${data.artists[0].name}</h2>
-                    <h3>Rating: 
-                    ${rating}</h3>
-                    <div id= "rating"> </div>
-                    <ul id= "songList"> </ul>
-                </div>
-            </div>
-        </div>
-    `
-        
-    }
-
-    if (listType === "playlists") {
         htmlBlock = `
             <div id="modalPadding">
                 <div class="closeModal">
@@ -291,36 +275,66 @@ async function myFunction(data, listType) {
                 <div class="modalAlbumWrapper">
                     <div class="albumCover">
                         <img src="${data.coverImage}" alt="Album cover" />
+                        <p><a href="${data.spotifyURL}" target="_blank">Listen on Spotify</a></p>
+                        <p id="year">(${data.releaseDate})</p>
                     </div>
                     <div class="modalAlbumInfo">
                         <h1>${data.title}</h1>
+                        <h2>${data.artists[0].name}</h2>
+                        <h3>Rating: ${rating}</h3>
+                        <div id="rating"> </div>
+                        <ul id="trackList"> </ul>
+                    </div>
+                </div>
+            </div>
+        `
+
+    }
+
+    if (listType === "playlists") {
+        htmlBlock = `
+            <div id="modalPadding">
+                <div class="closeModal">
+                    <img id="closeModal" src="images/close-black.svg" alt="Close" />
+                </div>
+                <div class="modalPlaylistWrapper">
+                    <div class="playlistCover">
+                        <img src="${data.coverImage}" alt="Playlist cover" />
+                    </div>
+                    <div class="modalPlaylistInfo">
+                        <h1>${data.title}</h1>
                         <h2>${data.createdBy}</h2>
+
                         <h3>Rating: 
                         ${rating}</h3>
                         <div id= "rating"> </div>
-                        <ul id= "songList"> </ul>
+                        <ul id= "trackList"> </ul>
                         <div id="playListComments">
                         ${await fetchComments("5aae312ee3534b03981f6521")}
                         </div>
+
 
                     </div>
                 </div>
             </div>
         `
-        
-        
+
+
     }
 
     if (listType === "artists") {
         htmlBlock = `
             <div id="modalPadding">
-                <img id="closeModal" src="images/close-black.svg" alt="Close" />
+                <div class="closeModal">
+                    <img id="closeModal" src="images/close-black.svg" alt="Close" />
+                </div>
                 <div class="modalArtistWrapper">
                     <div class="modalArtistContainer">
                         <div class="artistInfoContainer">
                             <img src="${data.coverImage}" alt="Album cover" />
                             <div class="modalArtistInfo">
-                                
+                                <h1>${data.name}</h1>
+                                <h2>(${data.genres[0]})</h2>
                             </div>
                         </div>
                         <h3>Albums:</h3>  
@@ -333,12 +347,8 @@ async function myFunction(data, listType) {
         `
     }
 
-    /*
-    <h1>${data.artists[0].name}</h1>
-    <h2>(${data.genres[0]})</h2>
-    */
     placeHolder.innerHTML = htmlBlock;
-    
+
     const closeModal = document.getElementById('closeModal');
     closeModal.addEventListener('click', function () {
         modal.style.display = "none";
@@ -346,16 +356,29 @@ async function myFunction(data, listType) {
 
     createVoting(data._id);
 
-    var songList = document.getElementById('songList');
+    var trackList = document.getElementById('trackList');
     var listElement = '';
-    var songNumber = 1;
-    for (i = 0; i < data.tracks.length; i++) {
+    var trackNumber = 1;
 
-        listElement += `
-            <li> ${songNumber}. ${data.tracks[i].title}</li>
-        `
-        songNumber += 1
-        songList.innerHTML = listElement;
+    if (listType !== "playlists") {
+        for (i = 0; i < data.tracks.length; i++) {
+            listElement += `
+                <li>${trackNumber}. ${data.tracks[i].title}</li>
+            `
+            trackNumber += 1
+            trackList.innerHTML = listElement;
+        }
+    } else if (listType === "playlists") {
+        for (i = 0; i < data.tracks.length; i++) {
+            listElement += `
+                <li> 
+                    ${trackNumber}. ${data.tracks[i].title}
+                    (${data.tracks[i].artists[0].name})
+                </li>
+            `
+            trackNumber += 1
+            trackList.innerHTML = listElement;
+        }
     }
 }
 
@@ -373,7 +396,7 @@ document.onkeydown = function (e) {
 }
 
 function fetchSearched(type) {
-    return fetch(`https://folksa.ga/api/${type}?key=flat_eric&limit=200&populateArtists=true`)
+    return fetch(`https://folksa.ga/api/${type}?key=flat_eric&limit=1000&populateArtists=true`)
         .then((response) => response.json())
 }
 
@@ -404,7 +427,6 @@ function searchArtist(list) {
         }
     }
     return titleList;
-
 }
 
 function createPlaceHolder() {
@@ -413,17 +435,17 @@ function createPlaceHolder() {
     var placeHolder = document.getElementById('modalContent');
     var listFrame = `
         <div id="modalPadding">
-        <div class="closeModal">
-            <img id="closeModal" src="images/close-black.svg" alt="Close" />
-        </div>
-        <h2 id="playlistHeader">Playlists:</h2>    
-        <div id="playlists"> </div>
-        <h2>Tracks:</h2>
-        <div id="tracks"> </div>
-        <h2>Albums:</h2>
-        <div id="albums"> </div>
-        <h2>Artists:</h2>
-        <div id="artists"> </div>
+            <div class="closeModal">
+                <img id="closeModal" src="images/close-black.svg" alt="Close" />
+            </div>
+            <h2 id="playlistHeader">Playlists:</h2>    
+            <div id="playlists"> </div>
+            <h2>Tracks:</h2>
+            <div id="tracks"> </div>
+            <h2>Albums:</h2>
+            <div id="albums"> </div>
+            <h2>Artists:</h2>
+            <div id="artists"> </div>
         </div>
     `
     placeHolder.innerHTML = listFrame;
@@ -457,18 +479,19 @@ function printSearched(list, listDiv) {
     for (i = 0; i < list.length; i++) {
         if (listDiv == "playlists") {
             htmlBlock += `
-            <div class="listAlbumContainer">
-                <img src="${list[i].coverImage}" alt="Album cover" />
-                <div class="listAlbumInfo">
-                    <h3>${list[i].title}</h3>
-                    <p>${list[i].createdBy}</p>
+                <div class="listAlbumContainer">
+                    <img src="${list[i].coverImage}" alt="Album cover" />
+                    <div class="listAlbumInfo">
+                        <h3>${list[i].title}</h3>
+                        <p>${list[i].createdBy}</p>
+                    </div>
                 </div>
-            </div>
             `
         } else if (listDiv == "tracks") {
             htmlBlock += `
                 <h3>${list[i].title}</h3>
                 <p>${list[i].artists[0].name}</p>
+
        `
 
         } else if (listDiv == "albums") {

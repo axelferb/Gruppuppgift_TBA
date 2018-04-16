@@ -2,133 +2,7 @@ body {
     margin: 0;
     font-family: 'Apercu-mono', monospace;
     color: #232323;
-    font-weight: 300;
-}
-
-#navbar {
-    width: 100%;
-    padding: 25px 0;
-    background-color: transparent;
-    position: fixed;
-    z-index: 3;
-    transition: background-color 800ms;
-    display: flex;
-    justify-content: center;
-    .navContainer { 
-        padding: 0 25px;
-        width: 100%;
-        max-width: 1200px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    #openSideNav {
-        height: 50px;
-        cursor: pointer;
-    }
-    #navbarLogo {
-        width: 120px;
-    }
-}
-
-.sidenav {
-    width: 0;
-    height: 100%;
-    position: fixed;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    background-color: #000;
-    overflow-x: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    #closeSideNav {
-        @extend #openSideNav;
-    }
-    #searchBar {
-        margin-top: 40px;
-        padding-left: 15px;
-        width: 250px;
-        height: 35px;
-        font-family: $mainFont;
-        font-size: .8rem;
-        letter-spacing: .02rem;
-        border: 0;
-        border-radius: 15px;
-    }
-    #searchBar:focus {
-        outline: 0;
-    }
-    a {
-        color: #fff;
-        text-decoration: none;
-        display: inline-block;
-    }
-    a:after {
-        display: block;
-        content: '';
-        border-bottom: 2px #fff solid;  
-        transform: scaleX(0);  
-        transition: transform 250ms ease-in-out;
-    }
-    a:hover:after {
-        transform: scaleX(1);
-    }
-}
-
-.sidenav .close {
-    position: absolute;
-    top: 24px;
-    right: 29px;
-}
-
-.browseDropDown,
-.addDropDown {
     text-align: center;
-    .browseDropButton,
-    .addDropButton {
-        padding: 0;
-        font-family: $mainFont;
-        font-size: 1rem;
-        color: #fff;
-        background-color: transparent;
-        border: 0;
-        border-bottom: 2px #fff solid;
-    }
-    #browseDropDownContent,
-    #addDropDownContent {
-        margin: 21px 0;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            li {
-                width: 100%;
-                margin: 5px 0 10px 0;
-            }
-            span {
-                color: #fff;
-                text-decoration: none;
-                display: inline-block;
-                cursor: pointer;
-            }
-            span:after {
-                display: block;
-                content: '';
-                border-bottom: 2px #fff solid;  
-                transform: scaleX(0);  
-                transition: transform 250ms ease-in-out;
-            }
-            span:hover:after {
-                transform: scaleX(1);
-            }
-        }
-    }
 }
 
 .hero {
@@ -136,7 +10,6 @@ body {
     height: 500px;
     background-color: #4e2791;
     background-image: $backgroundPattern;
-    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -153,27 +26,36 @@ body {
         }
         p {
             margin: 0;
-            font-family: 'Apercu-light', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 100;
+            font-family: $mainFont;
             color: #fff;
         }
     }
 }
 
-.playlistHero {
-    @extend .hero;
-    padding: 100px 40px 40px 40px;
-    height: 300px;
-    background-image: linear-gradient(to left, #a18cd1 0%, #fbc2eb 100%);
-    justify-content: flex-end;
-    align-items: flex-start;
-    h2 {
-        font-size: 6rem;
+.mainWrapper {
+    padding: 40px 20px;
+    transition: padding 3s;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    h3 {
+        margin: 0;
+        font-family: $headerFont;
+        font-size: 3rem;
     }
     p {
-        margin: 30px 0 0 0;
-        font-size: 1rem;
+        margin-top: 10px;
+        line-height: 1.5rem;
+    }
+}
+
+.loadingWrapper {
+    #loadingImage {
+        margin-top: 20px;
+        width: 115px;
+        -webkit-animation: spin 1s linear infinite;
+                animation: spin 1s linear infinite;
     }
 }
 
@@ -198,39 +80,10 @@ body {
         color: #4e2791;
         position: absolute;
     }
-
 }
 
-.mainWrapper {
-    padding: 40px 20px;
-    transition: padding 3s;
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    h3 {
-        margin: 0;
-        font-family: $headerFont;
-        font-size: 3rem;
-    }
-    p {
-        text-align: center;
-        line-height: 1.5rem;
-    }
-}
-
-.loadingWrapper {
-    text-align: center;
-    #loadingImage {
-        margin-top: 20px;
-        width: 115px;
-        -webkit-animation: spin 1s linear infinite;
-                animation: spin 1s linear infinite;
-    }
-}
-
+.albumWrapper,
 .playlistWrapper,
-.latestAlbumWrapper,
 .artistWrapper {
     margin-top: 20px;
     width: 100%;
@@ -240,12 +93,12 @@ body {
     justify-content: space-around;
 }
 
-.latestAlbumWrapper {
+.albumWrapper {
     margin-bottom: 60px;
 }
 
 .artists,
-.latestAlbum,
+.albums,
 .playlists {
     margin: 20px;
     background-color: #f2f2f2;
@@ -256,9 +109,9 @@ body {
     .artistInfo,
     .albumInfo,
     .playlistInfo { 
+        padding: 20px;
         width: 300px;
         height: 300px;
-        padding: 20px;
         color: #fff;
         text-align: center;
         background-color: hsla(262, 58%, 36%, 0.8);
@@ -306,9 +159,9 @@ body {
     }
 }
 
-.latestAlbum:hover,
+.albums:hover,
 .artists:hover,
-.playlist:hover {
+.playlists:hover {
     .albumInfo,
     .artistInfo,
     .playlistInfo {
@@ -321,11 +174,13 @@ body {
 #deleteArtistForm,
 #addAlbumForm,
 #deleteAlbumForm,
-#addSongForm,
-#deleteSongForm {
+#addTrackForm,
+#deleteTrackForm,
+#deletePlaylistForm {
     margin-top: 40px;
     display: flex;
     flex-direction: column;
+    text-align: left;
     label {
         font-size: .8rem;
         margin-bottom: 5px;
@@ -370,6 +225,8 @@ body {
 }
 
 footer {
+    color: #fff;
+    text-align: left;
     background-color: #000;
     background-image: $backgroundPattern;
     display: flex;
@@ -387,11 +244,7 @@ footer {
         }
         ul {
             margin: 0;
-            color: #fff;
             list-style: none;
-            li {
-                margin: 0px;
-            }
             h4 {
                 margin: 0 0 10px 0;
                 font-family: $headerFont;

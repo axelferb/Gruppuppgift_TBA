@@ -4,31 +4,60 @@ function fetchAlbums(amount) {
 }
 
 fetchAlbums('6')
-.then(value => {
-    View.displayAlbumsLimited(value);
-        })
+    .then(value => {
+        View.displayAlbumsLimited(value);
+    })
 
 function fetchPlaylists(amount) {
+
     return fetch(`https://folksa.ga/api/playlists?limit=${amount}&sort=desc&key=flat_eric&populateArtists=true`)
         .then((response) => response.json())
 }
 
 fetchPlaylists('6')
-.then(value => {
-    View.displayPlaylists(value);
-        })
+    .then(value => {
+        View.displayPlaylists(value);
+    })
 
 function fetchArtists(amount) {
     return fetch(`https://folksa.ga/api/artists?limit=${amount}&sort=desc&key=flat_eric&populateArtists=true`)
         .then((response) => response.json())
 }
 
+
+
+function fetchComments(id) {
+    return fetch(` https://folksa.ga/api/playlists/${id}/comments?key=flat_eric`)
+        //return fetch(` https://folksa.ga/api/comments/${id}/?key=flat_eric`)
+        .then((response) => response.json())
+        .then(function (value) {
+            return displayComments(value);
+        })
+
+}
+
+function displayComments(value) {
+    //var commentsArray = []
+    console.log(value)
+    var commentHtmlBlock = ''
+    for (let mumma of value) {
+
+        //commentsArray.push(mumma.body)
+        commentHtmlBlock += `
+            <p> ${mumma.body} </p>
+            `
+        console.log(mumma.body)
+    }
+    return commentHtmlBlock
+
+}
+
 const browseArtists = document.getElementById('browseArtists');
-browseArtists.addEventListener('click', function (){
+browseArtists.addEventListener('click', function () {
     fetchArtists('6')
-    .then(value => {
-        View.displayArtists(value);
-            })
+        .then(value => {
+            View.displayArtists(value);
+        })
 })
 
 const browseAlbums = document.getElementById('browseAlbums');
@@ -77,10 +106,10 @@ const View = {
         let htmlBlock = '';
 
         for (i = 0; i < albumsLimited.length; i++) {
-            if (albumsLimited[i].coverImage === "" || 
-                albumsLimited[i].coverImage === null || 
+            if (albumsLimited[i].coverImage === "" ||
+                albumsLimited[i].coverImage === null ||
                 albumsLimited[i].coverImage === undefined
-            ){
+            ) {
                 htmlBlock += `
                     <div class="albums" id="albums${[i]}" value="${albumsLimited[i]._id}">
                         <img src="images/noimage.jpg" />
@@ -146,10 +175,10 @@ const View = {
         const playlistWrapper = document.getElementById('playlistWrapper');
         let htmlBlock = '';
         for (i = 0; i < playlists.length; i++) {
-            if (playlists[i].coverImage === "" || 
-                playlists[i].coverImage === null || 
+            if (playlists[i].coverImage === "" ||
+                playlists[i].coverImage === null ||
                 playlists[i].coverImage === undefined
-            ){
+            ) {
                 htmlBlock += `
                 <div class="playlists" id="playlists${[i]}" value="${playlists[i]._id}">
                     <img src="images/noimage.jpg" />
@@ -159,6 +188,7 @@ const View = {
                     </div>
                 </div>
             `
+
             } else {
                 htmlBlock += `
                     <div class="playlists" id="playlists${[i]}" value="${playlists[i]._id}">
@@ -170,6 +200,7 @@ const View = {
                     </div>
                 `
             }
+
         }
         playlistWrapper.innerHTML = htmlBlock;
         addEventListener("playlists", "playlists", 6);
@@ -180,13 +211,13 @@ const View = {
         View.hideNavigation();
         View.scrollToMain();
         document.getElementById("navigation").style.width = "0";
-        let htmlBlock =`
+        let htmlBlock = `
             <h3>Artists</h3>
             <p>All the happy campers in our catalogue</p>
             <div id="artistWrapper" class="artistWrapper">
         `
         for (i = 0; i < artist.length; i++) {
-            htmlBlock +=`
+            htmlBlock += `
                 <div class="artists" id="artists${[i]}" value="${artist[i]._id}">
                     <img src="${artist[i].coverImage}" />
                     <div class="artistInfo">
@@ -197,7 +228,7 @@ const View = {
                 </div>
             `
         }
-        htmlBlock +=`
+        htmlBlock += `
         </div>
         `
         mainWrapper.innerHTML = htmlBlock;
@@ -266,18 +297,20 @@ closeSideNav.addEventListener('click', function () {
 var modal = document.getElementById('myModal');
 
 //print out Single information
-function myFunction(data, listType) {
+async function myFunction(data, listType) {
     /* Modal content */
     modal.style.display = "block";
     var placeHolder = document.getElementById('modalContent')
+    var CommentsplaceHolder = document.getElementById('playListComments')
+
     let htmlBlock = '';
 
     var rating = displayAverage(calculateAverage(calculateSum(data.ratings), data.ratings.length));
-    if (isNaN(rating)){
+    if (isNaN(rating)) {
         rating = 0;
     }
     if (listType === "albums") {
-        htmlBlock =`
+        htmlBlock = `
             <div id="modalPadding">
                 <div class="closeModal">
                     <img id="closeModal" src="images/close-black.svg" alt="Close" />
@@ -298,10 +331,11 @@ function myFunction(data, listType) {
                 </div>
             </div>
         `
+
     }
 
     if (listType === "playlists") {
-        htmlBlock =`
+        htmlBlock = `
             <div id="modalPadding">
                 <div class="closeModal">
                     <img id="closeModal" src="images/close-black.svg" alt="Close" />
@@ -313,17 +347,26 @@ function myFunction(data, listType) {
                     <div class="modalPlaylistInfo">
                         <h1>${data.title}</h1>
                         <h2>${data.createdBy}</h2>
-                        <h3>Rating: ${rating}</h3>
-                        <div id="rating"> </div>
-                        <ul id="trackList"> </ul>
+
+                        <h3>Rating: 
+                        ${rating}</h3>
+                        <div id= "rating"> </div>
+                        <ul id= "trackList"> </ul>
+                        <div id="playListComments">
+                        ${await fetchComments("5aae312ee3534b03981f6521")}
+                        </div>
+
+
                     </div>
                 </div>
             </div>
         `
+
+
     }
 
     if (listType === "artists") {
-        htmlBlock =`
+        htmlBlock = `
             <div id="modalPadding">
                 <div class="closeModal">
                     <img id="closeModal" src="images/close-black.svg" alt="Close" />
@@ -348,6 +391,7 @@ function myFunction(data, listType) {
     }
 
     placeHolder.innerHTML = htmlBlock;
+
     const closeModal = document.getElementById('closeModal');
     closeModal.addEventListener('click', function () {
         modal.style.display = "none";
@@ -361,7 +405,7 @@ function myFunction(data, listType) {
 
     if (listType !== "playlists") {
         for (i = 0; i < data.tracks.length; i++) {
-            listElement +=`
+            listElement += `
                 <li>${trackNumber}. ${data.tracks[i].title}</li>
             `
             trackNumber += 1
@@ -369,7 +413,7 @@ function myFunction(data, listType) {
         }
     } else if (listType === "playlists") {
         for (i = 0; i < data.tracks.length; i++) {
-            listElement +=`
+            listElement += `
                 <li> 
                     ${trackNumber}. ${data.tracks[i].title}
                     (${data.tracks[i].artists[0].name})
@@ -490,7 +534,9 @@ function printSearched(list, listDiv) {
             htmlBlock += `
                 <h3>${list[i].title}</h3>
                 <p>${list[i].artists[0].name}</p>
-            `
+
+       `
+
         } else if (listDiv == "albums") {
             htmlBlock += `
                 <div class="listAlbumContainer">

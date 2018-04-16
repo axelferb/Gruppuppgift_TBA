@@ -5,7 +5,7 @@ const addTrackButton = document.getElementById("addTrack");
 const addPlaylistButton = document.getElementById("addPlaylist");
 const deleteButton = document.getElementById("deleteButton");
 const model = {
-    // Creates a new artist to POST in API.
+    // Fetches artists and loops through them to use later in the HTML.
     fetchArtist: function () {
         function fetchArtists() {
             return fetch('https://folksa.ga/api/artists?sort=desc&limit=1000&key=flat_eric')
@@ -24,8 +24,8 @@ const model = {
         fetchArtists()
             .then(loopArtists);
     },
+    // Fetches albums and loops through them to use later in the HTML.
     fetchAlbum: function () {
-        // Fetch all albums.
         function fetchAlbums() {
             return fetch('https://folksa.ga/api/albums?sort=desc&limit=1000&key=flat_eric')
                 .then((response) => response.json())
@@ -43,8 +43,8 @@ const model = {
         fetchAlbums()
             .then(loopAlbums);
     },
+    // Fetches tracks and loops through them to use later in the HTML.
     fetchTrack: function () {
-        // Fetch all tracks.
         function fetchTracks() {
             return fetch('https://folksa.ga/api/tracks?sort=desc&limit=10000&key=flat_eric')
                 .then((response) => response.json())
@@ -58,8 +58,10 @@ const model = {
                     ${tracks[i].title} (${tracks[i].artists[0].name})
                 </p>
                 `
+                // Creates a empty array where the user puts the songs Id's selected below. 
                 trackArray = []
                 const loopedTracks = document.getElementsByClassName("loopedTracks");
+                // Loops through all tracks and adds a eventlistener to them so you can add songs to a playlist by just clicking the song desired.
                 for (let loopedTrack of loopedTracks) {
                     loopedTrack.addEventListener("click", function () {
                         loopedTrack.style.color = "#fff";
@@ -72,6 +74,7 @@ const model = {
         fetchTracks()
             .then(loopTracks)
     },
+    // Creates a template on what to send to the api when creating a new artist.
     submitNewArtist: function () {
         const artistSubmit = document.getElementById("artistSubmit");
         const artistName = document.getElementById("artistName");
@@ -103,6 +106,7 @@ const model = {
                 return newArtist;
             });
     },
+    // Creates a template on what to send to the api when creating a new album.
     submitNewAlbum: function () {
         const albumTitle = document.getElementById("albumTitle");
         const albumArtist = document.getElementById("albumArtist");
@@ -132,6 +136,7 @@ const model = {
                 return newAlbum;
             });
     },
+    // Creates a template on what to send to the api when creating a new track.
     submitNewTrack: function () {
         const trackTitle = document.getElementById("trackTitle");
         const trackArtist = document.getElementById("trackArtist");
@@ -156,6 +161,7 @@ const model = {
                 return newTrack;
             });
     },
+    // Creates a template on what to send to the api when creating a new playlist.
     submitNewPlaylist: function () {
         const playlistTitle = document.getElementById("playlistTitle");
         const playlistGenre = document.getElementById("playlistGenre");
@@ -182,6 +188,7 @@ const model = {
                 return newPlaylist;
             });
     },
+    // Handles all the deletes a user can make.
     deleteItem: function (param, id) {
         fetch(`https://folksa.ga/api/${param}/${id}?key=flat_eric`, {
                 method: 'DELETE',
@@ -193,7 +200,7 @@ const model = {
             .then((response) => response.json())
     }
 }
-// What to replace the innerHTML on index with!
+
 const view = {
     hideNavigation: function () {
         document.getElementById("navigation").style.width = "0";
@@ -204,7 +211,7 @@ const view = {
             behavior: "smooth"
         });
     },
-
+    // Replaces the htmlcontent on the page with the form to create a new artist.
     replaceArtistForm: function () {
         mainWrapper.innerHTML = `
         <h3>Add new artist</h3>
@@ -238,6 +245,7 @@ const view = {
         </form>
         `
     },
+    // Replaces the htmlcontent on the page with the form to create a new album.
     replaceAlbumForm: function () {
         mainWrapper.innerHTML = `
             <h3>Add new album</h3>
@@ -265,6 +273,7 @@ const view = {
             </form>
         `
     },
+    // Replaces the htmlcontent on the page with the form to create a new track.
     replaceTrackForm: function () {
         mainWrapper.innerHTML = `
             <h3>Add track</h3>
@@ -287,6 +296,7 @@ const view = {
             </form>
         `
     },
+    // Replaces the htmlcontent on the page with the form to create a new playlist.
     replacePlaylistForm: function () {
         mainWrapper.innerHTML = `
             <h3>Add playlist</h3>
@@ -310,6 +320,7 @@ const view = {
             </form>
         `
     },
+    // Replaces the htmlcontent on the page with the form to delete.
     replaceDeleteForm: function () {
         mainWrapper.innerHTML = `
             <h3>Clean up the API</h3>
@@ -356,7 +367,7 @@ addArtistButton.addEventListener("click", function () {
         e.preventDefault();
     });
 });
-// Replaces the innerHTML with the form to create a Artist.
+// What happens when you press "add new album".
 addAlbumButton.addEventListener("click", function () {
     model.fetchArtist()
     view.replaceAlbumForm();
@@ -375,6 +386,7 @@ addAlbumButton.addEventListener("click", function () {
         e.preventDefault();
     });
 });
+// What happens when you press "add new track".
 addTrackButton.addEventListener("click", function () {
     model.fetchArtist()
     model.fetchAlbum()
@@ -392,6 +404,7 @@ addTrackButton.addEventListener("click", function () {
         document.getElementById('trackTitle').value = '';
     });
 });
+// What happens when you press "add new playlist".
 addPlaylistButton.addEventListener("click", function () {
     model.fetchTrack()
     view.replacePlaylistForm()
@@ -404,6 +417,7 @@ addPlaylistButton.addEventListener("click", function () {
         document.getElementById("playlistTitle").value = "";
     });
 })
+// What happens when you press "delete".
 deleteButton.addEventListener("click", function () {
     view.replaceDeleteForm()
     view.hideNavigation()

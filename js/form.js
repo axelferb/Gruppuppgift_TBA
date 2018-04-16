@@ -2,6 +2,7 @@ const mainWrapper = document.getElementById("mainWrapper");
 const addArtistButton = document.getElementById("addArtist");
 const addAlbumButton = document.getElementById("addAlbum");
 const addTrackButton = document.getElementById("addTrack");
+const addPlaylistButton = document.getElementById("addPlaylist");
 const deleteButton = document.getElementById("deleteButton");
 const model = {
     // Creates a new artist to POST in API.
@@ -41,6 +42,33 @@ const model = {
         }
         fetchAlbums()
             .then(loopAlbums);
+    },
+    fetchTrack: function () {
+        // Fetch all Tracks.
+        function fetchTracks() {
+            return fetch('https://folksa.ga/api/tracks?sort=desc&limit=1000&key=flat_eric')
+                .then((response) => response.json())
+        }
+
+        function loopTracks(Tracks) {
+            for (i = 0; i < Tracks.length; i++) {
+                addPlaylistForm.innerHTML += `
+                <p class="loopedTracks" id="${Tracks[i]._id}">
+                ${Tracks[i].title.toUpperCase()} - ${Tracks[i].artists[0].name.toUpperCase()}
+                </p>
+                `
+                trackArray = []
+                const loopedTracks = document.getElementsByClassName("loopedTracks");
+                for (let loopedTrack of loopedTracks) {
+                    loopedTrack.addEventListener("click", function () {
+                        trackArray.push(this.id);
+                        console.log(trackArray);
+                    })
+                }
+            }
+        }
+        fetchTracks()
+            .then(loopTracks)
     },
     submitNewArtist: function () {
         const artistSubmit = document.getElementById("artistSubmit");
@@ -123,6 +151,34 @@ const model = {
             .then((response) => response.json())
             .then((newTrack) => {
                 return newTrack;
+            });
+    },
+    submitNewPlaylist: function () {
+        const playlistTitle = document.getElementById("playlistTitle");
+        const playlistGenre = document.getElementById("playlistGenre");
+        const playlistAuthor = document.getElementById("playlistAuthor");
+        const playlistTracks = document.getElementById("playlistTracks");
+        const playlistImageLink = document.getElementById("playlistImageLink");
+        const playlistImageColor = document.getElementById("playlistImageColor");
+        let newPlaylist = {
+            title: playlistTitle.value,
+            genres: playlistGenre.value,
+            createdBy: playlistAuthor.value,
+            tracks: trackArray.join(","),
+            // coverImage: playlistImageLink.value,
+            // coverImageColor: playlistImageColor.value
+        }
+        return fetch('https://folksa.ga/api/playlists?key=flat_eric', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newPlaylist),
+            })
+            .then((response) => response.json())
+            .then((newPlaylist) => {
+                return newPlaylist;
             });
     },
     deleteItem: function (param, id) {
@@ -230,6 +286,23 @@ const view = {
                 <label for="Genre">Genre:</label>
                 <input id="trackGenre" name="Genre" type="text">
                 <button id="trackSubmit" type="submit">Submit</button>
+            </form>
+        `
+    },
+    replacePlaylistForm: function () {
+        mainWrapper.innerHTML = `
+            <h3>Add playlist</h3>
+            <p>Add a new playlist to the API</p>
+            <form id="addPlaylistForm">
+                <label for="Title">Title:</label>
+                <input id="playlistTitle" name="Title" type="text">
+
+                <label for="Genre">Genre:</label>
+                <input id="playlistGenre" name="Genre" type="text">
+
+                <label for="Author">Author:</label>
+                <input id="playlistAuthor" name="Author" type="text">
+                <button id="playlistSubmit" type="submit">Submit</button>
             </form>
         `
     },
@@ -341,6 +414,21 @@ addTrackButton.addEventListener("click", function () {
         document.getElementById('trackTitle').value = '';
     });
 });
+addPlaylistButton.addEventListener("click", function () {
+    model.fetchTrack()
+    view.replacePlaylistForm()
+    view.hideNavigation()
+    view.scrollToMain()
+    const playlistSubmit = document.getElementById("addPlaylistForm");
+    playlistSubmit.addEventListener("submit", function (e) {
+        e.stopImmediatePropagation();
+        e.stopPropagation();
+        e.preventDefault();
+        model.submitNewPlaylist()
+            .then(console.log)
+        document.getElementById("playlistTitle").value = "";
+    });
+})
 deleteButton.addEventListener("click", function () {
     view.replaceDeleteForm()
     view.hideNavigation()
@@ -349,7 +437,6 @@ deleteButton.addEventListener("click", function () {
     const deleteArtistButton = document.getElementById("deleteArtistButton");
     deleteArtistButton.addEventListener("click", function (e) {
         const artistID = document.getElementById("artistID");
-
         e.preventDefault();
         console.log(artistID.value);
         model.deleteItem('artists', artistID.value);

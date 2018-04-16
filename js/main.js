@@ -69,7 +69,10 @@ const View = {
         let htmlBlock = '';
 
         for (i = 0; i < albumsLimited.length; i++) {
-            if (albumsLimited[i].coverImage === "") {
+            if (albumsLimited[i].coverImage === "" || 
+                albumsLimited[i].coverImage === null || 
+                albumsLimited[i].coverImage === undefined
+            ){
                 htmlBlock += `
                     <div class="albums" id="albums${[i]}" value="${albumsLimited[i]._id}">
                         <img src="images/noimage.jpg" />
@@ -108,7 +111,10 @@ const View = {
         const playlistWrapper = document.getElementById('playlistWrapper');
         let htmlBlock = '';
         for (i = 0; i < playlists.length; i++) {
-            if (playlists[i].coverImage === "") {
+            if (playlists[i].coverImage === "" || 
+                playlists[i].coverImage === null || 
+                playlists[i].coverImage === undefined
+            ){
                 htmlBlock += `
                 <div class="playlists" id="playlists${[i]}" value="${playlists[i]._id}">
                     <img src="images/noimage.jpg" />

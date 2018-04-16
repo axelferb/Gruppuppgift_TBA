@@ -160,6 +160,25 @@
     }
 }
 
+.playlistContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#playListComments {
+    width: 100%;
+    text-align: center;
+    h2 {
+        margin-bottom: 0;
+    }
+    .comment {
+        margin-bottom: 20px;
+        font-size: .8rem;
+    }
+}
+
 #tracks p {
     margin-bottom: 20px;
 }

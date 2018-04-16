@@ -1,9 +1,3 @@
-const mainWrapper = document.getElementById("mainWrapper");
-const addArtistButton = document.getElementById("addArtist");
-const addAlbumButton = document.getElementById("addAlbum");
-const addTrackButton = document.getElementById("addTrack");
-const addPlaylistButton = document.getElementById("addPlaylist");
-const deleteButton = document.getElementById("deleteButton");
 const formModel = {
     // Fetches artists and loops through them to use later in the HTML.
     fetchArtist: function () {

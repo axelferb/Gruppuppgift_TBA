@@ -28,7 +28,6 @@ const Fetch = {
         return fetch('https://folksa.ga/api/' + listType + '/' + ItemId + '?key=flat_eric')
             .then((response) => response.json())
             .then((data) => {
-                console.log(listType);
                 View.myFunction(data, listType)
             });
     },
@@ -397,7 +396,7 @@ const View = {
         }
     },
     printSearched: function (list, listDiv) {
-        const jumjum = document.getElementById(listDiv);
+        const searchPlaceHolder = document.getElementById(listDiv);
         let htmlBlock = '';
     
         for (i = 0; i < list.length; i++) {
@@ -412,14 +411,13 @@ const View = {
                     </div>
                 `
             } else if (listDiv == "tracks") {
-                htmlBlock += `
+                htmlBlock +=`
                     <h3>${list[i].title}</h3>
                     <p>${list[i].artists[0].name}</p>
     
-           `
-    
+                `
             } else if (listDiv == "albums") {
-                htmlBlock += `
+                htmlBlock +=`
                     <div class="listAlbumContainer">
                         <img src="${list[i].coverImage}" alt="Album cover" />
                         <div class="listAlbumInfo">
@@ -429,7 +427,7 @@ const View = {
                     </div>
                 `
             } else {
-                htmlBlock += `
+                htmlBlock +=`
                     <div class="listArtistContainer">
                         <img src="${list[i].coverImage}" alt="Artist image" />
                         <div class="listAlbumInfo">
@@ -438,10 +436,9 @@ const View = {
                         </div>
                     </div>
                 `
-                console.log(list.length)
             }
         }
-        jumjum.innerHTML = htmlBlock;
+        searchPlaceHolder.innerHTML = htmlBlock;
         Controller.addEventListener(listDiv, listDiv, list.length);
     },
 

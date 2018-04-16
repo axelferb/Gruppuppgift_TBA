@@ -70,6 +70,14 @@ browseArtists.addEventListener('click', function () {
         })
 })
 
+const browseAlbums = document.getElementById('browseAlbums');
+browseAlbums.addEventListener('click', function (){
+    fetchAlbums('18')
+    .then(value => {
+        View.displayAlbums(value);
+            })
+})
+
 
 // // Fetches artists, limited to 9
 // fetch('https://folksa.ga/api/artists?limit=9&sort=desc&key=flat_eric')
@@ -145,6 +153,33 @@ const View = {
         addEventListener("albums", "albums", 6);
 
     },
+    displayAlbums: function (albums) {
+        View.hideNavigation();
+        View.scrollToMain();
+        document.getElementById("navigation").style.width = "0";
+        let htmlBlock =`
+            <h3>Albums</h3>
+            <p>Browse through our awesome albums</p>
+            <div id="albumWrapper" class="albumWrapper">
+        `
+        for (i = 0; i < albums.length; i++) {
+            htmlBlock +=`
+                <div class="artists" id="albums${[i]}" value="${albums[i]._id}">
+                    <img src="${albums[i].coverImage}" />
+                    <div class="albumInfo">
+                        <h4> ${albums[i].title} </h4>
+                        <h4>(${albums[i].genres[0]}) </h4>
+                        <p> <a href="${albums[i].spotifyURL}" target="_blank">Listen on Spotify</a> </p>
+                    </div>
+                </div>
+            `
+        }
+        htmlBlock +=`
+        </div>
+        `
+        mainWrapper.innerHTML = htmlBlock;
+        addEventListener("albums", "albums", albums.length);
+    },
     // Diplays the playlists on the main page.
     displayPlaylists: function (playlists) {
         const playlistWrapper = document.getElementById('playlistWrapper');
@@ -183,10 +218,8 @@ const View = {
     },
     // Display artists
     displayArtists: function (artist) {
-        window.scrollTo({
-            top: 502,
-            behavior: "smooth"
-        });
+        View.hideNavigation();
+        View.scrollToMain();
         document.getElementById("navigation").style.width = "0";
         let htmlBlock = `
             <h3>Artists</h3>
@@ -210,7 +243,17 @@ const View = {
         `
         mainWrapper.innerHTML = htmlBlock;
         addEventListener("artists", "artists", artist.length);
-    }
+    },
+    // Styling functions
+    hideNavigation: function () {
+        document.getElementById("navigation").style.width = "0";
+    },
+    scrollToMain: function () {
+        window.scrollTo({
+            top: 502,
+            behavior: "smooth"
+        });
+    },
 }
 // Parallax and styling.
 function navbarShift() {

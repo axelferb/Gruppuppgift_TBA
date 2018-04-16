@@ -627,6 +627,7 @@ Fetch.fetchPlaylists('6')
     })
 
 Controller.triggerEventListeners();
+
 Controller.searchFunction();
 
 window.onscroll = function () {

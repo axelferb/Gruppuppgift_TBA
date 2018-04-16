@@ -24,31 +24,26 @@ function fetchArtists(amount) {
         .then((response) => response.json())
 }
 
-
-
 function fetchComments(id) {
     return fetch(` https://folksa.ga/api/playlists/${id}/comments?key=flat_eric`)
-        //return fetch(` https://folksa.ga/api/comments/${id}/?key=flat_eric`)
         .then((response) => response.json())
         .then(function (value) {
             return displayComments(value);
         })
-
 }
 
 function displayComments(value) {
-    //var commentsArray = []
-    console.log(value);
+
     var commentHtmlBlock = '';
-    
+
     if (value === undefined || value.length == 0) {
-        commentHtmlBlock =`
+        commentHtmlBlock = `
             <p class="comment"> No comments yet </p>
         `
-    }
-    else {
-        for (let comment of value) {   
-            //commentsArray.push(mumma.body)
+
+    } else {
+
+        for (let comment of value) {
             commentHtmlBlock += `
                 <p> ${comment.username}</p>
                 <p class="comment"> ${comment.body} </p>   
@@ -67,19 +62,19 @@ browseArtists.addEventListener('click', function () {
 })
 
 const browseAlbums = document.getElementById('browseAlbums');
-browseAlbums.addEventListener('click', function (){
+browseAlbums.addEventListener('click', function () {
     fetchAlbums('18')
-    .then(value => {
-        View.displayAlbums(value);
-            })
+        .then(value => {
+            View.displayAlbums(value);
+        })
 })
 
 const browsePlaylists = document.getElementById('browsePlaylists');
-browsePlaylists.addEventListener('click', function (){
+browsePlaylists.addEventListener('click', function () {
     fetchPlaylists('18')
-    .then(value => {
-        View.displayAllPlaylists(value);
-            })
+        .then(value => {
+            View.displayAllPlaylists(value);
+        })
 })
 
 
@@ -111,19 +106,19 @@ const View = {
             htmlBlock += `
                 <div class="albums" id="albums${[i]}" value="${albumsLimited[i]._id}">
                 `
-                if (albumsLimited[i].coverImage === "" ||
-                    albumsLimited[i].coverImage === null ||
-                    albumsLimited[i].coverImage === undefined
-                ) {
-                    htmlBlock +=`
+            if (albumsLimited[i].coverImage === "" ||
+                albumsLimited[i].coverImage === null ||
+                albumsLimited[i].coverImage === undefined
+            ) {
+                htmlBlock += `
                         <img src="images/noimage.jpg" alt="No image available" />
                     `
-                } else {
-                    htmlBlock +=`
+            } else {
+                htmlBlock += `
                         <img src="${albumsLimited[i].coverImage}" alt="Cover image" />
                     `
-                }
-                htmlBlock +=`
+            }
+            htmlBlock += `
                     <div class="albumInfo">
                         <h4> ${albumsLimited[i].title} </h4>
                         <h4> (${albumsLimited[i].releaseDate}) </h4>
@@ -143,28 +138,28 @@ const View = {
         View.hideNavigation();
         View.scrollToMain();
         document.getElementById("navigation").style.width = "0";
-        let htmlBlock =`
+        let htmlBlock = `
             <h3>Albums</h3>
             <p>Browse through our awesome albums</p>
             <div id="albumWrapper" class="albumWrapper">
         `
         for (i = 0; i < albums.length; i++) {
-            htmlBlock +=`
+            htmlBlock += `
                 <div class="artists" id="albums${[i]}" value="${albums[i]._id}">
                 `
-                if (albums[i].coverImage === "" ||
-                    albums[i].coverImage === null ||
-                    albums[i].coverImage === undefined
-                ) {
-                    htmlBlock +=`
+            if (albums[i].coverImage === "" ||
+                albums[i].coverImage === null ||
+                albums[i].coverImage === undefined
+            ) {
+                htmlBlock += `
                         <img src="images/noimage.jpg" alt="No image available" />
                     `
-                } else {
-                    htmlBlock +=`
+            } else {
+                htmlBlock += `
                         <img src="${albums[i].coverImage}" alt="Cover image" />
                     `
-                }
-                htmlBlock +=`
+            }
+            htmlBlock += `
                     <div class="albumInfo">
                         <h4> ${albums[i].title} </h4>
                         <h4>(${albums[i].genres[0]}) </h4>
@@ -173,7 +168,7 @@ const View = {
                 </div>
             `
         }
-        htmlBlock +=`
+        htmlBlock += `
         </div>
         `
         mainWrapper.innerHTML = htmlBlock;
@@ -184,22 +179,22 @@ const View = {
         const playlistWrapper = document.getElementById('playlistWrapper');
         let htmlBlock = '';
         for (i = 0; i < playlists.length; i++) {
-            htmlBlock +=`
+            htmlBlock += `
                 <div class="playlists" id="playlists${[i]}" value="${playlists[i]._id}">
             `
-            if (playlists[i].coverImage === '' || 
-                playlists[i].coverImage === undefined || 
+            if (playlists[i].coverImage === '' ||
+                playlists[i].coverImage === undefined ||
                 playlists[i].coverImage === null
             ) {
-                htmlBlock +=`
+                htmlBlock += `
                     <img src="images/noimage.jpg" alt="No image" />
                 `
             } else {
-                htmlBlock +=`
+                htmlBlock += `
                     <img src="${playlists[i].coverImage}" />
                 `
             }
-            htmlBlock +=` 
+            htmlBlock += ` 
                     <div class="albumInfo">
                         <h4> ${playlists[i].title} </h4>
                         <p> ${playlists[i].createdBy} </p>
@@ -215,28 +210,28 @@ const View = {
         View.hideNavigation();
         View.scrollToMain();
         document.getElementById("navigation").style.width = "0";
-        let htmlBlock =`
+        let htmlBlock = `
             <h3>Playlists</h3>
             <p>Try to find one great playlists and you'll win a cookie</p>
             <div id="playlistWrapper" class="playlistWrapper">
         `
         for (i = 0; i < playlists.length; i++) {
-            htmlBlock +=`
+            htmlBlock += `
                 <div class="playlists" id="playlists${[i]}" value="${playlists[i]._id}">
             `
-            if (playlists[i].coverImage === '' || 
-                playlists[i].coverImage === undefined || 
+            if (playlists[i].coverImage === '' ||
+                playlists[i].coverImage === undefined ||
                 playlists[i].coverImage === null
             ) {
-                htmlBlock +=`
+                htmlBlock += `
                     <img src="images/noimage.jpg" alt="No image" />
                 `
             } else {
-                htmlBlock +=`
+                htmlBlock += `
                     <img src="${playlists[i].coverImage}" />
                 `
             }
-            htmlBlock +=` 
+            htmlBlock += ` 
                     <div class="albumInfo">
                         <h4> ${playlists[i].title} </h4>
                         <p> ${playlists[i].createdBy} </p>
@@ -244,7 +239,7 @@ const View = {
                 </div>
             `
         }
-        htmlBlock +=`
+        htmlBlock += `
         </div>
         `
         mainWrapper.innerHTML = htmlBlock;
@@ -264,19 +259,19 @@ const View = {
             htmlBlock += `
                 <div class="artists" id="artists${[i]}" value="${artist[i]._id}">
                 `
-                if (artist[i].coverImage === '' || 
-                    artist[i].coverImage === undefined || 
-                    artist[i].coverImage === null
-                ) {
-                    htmlBlock +=`
+            if (artist[i].coverImage === '' ||
+                artist[i].coverImage === undefined ||
+                artist[i].coverImage === null
+            ) {
+                htmlBlock += `
                         <img src="images/noimage.jpg" alt="No image" />
                     `
-                } else {
-                    htmlBlock +=`
+            } else {
+                htmlBlock += `
                         <img src="${artist[i].coverImage}" />
                     `
-                }
-                htmlBlock +=` 
+            }
+            htmlBlock += ` 
                     <div class="artistInfo">
                         <h4> ${artist[i].name} </h4>
                         <h4>(${artist[i].genres[0]}) </h4>
@@ -392,7 +387,7 @@ async function myFunction(data, listType) {
     }
 
     if (listType === "playlists") {
-        htmlBlock =`
+        htmlBlock = `
             <div id="modalPadding">
                 <div class="closeModal">
                     <img id="closeModal" src="images/close-black.svg" alt="Close" />
@@ -417,7 +412,7 @@ async function myFunction(data, listType) {
                     </div>
                 </div>
             </div>
-        `
+        ` 
     }
 
     if (listType === "artists") {
@@ -437,7 +432,7 @@ async function myFunction(data, listType) {
                         </div>
                         <h3>Albums:</h3>  
                         <ul>
-                            <li>${data.albums}</li>
+                            <li>${data.albums[0]}</li>
                         </ul>
                     </div>
                 </div>
@@ -580,7 +575,7 @@ function printSearched(list, listDiv) {
                 <div class="listAlbumContainer">
                     <img src="${list[i].coverImage}" alt="Album cover" />
                     <div class="listAlbumInfo">
-                        <h3>${list[i].title}</h3>
+                        <h3 id="playlists${[i]}" value="${list[i]._id}">${list[i].title}</h3>
                         <p>${list[i].createdBy}</p>
                     </div>
                 </div>
@@ -597,7 +592,7 @@ function printSearched(list, listDiv) {
                 <div class="listAlbumContainer">
                     <img src="${list[i].coverImage}" alt="Album cover" />
                     <div class="listAlbumInfo">
-                        <h3>${list[i].title}</h3>
+                        <h3 id="albums${[i]}" value="${list[i]._id}"> ${list[i].title}</h3>
                         <p>${list[i].artists[0].name}</p>
                     </div>
                 </div>
@@ -607,16 +602,27 @@ function printSearched(list, listDiv) {
                 <div class="listArtistContainer">
                     <img src="${list[i].coverImage}" alt="Artist image" />
                     <div class="listAlbumInfo">
-                        <h3>${list[i].name}</h3>
+                        <h3 id="artists${[i]}" value="${list[i]._id}">${list[i].name}</h3>
                         <p>(${list[i].genres[0]})</p>
                     </div>
                 </div>
             `
+            console.log(list.length)
         }
     }
     jumjum.innerHTML = htmlBlock;
+    addEventListener(listDiv, listDiv, list.length);
+
 }
 
+/*function addEventListener(listType, divType, looplength) {
+    for (i = 0; i < looplength; i++) {
+        var itemId = document.getElementById(divType + [i]).getAttribute("value")
+        var moreInfo = document.getElementById(divType + [i]);
+
+        moreInfo.addEventListener('click', fetchSingleItem.bind(this, listType, itemId));
+    }
+}*/
 
 document.getElementById("searchBar").addEventListener('keypress', function (e) {
     const enterKey = e.keyCode;

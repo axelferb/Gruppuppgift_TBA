@@ -39,15 +39,15 @@ const Fetch = {
 
     vote: function (ratingNumber, id, type) {
         fetch(`https://folksa.ga/api/${type}/${id}/vote?key=flat_eric`, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    rating: ratingNumber
-                })
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                rating: ratingNumber
             })
+        })
             .then((response) => response.json())
     },
 }
@@ -67,15 +67,15 @@ const View = {
                 albumsLimited[i].coverImage === null ||
                 albumsLimited[i].coverImage === undefined
             ) {
-                htmlBlock +=`
+                htmlBlock += `
                     <img src='images/noimage.jpg' alt='No image available' />
                 `
             } else {
-                htmlBlock +=`
+                htmlBlock += `
                     <img src='${albumsLimited[i].coverImage}' alt='Cover image' />
                 `
             }
-            htmlBlock +=`
+            htmlBlock += `
                 <div class='albumInfo'>
                     <h4> ${albumsLimited[i].title} </h4>
                     <h4> (${albumsLimited[i].releaseDate}) </h4>
@@ -95,20 +95,20 @@ const View = {
         View.hideNavigation();
         View.scrollToMain();
         document.getElementById('navigation').style.width = '0';
-        let htmlBlock =`
+        let htmlBlock = `
             <h3>Albums</h3>
             <p>Browse through our awesome albums</p>
             <div id='albumWrapper' class='albumWrapper'>
         `
         for (i = 0; i < albums.length; i++) {
-            htmlBlock +=`
+            htmlBlock += `
                     <div class='artists' id='albums${[i]}' value='${albums[i]._id}'>
                 `
             if (albums[i].coverImage === '' ||
                 albums[i].coverImage === null ||
                 albums[i].coverImage === undefined
             ) {
-                htmlBlock +=`
+                htmlBlock += `
                     <img src='images/noimage.jpg' alt='No image available' />
                 `
             } else {
@@ -125,7 +125,7 @@ const View = {
             </div>
             `
         }
-        htmlBlock +=`
+        htmlBlock += `
         </div>
         `
         mainWrapper.innerHTML = htmlBlock;
@@ -136,22 +136,22 @@ const View = {
         const playlistWrapper = document.getElementById('playlistWrapper');
         let htmlBlock = '';
         for (i = 0; i < playlists.length; i++) {
-            htmlBlock +=`
+            htmlBlock += `
                 <div class='playlists' id='playlists${[i]}' value='${playlists[i]._id}'>
             `
             if (playlists[i].coverImage === '' ||
                 playlists[i].coverImage === undefined ||
                 playlists[i].coverImage === null
             ) {
-                htmlBlock +=`
+                htmlBlock += `
                     <img src='images/noimage.jpg' alt='No image' />
                 `
             } else {
-                htmlBlock +=`
+                htmlBlock += `
                     <img src='${playlists[i].coverImage}' />
                 `
             }
-            htmlBlock +=` 
+            htmlBlock += ` 
                     <div class='albumInfo'>
                         <h4> ${playlists[i].title} </h4>
                         <p> ${playlists[i].createdBy} </p>
@@ -167,28 +167,28 @@ const View = {
         View.hideNavigation();
         View.scrollToMain();
         document.getElementById('navigation').style.width = '0';
-        let htmlBlock =`
+        let htmlBlock = `
             <h3>Playlists</h3>
             <p>Try to find one great playlists and you'll win a cookie</p>
             <div id='playlistWrapper' class='playlistWrapper'>
         `
         for (i = 0; i < playlists.length; i++) {
-            htmlBlock +=`
+            htmlBlock += `
                 <div class='playlists' id='playlists${[i]}' value='${playlists[i]._id}'>
             `
             if (playlists[i].coverImage === '' ||
                 playlists[i].coverImage === undefined ||
                 playlists[i].coverImage === null
             ) {
-                htmlBlock +=`
+                htmlBlock += `
                     <img src='images/noimage.jpg' alt='No image' />
                 `
             } else {
-                htmlBlock +=`
+                htmlBlock += `
                     <img src='${playlists[i].coverImage}' />
                 `
             }
-            htmlBlock +=` 
+            htmlBlock += ` 
                     <div class='albumInfo'>
                         <h4> ${playlists[i].title} </h4>
                         <p> ${playlists[i].createdBy} </p>
@@ -196,7 +196,7 @@ const View = {
                 </div>
             `
         }
-        htmlBlock +=`
+        htmlBlock += `
         </div>
         `
         mainWrapper.innerHTML = htmlBlock;
@@ -207,28 +207,28 @@ const View = {
         View.hideNavigation();
         View.scrollToMain();
         document.getElementById('navigation').style.width = '0';
-        let htmlBlock =`
+        let htmlBlock = `
             <h3>Artists</h3>
             <p>All the happy campers in our catalogue</p>
             <div id='artistWrapper' class='artistWrapper'>
         `
         for (i = 0; i < artist.length; i++) {
-            htmlBlock +=`
+            htmlBlock += `
                 <div class='artists' id='artists${[i]}' value='${artist[i]._id}'>
             `
             if (artist[i].coverImage === '' ||
                 artist[i].coverImage === undefined ||
                 artist[i].coverImage === null
             ) {
-                htmlBlock +=`
+                htmlBlock += `
                     <img src='images/noimage.jpg' alt='No image' />
                 `
             } else {
-                htmlBlock +=`
+                htmlBlock += `
                     <img src='${artist[i].coverImage}' />
                 `
             }
-            htmlBlock +=` 
+            htmlBlock += ` 
                 <div class='artistInfo'>
                     <h4> ${artist[i].name} </h4>
                     <h4>(${artist[i].genres[0]}) </h4>
@@ -237,7 +237,7 @@ const View = {
             </div>
             `
         }
-        htmlBlock +=`
+        htmlBlock += `
         </div>
         `
         mainWrapper.innerHTML = htmlBlock;
@@ -258,7 +258,7 @@ const View = {
             rating = 0;
         }
         if (listType === 'albums') {
-            htmlBlock =`
+            htmlBlock = `
                 <div id='modalPadding'>
                     <div class='closeModal'>
                         <img id='closeModal' src='images/close-black.svg' alt='Close' />
@@ -281,7 +281,7 @@ const View = {
             `
         }
         if (listType === 'playlists') {
-            htmlBlock =`
+            htmlBlock = `
                 <div id='modalPadding'>
                     <div class='closeModal'>
                         <img id='closeModal' src='images/close-black.svg' alt='Close' />
@@ -306,11 +306,11 @@ const View = {
                         </div>
                     </div>
                 </div>
-            ` 
+            `
         }
-    
+
         if (listType === 'artists') {
-            htmlBlock =`
+            htmlBlock = `
                 <div id='modalPadding'>
                     <div class='closeModal'>
                         <img id='closeModal' src='images/close-black.svg' alt='Close' />
@@ -330,20 +330,20 @@ const View = {
                 </div>
             `
         }
-    
+
         placeHolder.innerHTML = htmlBlock;
-    
+
         const closeModal = document.getElementById('closeModal');
         closeModal.addEventListener('click', function () {
             modal.style.display = 'none';
         })
-    
+
         View.createVoting(data._id, listType);
-    
+
         var trackList = document.getElementById('trackList');
         var listElement = '';
         var trackNumber = 1;
-    
+
         if (listType !== 'playlists') {
             for (i = 0; i < data.tracks.length; i++) {
                 listElement += `
@@ -369,7 +369,7 @@ const View = {
     printSearched: function (list, listDiv) {
         const searchPlaceHolder = document.getElementById(listDiv);
         let htmlBlock = '';
-    
+
         for (i = 0; i < list.length; i++) {
             if (listDiv == 'playlists') {
                 htmlBlock += `
@@ -382,13 +382,13 @@ const View = {
                     </div>
                 `
             } else if (listDiv == 'tracks') {
-                htmlBlock +=`
+                htmlBlock += `
                     <h3>${list[i].title}</h3>
                     <p>${list[i].artists[0].name}</p>
     
                 `
             } else if (listDiv == 'albums') {
-                htmlBlock +=`
+                htmlBlock += `
                     <div class='listAlbumContainer'>
                         <img src='${list[i].coverImage}' alt='Album cover' />
                         <div class='listAlbumInfo'>
@@ -398,7 +398,7 @@ const View = {
                     </div>
                 `
             } else {
-                htmlBlock +=`
+                htmlBlock += `
                     <div class='listArtistContainer'>
                         <img src='${list[i].coverImage}' alt='Artist image' />
                         <div class='listAlbumInfo'>
@@ -415,9 +415,9 @@ const View = {
 
     createPlaceHolder: function () {
         modal.style.display = 'block';
-    
+
         var placeHolder = document.getElementById('modalContent');
-        var listFrame =`
+        var listFrame = `
             <div id='modalPadding'>
                 <div class='closeModal'>
                     <img id='closeModal' src='images/close-black.svg' alt='Close' />
@@ -439,9 +439,9 @@ const View = {
     },
     searchError: function () {
         modal.style.display = 'block';
-    
+
         var placeHolder = document.getElementById('modalPadding');
-        var listFrame =`
+        var listFrame = `
             <div class='closeModal'>
                 <img id='closeModal' src='images/close-black.svg' alt='Close' />
             </div>
@@ -452,7 +452,7 @@ const View = {
         document.getElementById('closeModal').addEventListener('click', function () {
             modal.style.display = 'none';
         })
-    }, 
+    },
 
     createVoting: function (id, type) {
         votingValue = 10;
@@ -460,16 +460,16 @@ const View = {
             var ratingPlaceHolder = document.getElementById('rating');
             var ratings = document.createElement('SPAN');
             var ratingSymbol = document.createTextNode('⬤');
-    
+
             ratings.appendChild(ratingSymbol);
             ratings.addEventListener('click', Fetch.vote.bind(this, votingValue, id, type));
-    
+
             ratingPlaceHolder.appendChild(ratings);
-    
+
             votingValue -= 1;
         }
     },
-    
+
     // Styling functions
     hideNavigation: function () {
         document.getElementById('navigation').style.width = '0';
@@ -493,7 +493,7 @@ const View = {
             document.getElementById('browseDropDownContent').style.backgroundColor = 'transparent';
         }
     },
-    
+
     heroTextParallax: function () {
         const heroText = document.getElementById('heroText');
         heroText.style.transform = 'translateY(' + scrollY / 2 + 'px)';
@@ -501,7 +501,7 @@ const View = {
             heroText.style.transform = 'translateY(225px)';
         }
     },
-    
+
     heroOpacity: function () {
         if (document.body.scrollTop > 425 || document.documentElement.scrollTop > 425) {
             document.getElementById('hero').style.backgroundColor = '#000';
@@ -516,7 +516,7 @@ const View = {
 const Model = {
     displayComments: function (value) {
         var commentHtmlBlock = '';
-    
+
         if (value === undefined || value.length == 0) {
             commentHtmlBlock = `
                 <p class='comment'> No comments yet </p>
@@ -535,10 +535,10 @@ const Model = {
     search: function (list) {
         var searchBarValue = document.getElementById('searchBar').value.toLowerCase();
         var titleList = [];
-    
+
         for (i = 0; i < list.length; i++) {
             var lowerCaseValue = list[i].title.toLowerCase();
-    
+
             if (lowerCaseValue.includes(searchBarValue)) {
                 titleList.push(list[i]);
             }
@@ -549,10 +549,10 @@ const Model = {
     searchArtist: function (list) {
         var searchBarValue = document.getElementById('searchBar').value.toLowerCase();
         var titleList = [];
-    
+
         for (i = 0; i < list.length; i++) {
             var lowerCaseValue = list[i].name.toLowerCase();
-    
+
             if (lowerCaseValue.includes(searchBarValue)) {
                 titleList.push(list[i]);
             }
@@ -563,12 +563,12 @@ const Model = {
         var sum = array.reduce((a, b) => a + b, 0);
         return sum;
     },
-    
+
     calculateAverage: function (sum, arrayLength) {
         average = sum / arrayLength;
         return average;
     },
-    
+
     displayAverage: function (average) {
         var display = parseFloat(average.toFixed(1));
         return display;
@@ -576,7 +576,7 @@ const Model = {
 }
 
 const Controller = {
-    triggerEventListeners: function (){
+    triggerEventListeners: function () {
         const browseArtists = document.getElementById('browseArtists');
         browseArtists.addEventListener('click', function () {
             Fetch.fetchArtists('6')
@@ -584,7 +584,7 @@ const Controller = {
                     View.displayArtists(value);
                 })
         })
-        
+
         const browseAlbums = document.getElementById('browseAlbums');
         browseAlbums.addEventListener('click', function () {
             Fetch.fetchAlbums('18')
@@ -592,7 +592,7 @@ const Controller = {
                     View.displayAlbums(value);
                 })
         })
-        
+
         const browsePlaylists = document.getElementById('browsePlaylists');
         browsePlaylists.addEventListener('click', function () {
             Fetch.fetchPlaylists('18')
@@ -615,7 +615,7 @@ const Controller = {
         for (i = 0; i < looplength; i++) {
             var itemId = document.getElementById(divType + [i]).getAttribute('value')
             var moreInfo = document.getElementById(divType + [i]);
-    
+
             moreInfo.addEventListener('click', Fetch.fetchSingleItem.bind(this, listType, itemId));
         }
     },
@@ -631,22 +631,22 @@ const Controller = {
                 View.createPlaceHolder();
                 document.getElementById('navigation').style.width = '0';
                 document.getElementById('searchBar').blur();
-        
+
                 Fetch.fetchSearched('playlists')
                     .then(value => {
                         View.printSearched(Model.search(value), 'playlists')
                     })
-        
+
                 Fetch.fetchSearched('tracks')
                     .then(value => {
                         View.printSearched(Model.search(value), 'tracks')
                     })
-        
+
                 Fetch.fetchSearched('albums')
                     .then(value => {
                         View.printSearched(Model.search(value), 'albums')
                     })
-        
+
                 Fetch.fetchSearched('artists')
                     .then(value => {
                         View.printSearched(Model.searchArtist(value), 'artists')
@@ -660,7 +660,7 @@ Fetch.fetchAlbums('6')
     .then(value => {
         View.displayAlbumsLimited(value);
     })
-           
+
 Fetch.fetchPlaylists('6')
     .then(value => {
         View.displayPlaylists(value);

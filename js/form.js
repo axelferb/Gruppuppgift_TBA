@@ -196,14 +196,14 @@ const ModelForm = {
 }
 
 const ViewForm = {
-    hideNavigation: function () {
-        document.getElementById("navigation").style.width = "0";
-    },
-    scrollToMain: function () {
-        window.scrollTo({
-            top: 502,
-            behavior: "smooth"
-        });
+    // hideNavigation: function () {
+    //     document.getElementById("navigation").style.width = "0";
+    // },
+    // scrollToMain: function () {
+    //     window.scrollTo({
+    //         top: 502,
+    //         behavior: "smooth"
+    //     });
     },
     // Replaces the htmlcontent on the page with the form to create a new artist.
     replaceArtistForm: function () {
@@ -352,13 +352,15 @@ const ViewForm = {
 // Replaces the innerHTML with the form to create a Artist.
 addArtistButton.addEventListener("click", function () {
     ViewForm.replaceArtistForm();
-    ViewForm.hideNavigation();
-    ViewForm.scrollToMain();
+    View.hideNavigation();
+    View.scrollToMain();
     const artistSubmit = document.getElementById("artistSubmit");
     // Sends new artist to API when button is 
     addArtistForm.addEventListener("submit", function (e) {
         ModelForm.submitNewArtist()
         e.preventDefault();
+        document.getElementById("addArtistForm").style.transition = "400ms";
+        document.getElementById("addArtistForm").style.opacity = "0";
         setTimeout(function(){ 
             Fetch.fetchArtists('108')
             .then(value => {
@@ -371,8 +373,8 @@ addArtistButton.addEventListener("click", function () {
 addAlbumButton.addEventListener("click", function () {
     ModelForm.fetchArtist()
     ViewForm.replaceAlbumForm();
-    ViewForm.hideNavigation();
-    ViewForm.scrollToMain();
+    View.hideNavigation();
+    View.scrollToMain();
     const albumTitle = document.getElementById("albumTitle");
     const albumArtist = document.getElementById("albumArtist");
     const albumRelease = document.getElementById("albumRelease");
@@ -384,6 +386,14 @@ addAlbumButton.addEventListener("click", function () {
     addAlbumForm.addEventListener("submit", function (e) {
         ModelForm.submitNewAlbum()
         e.preventDefault();
+        document.getElementById("addAlbumForm").style.transition = "300ms";
+        document.getElementById("addAlbumForm").style.opacity = "0";
+        setTimeout(function(){ 
+            Fetch.fetchAlbums('108')
+            .then(value => {
+                View.displayAlbums(value);
+            })
+        }, 300);
     });
 });
 // What happens when you press "add new track".
@@ -391,8 +401,8 @@ addTrackButton.addEventListener("click", function () {
     ModelForm.fetchArtist()
     ModelForm.fetchAlbum()
     ViewForm.replaceTrackForm();
-    ViewForm.hideNavigation();
-    ViewForm.scrollToMain();
+    View.hideNavigation();
+    View.scrollToMain();
     const trackTitle = document.getElementById("trackTitle");
     const trackArtist = document.getElementById("trackArtist");
     const trackGenre = document.getElementById("trackGenre");
@@ -415,6 +425,14 @@ addPlaylistButton.addEventListener("click", function () {
         e.preventDefault();
         ModelForm.submitNewPlaylist()
         document.getElementById("playlistTitle").value = "";
+        document.getElementById("addPlaylistForm").style.transition = "400ms";
+        document.getElementById("addPlaylistForm").style.opacity = "0";
+        setTimeout(function(){ 
+            Fetch.fetchPlaylists('108')
+            .then(value => {
+                View.displayAllPlaylists(value);
+            })
+        }, 300);
     });
 })
 // What happens when you press "delete".

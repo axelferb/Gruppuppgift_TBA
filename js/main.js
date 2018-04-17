@@ -422,7 +422,8 @@ const View = {
                     `
                     if (list[i].coverImage === '' ||
                         list[i].coverImage === undefined ||
-                        list[i].coverImage === null
+                        list[i].coverImage === null ||
+                        list[i].coverImage === "(unknown)"
                     ) {
                         htmlBlock += `
                             <img src="images/noimage.jpg" alt="No image" />
@@ -451,7 +452,8 @@ const View = {
                     `
                     if (list[i].coverImage === '' ||
                         list[i].coverImage === undefined ||
-                        list[i].coverImage === null
+                        list[i].coverImage === null ||
+                        list[i].coverImage === "(unknown)"
                     ) {
                         htmlBlock += `
                             <img src="images/noimage.jpg" alt="No image" />
@@ -474,7 +476,8 @@ const View = {
                     `
                     if (list[i].coverImage === '' ||
                         list[i].coverImage === undefined ||
-                        list[i].coverImage === null
+                        list[i].coverImage === null ||
+                        list[i].coverImage === "(unknown)"
                     ) {
                         htmlBlock += `
                             <img src="images/noimage.jpg" alt="No image" />

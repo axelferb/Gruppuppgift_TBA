@@ -196,15 +196,6 @@ const ModelForm = {
 }
 
 const ViewForm = {
-    // hideNavigation: function () {
-    //     document.getElementById("navigation").style.width = "0";
-    // },
-    // scrollToMain: function () {
-    //     window.scrollTo({
-    //         top: 502,
-    //         behavior: "smooth"
-    //     });
-    },
     // Replaces the htmlcontent on the page with the form to create a new artist.
     replaceArtistForm: function () {
         mainWrapper.innerHTML = `

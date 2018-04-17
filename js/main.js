@@ -271,7 +271,20 @@ const View = {
                     </div>
                     <div class='modalAlbumWrapper'>
                         <div class='albumCover'>
-                            <img src='${data.coverImage}' alt='Album cover' />
+                        `
+                        if (data.coverImage === '' ||
+                            data.coverImage === undefined ||
+                            data.coverImage === null
+                        ) {
+                            htmlBlock += `
+                                <img src="images/noimage.jpg" alt="No image" />
+                            `
+                        } else {
+                            htmlBlock += `
+                                <img src='${data.coverImage}' alt='Album cover' />
+                            `
+                        } 
+                        htmlBlock += `
                             <p><a href='${data.spotifyURL}' target='_blank'>Listen on Spotify</a></p>
                             <p id='year'>(${data.releaseDate})</p>
                         </div>
@@ -295,7 +308,20 @@ const View = {
                     <div class='playlistContainer'>
                         <div class='modalPlaylistWrapper'>
                             <div class='playlistCover'>
-                                <img src='${data.coverImage}' alt='Playlist cover' />
+                            `
+                            if (data.coverImage === '' ||
+                                data.coverImage === undefined ||
+                                data.coverImage === null
+                            ) {
+                                htmlBlock += `
+                                    <img src="images/noimage.jpg" alt="No image" />
+                                `
+                            } else {
+                                htmlBlock += `
+                                    <img src='${data.coverImage}' alt='Playlist cover' />
+                                `
+                            } 
+                            htmlBlock += `
                             </div>
                             <div class='modalPlaylistInfo'>
                                 <h1>${data.title}</h1>
@@ -324,7 +350,20 @@ const View = {
                     <div class='modalArtistWrapper'>
                         <div class='modalArtistContainer'>
                             <div class='artistInfoContainer'>
-                                <img src='${data.coverImage}' alt='Artist image' />
+                                `
+                                if (data.coverImage === '' ||
+                                    data.coverImage === undefined ||
+                                    data.coverImage === null
+                                ) {
+                                    htmlBlock += `
+                                        <img src="images/noimage.jpg" alt="No image" />
+                                    `
+                                } else {
+                                    htmlBlock += `
+                                        <img src='${data.coverImage}' alt='Artist image' />
+                                    `
+                                } 
+                                htmlBlock += `
                                 <div class='modalArtistInfo'>
                                     <h1>${data.name}</h1>
                                     <h2>(${data.genres[0]})</h2>
@@ -390,7 +429,7 @@ const View = {
                         `
                     } else {
                         htmlBlock += `
-                            <img src='${list[i].coverImage}' alt='Album cover' />
+                            <img src='${list[i].coverImage}' alt='Playlist cover' />
                         `
                     } 
                     htmlBlock += `
@@ -442,7 +481,7 @@ const View = {
                         `
                     } else {
                         htmlBlock += `
-                            <img src='${list[i].coverImage}' alt='Album cover' />
+                            <img src='${list[i].coverImage}' alt='Artist image' />
                         `
                     } 
                     htmlBlock += `

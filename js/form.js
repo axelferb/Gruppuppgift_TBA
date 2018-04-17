@@ -359,6 +359,12 @@ addArtistButton.addEventListener("click", function () {
     addArtistForm.addEventListener("submit", function (e) {
         ModelForm.submitNewArtist()
         e.preventDefault();
+        setTimeout(function(){ 
+            Fetch.fetchArtists('108')
+            .then(value => {
+                View.displayArtists(value);
+            })
+        }, 100);
     });
 });
 // What happens when you press "add new album".

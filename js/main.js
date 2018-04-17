@@ -380,7 +380,20 @@ const View = {
             if (listDiv == 'playlists') {
                 htmlBlock += `
                     <div class='listAlbumContainer'>
-                        <img src='${list[i].coverImage}' alt='Playlist cover' />
+                    `
+                    if (list[i].coverImage === '' ||
+                        list[i].coverImage === undefined ||
+                        list[i].coverImage === null
+                    ) {
+                        htmlBlock += `
+                            <img src="images/noimage.jpg" alt="No image" />
+                        `
+                    } else {
+                        htmlBlock += `
+                            <img src='${list[i].coverImage}' alt='Album cover' />
+                        `
+                    } 
+                    htmlBlock += `
                         <div class='listAlbumInfo'>
                             <h3 id='playlists${[i]}' value='${list[i]._id}'>${list[i].title}</h3>
                             <p>${list[i].createdBy}</p>
@@ -396,7 +409,20 @@ const View = {
             } else if (listDiv == 'albums') {
                 htmlBlock += `
                     <div class='listAlbumContainer'>
-                        <img src='${list[i].coverImage}' alt='Album cover' />
+                    `
+                    if (list[i].coverImage === '' ||
+                        list[i].coverImage === undefined ||
+                        list[i].coverImage === null
+                    ) {
+                        htmlBlock += `
+                            <img src="images/noimage.jpg" alt="No image" />
+                        `
+                    } else {
+                        htmlBlock += `
+                            <img src='${list[i].coverImage}' alt='Album cover' />
+                        `
+                    } 
+                    htmlBlock += `
                         <div class='listAlbumInfo'>
                             <h3 id='albums${[i]}' value='${list[i]._id}'> ${list[i].title}</h3>
                             <p>${list[i].artists[0].name}</p>
@@ -406,7 +432,20 @@ const View = {
             } else {
                 htmlBlock += `
                     <div class='listArtistContainer'>
-                        <img src='${list[i].coverImage}' alt='Artist image' />
+                    `
+                    if (list[i].coverImage === '' ||
+                        list[i].coverImage === undefined ||
+                        list[i].coverImage === null
+                    ) {
+                        htmlBlock += `
+                            <img src="images/noimage.jpg" alt="No image" />
+                        `
+                    } else {
+                        htmlBlock += `
+                            <img src='${list[i].coverImage}' alt='Album cover' />
+                        `
+                    } 
+                    htmlBlock += `
                         <div class='listAlbumInfo'>
                             <h3 id='artists${[i]}' value='${list[i]._id}'>${list[i].name}</h3>
                             <p>(${list[i].genres[0]})</p>

@@ -9,3 +9,7 @@
 - Display errors when something goes wrong
 - Sort and filtering
 - Some UX stuff
+
+
+
+# `API IS OFFLINE, WHICH MEANS THIS APP DOESN'T WORK AS INTENTED`

@@ -1,3 +1,6 @@
+
+## `API IS OFFLINE, WHICH MEANS THIS APP DOESN'T WORK AS INTENTED`
+
 # `TBA: Musikinstitutet`
 [GitHub Pages](https://axelferb.github.io/Gruppuppgift_TBA/) / [GitHub Repository](https://github.com/axelferb/Gruppuppgift_TBA)
 
@@ -9,7 +12,3 @@
 - Display errors when something goes wrong
 - Sort and filtering
 - Some UX stuff
-
-
-
-# `API IS OFFLINE, WHICH MEANS THIS APP DOESN'T WORK AS INTENTED`
